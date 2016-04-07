@@ -38,7 +38,7 @@ depends on functions, functions are the natural place to begin.
 가장 중요한게 함수이므로, 함수에서부터 이야기를 시작하겠습니다.
 
 2.1 Functions as Data
-2.1 데이타같은 함수
+2.1 데이타처럼 사용되는 함수
 
 
 Two things make Lisp functions different. One, mentioned above, is that Lisp
@@ -146,7 +146,7 @@ double-quotes. To represent a function, we use what’s called a lambda-expressi
 A lambda-expression is a list with three parts: the symbol lambda, a parameter
 list, and a body of zero or more expressions. This lambda-expression refers to a
 function equivalent to double:
-(lambda (x) (* x 2))
+
 
 꼭 함수를 만들 때 defun이 필요한건 아닙니다.
 다른 리습 객체들처럼 우리는 함수 그 자체에 접근할 수 있습니다.
@@ -156,6 +156,7 @@ function equivalent to double:
 람다 표현식은 3개의 항목으로 구성된 리스트입니다.
 lambda라는 심볼과, 매개변수 리스트, 0개 이상의 표현식으로 구성된 몸체입니다.
 람다 표현식으로 double과 동일한 함수를 참조할 수 있습니다.
+(lambda (x) (* x 2))
 
 It describes a function which takes one argument x, and returns 2x.
 A lambda-expression can also be considered as the name of a function. If
@@ -163,6 +164,13 @@ double is a proper name, like “Michelangelo,” then (lambda (x) (* x 2)) is
 a definite description, like “the man who painted the ceiling of the Sistine Chapel.”
 By putting a sharp-quote before a lambda-expression, we get the corresponding
 function:
+
+하나의 인자값 x 를 받아서 2x를 반환하는 함수를 표현해봤습니다.
+람다라는 표현을 함수의 이름이라고 생각할 수 있습니다.
+double가 이름이고 (lambda (x) (* x 2))라는 표현은 이름에 대한 설명이라고 생각해봅시다.
+“미켈란젤로"가 이름이고 “시스틴 예배당의 천장에 그림을 그린 사람"이 설명인것과 같습니다.
+
+
 > #’(lambda (x) (* x 2))
 #<Interpreted-Function C674CE>
 
@@ -171,19 +179,30 @@ function:
 This function behaves exactly like double, but the two are distinct objects.
 In a function call, the name of the function appears first, followed by the
 arguments:
+
+이 함수는 double과 같은 일을 하는데 각각 다른 객체입니다.
+함수를 호출할때는 이름을 먼저 쓰고, 그 다음에 인자를 씁니다.
+
 > (double 3)
 6
+
+
 Since lambda-expressions are also names of functions, they can also appear first
 in function calls:
+람다 표현도 함수 이름이므로 lambda를 가장 먼저 써야합니다.
 > ((lambda (x) (* x 2)) 3)
 6
+
+
 In Common Lisp, we can have a function named double and a variable named
-double at the same time.12
-FUNCTIONS
+double at the same time.
+
+커먼 리습에서 double이라는 함수가 있을 때 동시에 double이라는 변수도 있을 수 있습니다.
 > (setq double 2)
 2
 > (double double)
 4
+
 When a name occurs first in a function call, or is preceded by a sharp-quote, it is
 taken to refer to a function. Otherwise it is treated as a variable name.
 It is therefore said that Common Lisp has distinct name-spaces for variables
@@ -191,51 +210,74 @@ and functions. We can have a variable called foo and a function called foo, and
 they need not be identical. This situation can be confusing, and leads to a certain
 amount of ugliness in code, but it is something that Common Lisp programmers
 have to live with.
+함수 호출에서 첫번째로 나타나는 이름이나 샤프-따옴표가 붙은 이름은 함수를 나타내는 것입니다. 그 외에는 변수 이름입니다. 이걸보면 함수와 변수가 분리된 이름 공간을 사용한다는걸 알 수 있습니다. foo라는 변수와 foo라는 함수가 있는데 동일한게 아니라니. 혼란스러울 수 있습니다. 코드가 이상해보일 수도 있습니다. 하지만 커먼 리습 프로그래머라면 감당해야합니다.
+
 If necessary, Common Lisp provides two functions which map symbols to the
 values, or functions, that they represent. The function symbol-value takes a
 symbol and returns the value of the corresponding special variable:
+커먼 리습에는 하나의 심볼을 필요에 따라 함수로 쓸건지 변수로 쓸건지 고르게 해주는 2개의 함수를 제공하고 있습니다. symbol-value 함수는 심볼을 받아서 그에 해당하는 변수의 값을 반환합니다.
+
 > (symbol-value ’double)
 2
+
 while symbol-function does the same for a globally defined function:
+반면에 symbol-fundtion은 전역 함수를 반환합니다.
+
 > (symbol-function ’double)
 #<Interpreted-Function C66ACE>
 Note that, since functions are ordinary data objects, a variable could have a
 function as its value:
+함수가 보통의 데이터 객체이므로 변수의 값으로 함수를 저장할 수도 있습니다.
+
 > (setq x #’append)
 #<Compiled-Function 46B4BE>
 > (eq (symbol-value ’x) (symbol-function ’append))
 T
+
+
 Beneath the surface, defun is setting the symbol-function of its first argu-
 ment to a function constructed from the remaining arguments. The following two
 expressions do approximately the same thing:
+내부를 들여다보면 defun이 하는 일은 첫번째 인자로 symbol-function을 호출하고, 나머지인자들로 함수를 만들어서 연결하는 것입니다. 다음 2개의 표현식은 서로 동일하다고 볼 수 있습니다.
 (defun double (x) (* x 2))
 (setf (symbol-function ’double)
 #’(lambda (x) (* x 2)))
+
 So defun has the same effect as procedure definition in other languages—to
 associate a name with a piece of code. But the underlying mechanism is not the
-same. We don’t need defun to make functions, and functions don’t have to be2.3
-FUNCTIONAL ARGUMENTS
-13
+same. We don’t need defun to make functions, and functions don’t have to be
 stored away as the value of some symbol. Underlying defun, which resembles
 procedure definition in any other language, is a more general mechanism: building
 a function and associating it with a certain name are two separate operations.
 When we don’t need the full generality of Lisp’s notion of a function, defun
 makes function definition as simple as in more restrictive languages.
+결국 겉으로보기에 defun은 다른 언어들의 프로시저 정의와 같이 여러개의 코드를 하나의 이름으로 묶는 일을 합니다. 하지만 내부를 들여다보면 같지 않습니다. 함수를 만들기위해 꼭 defun을 써야할 필요가 없습니다. 함수가 특정 심볼에 저장될 필요도 없습니다.  겉으로는 다른 언어들의 프로세저 정의와 같아보이지만 내부에는 좀더 범용적인 메카니즘이 들어있습니다. 함수를 만드는 것과 이름을 붙이는 것이 서로 분리될 수 있기 때문입니다. 우리가 리습에서 정의하는 함수의 범용성을 모두 사용할게 아니라면 defun을 다른 언어들과 같이 단순히 함수를 정의하는데만 사용해도 됩니다.
+
 2.3 Functional Arguments
+함수 인자에 함수를 전달하기
+
 Having functions as data objects means, among other things, that we can pass
 them as arguments to other functions. This possibility is partly responsible for the
 importance of bottom-up programming in Lisp.
+함수가 데이터 객체라는 것은 -다른 것들도 있겠지만- 다른 함수에 인자로 넘길 수 있다는것입니다. 리습의 상향식 프로그래밍이 가능한 이유중에 하나가 이것입니다.
+
 A language which allows functions as data objects must also provide some
 way of calling them. In Lisp, this function is apply. Generally, we call apply
 with two arguments: a function, and a list of arguments for it. The following four
 expressions all have the same effect:
+어떤 언어가 함수를 데이터 객체와 같게 만들었다면 당연히 그에 맞는 호출 방식도 제공해야합니다. 리습에서는 apply라는 함수가 그런 역할을 합니다. 보통 apply에 2개의 인자를 전달하면 됩니다. 호출할 함수와 함수에 전달할 인자 리스트입니다. 다음 4개의 표현식들은 모두 같은 일을 합니다.
+
 (+ 1 2)
 (apply #’+ ’(1 2))
 (apply (symbol-function ’+) ’(1 2))
 (apply #’(lambda (x y) (+ x y)) ’(1 2))
+
 In Common Lisp, apply can take any number of arguments, and the function
 given first will be applied to the list made by consing the rest of the arguments
 onto the list given last. So the expression
+커먼 리습에서 apply는 인자의 갯수가 제한돼있지 않습니다. apply에서 호루된 함수는 두번째부터 마지막까지 전달된 인자들의 cons 리스트를 인자로 전달받습니다.
+(주: cons 리스트라는게 나오는데 나중에 설명이 나옵니다. 간단하게 미리 설명하면 cons 함수로 만든 리스트라는 것입니다.)
+
 (apply #’+ 1 ’(2))
 is equivalent to the preceding four. If it is inconvenient to give the arguments as
 a list, we can use funcall, which differs from apply only in this respect. This
