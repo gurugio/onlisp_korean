@@ -18,9 +18,9 @@ can write it yourself, and your new function will be treated just like the built
 ones.
 
 사실 특별형식이라고 불리는 몇몇 연산자를 제외하면 리습의 내부구현은 리습 함수들의 모음일 뿐입니다.
-이 모음에 뭔가를 추가하지 못할게 뭐가 있겠습니까.
-전혀 없습니다. 뭔가 리습이 했으면 하고 생각하신게 있다면, 직접 구현하세요.
-만드신 함수들은 이미 리습에 포함돼있는 것들과 다를게 하나도 없습니다.
+이 모음에 뭔가 추가하지 못할 이유가 없지요.
+뭔가 리습이 했으면 하고 생각하신게 있다면, 직접 구현하세요.
+직접 만든 함수들이나 리습에 있는 함수들이나 똑같이 사용할 수 있습니다.
 
 
 This fact has important consequences for the programmer. It means that any
@@ -277,18 +277,21 @@ given first will be applied to the list made by consing the rest of the argument
 onto the list given last. So the expression
 커먼 리습에서 apply는 인자의 갯수가 제한돼있지 않습니다. apply에서 호루된 함수는 두번째부터 마지막까지 전달된 인자들의 cons 리스트를 인자로 전달받습니다.
 (주: cons 리스트라는게 나오는데 나중에 설명이 나옵니다. 간단하게 미리 설명하면 cons 함수로 만든 리스트라는 것입니다.)
-
 (apply #’+ 1 ’(2))
+
 is equivalent to the preceding four. If it is inconvenient to give the arguments as
 a list, we can use funcall, which differs from apply only in this respect. This
 expression
+이 표현은 위의 4개의 표현들과 완전히 동일한 것입니다. 함수 인자로 리스트를 넘기는게 불편하시면 funcall을 쓰면 됩니다. 인자가 리스트가 아니라는 것 외에는 apply와 다른게 없습니다.
 (funcall #’+ 1 2)
 has the same effect as those above.
+위의 것들과 같은 일을 하는 표현입니다.
+
 Many built-in Common Lisp functions take functional arguments. Among the
 most frequently used are the mapping functions. For example, mapcar takes two
 or more arguments, a function and one or more lists (one for each parameter of
-the function), and applies the function successively to elements of each list:14
-FUNCTIONS
+the function), and applies the function successively to elements of each list:
+커널 리습에 있는 많은 빌트인 함수들은 함수를 인자로 받습니다. 자주 사용되는 함수들 중에 맵핑 함수가 있습니다. 그중에 mapcar라는게 있는데 두개 이상의 인자를 받습니다. 그 인자는 함수 하나와 한개 이상의 리스트 (각각이 함수에 전달됩니다.)인데, 각각의 리스트마다 한번식 함수가 호출됩니다.
 > (mapcar #’(lambda (x) (+ x 10))
 ’(1 2 3))
 (11 12 13)
@@ -296,22 +299,29 @@ FUNCTIONS
 ’(1 2 3)
 ’(10 100 1000))
 (11 102 1003)
+
 Lisp programs frequently want to do something to each element of a list and get
 back a list of results. The first example above illustrates the conventional way to
 do this: make a function which does what you want done, and mapcar it over the
 list.
+리습 프로그램에서는 리스트에 있는 각각의 항목을 가지고 뭔가 일을 하는 경우가 많습니다. 위의 예중에 첫번째 것이 바로 그런 일을 간편하게 실행하는 방법을 보여줍니다. 내가 원하는 일을 하는 함수를 하나 만들고, 리스트의 각 항목에 한번씩 맵핑을 합니다. (주:이렇게 리스트에 있는 항목들을 하나씩 꺼내서 함수에 전달하는걸 mapcar라고 부릅니다.)
+
 Already we see how convenient it is to be able to treat functions as data. In
 many languages, even if we could pass a function as an argument to something like
 mapcar, it would still have to be a function defined in some source file beforehand.
 If just one piece of code wanted to add 10 to each element of a list, we would have
 to define a function, called plus ten or some such, just for this one use. With
 lambda-expressions, we can refer to functions directly.
+함수를 데이터처럼 다룰 수 있다는게 얼마나 편리한 것인지를 봤습니다. 다른 많은 언어들에서는 mapcar같은 함수에 함수를 인자로 전달할 수 있다해도 미리 소스 파일 어딘가에 정의된 함수만을 전달할 수 있습니다. 하나의 리스트 안에 있는 항목들 각각에 10을 더하는 단순한 일을 하는 함수를 만드려고 해도 우리는 함수를 정의하고 호출해야합니다. 한번만 사용하는 함수일때도 그렇습니다. 람다 표현식이 있으면 이럴때 함수를 곧바로 사용할 수 있습니다.
+
 One of the big differences between Common Lisp and the dialects which
 preceded it are the large number of built-in functions that take functional argu-
 ments. Two of the most commonly used, after the ubiquitous mapcar, are sort
 and remove-if. The former is a general-purpose sorting function. It takes a list
 and a predicate, and returns a list sorted by passing each pair of elements to the
 predicate.
+커먼리습과 커먼리습에서 갈라져나온 다른 언어들과 다른것중 큰게 함수를 인자로 많은 빌트인 함수가 많다는 것입니다. 많은 곳에서 사용되는 mapcar 다음으로 또 흔하게 사용되는 것들을 두개만 더 말하자면 sort와 remove-if가 있습니다. sort는 범용적으로 사용할 수 있는 정렬 함수입니다. 리스트와 판별자를 받아서 판별자에 의해 정렬된 리스트를 반환합니다.
+
 > (sort ’(1 4 2 5 6 7 3) #’<)
 (1 2 3 4 5 6 7)
 To remember how sort works, it helps to remember that if you sort a list with no
