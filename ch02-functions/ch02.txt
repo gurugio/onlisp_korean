@@ -422,11 +422,14 @@ sufficient.
 Common Lisp is a lexically scoped Lisp. Scheme is the oldest dialect with lexical
 scope; before Scheme, dynamic scope was considered one of the defining features
 of Lisp.
+커먼 리습은 렉시컬 유효 범위를 지원하는 언어입니다. 스킴이 렉시컬 유효 범위를 지원하는 리습의 방언이었고, 스킴이 생기기 전에는 리습의 중요한 특징이 다이나믹 유효 범위였습니다.
+
 The difference between lexical and dynamic scope comes down to how an
 implementation deals with free variables. A symbol is bound in an expression
 if it has been established as a variable, either by appearing as a parameter, or by
 variable-binding operators like let and do. Symbols which are not bound are
 said to be free. In this example, scope comes into play:
+
 (let ((y 7))
 (defun scope-test (x)
 (list x y)))
