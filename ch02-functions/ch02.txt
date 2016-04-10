@@ -6,10 +6,7 @@ from user-defined functions. But Lisp has a single model, function application, 
 describe all the computation done by a program. The Lisp + operator is a function,
 just like the ones you can define yourself.
 
-함수는 리습으로 프로그램을 만들기 위한 부품입니다. 또 리습 자체의 부품이기도 합니다.
-대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다.
-하지만 리습은 프로그램이 실행하는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다.
-그래서 리습에서 + 연산자는 사용자가 정의한 함수와 동일한 함수입니다.
+함수를 부품으로 리습 프로그램이 만들어집니다. 또 리습 자체도 함수라는 부품을 조립해서 만듭니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램이 실행하는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 그래서 리습에서 + 연산자는 사용자가 정의한 함수와 동일한 함수입니다.
 
 In fact, except for a small number of operators called special forms, the core
 of Lisp is a collection of Lisp functions. What’s to stop you from adding to this
@@ -46,8 +43,9 @@ itself is a collection of functions. This means that we can add to Lisp new oper
 of our own. Another important thing to know about functions is that they are Lisp
 objects.
 
-리습에서 함수를 특별하게 만드는게 2가지가 있습니다. 가장 먼저 리습 자체가 함수의 모음일 뿐입니다.
-그래서 우리가 만든 새로운 연산자를 리습에 추가할 수 있습니다.
+리습에서 함수를 특별하게 만드는게 2가지가 있습니다. 
+리습 자체가 함수의 모음일 뿐이라는걸 가장 먼저 알아야합니다.
+그래서 우리가 만든 새로운 연산자를 리습 언어에 추가할 수 있습니다.
 또 우리가 꼭 알아야 할 것은 함수가 리습의 객체라는 것입니다.
 
 
