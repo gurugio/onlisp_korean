@@ -6,7 +6,7 @@ from user-defined functions. But Lisp has a single model, function application, 
 describe all the computation done by a program. The Lisp + operator is a function,
 just like the ones you can define yourself.
 
-함수를 부품으로 리습 프로그램이 만들어집니다. 또 리습 자체도 함수라는 부품을 조립해서 만듭니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램이 실행하는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 그래서 리습에서 + 연산자는 사용자가 정의한 함수와 동일한 함수입니다.
+리습 프로그램은 함수가 모여서 만들어집니다. 또 리습 자체도 함수들이 모여서 만들어진 것입니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램이 실행하는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 그래서 리습에서 + 연산자는 사용자가 정의한 함수와 동일한 함수입니다.
 
 In fact, except for a small number of operators called special forms, the core
 of Lisp is a collection of Lisp functions. What’s to stop you from adding to this
@@ -322,17 +322,22 @@ predicate.
 
 > (sort ’(1 4 2 5 6 7 3) #’<)
 (1 2 3 4 5 6 7)
+
 To remember how sort works, it helps to remember that if you sort a list with no
 duplicates by <, and then apply < to the resulting list, it will return true.
+sort가 어떻게 동작하는지를 잘 기억하려면 중복된 항목이 없는 리스트를 <로 정렬할 때 정렬된 리스트에 다시 <를 적용했을 때 참이 반환된다는 것을 기억하면 됩니다.
+
 If remove-if weren’t included in Common Lisp, it might be the first utility
 you would write. It takes a function and a list, and returns all the elements of the
 list for which the function returns false.
+remove-if가 커먼 리습에 이미 포함되어있지 않았다면 우리가 만들어야 할 첫번째 라이브러리 함수가  remove-if였을 겁니다.(주: 그만큼 자주 쓸거란 이야기입니다.)  함수와 리스트를 인자로 받아서 함수가 거짓을 반환한 항목들을 리스트로 만들어서 반환해줍니다.
 > (remove-if #’evenp ’(1 2 3 4 5 6 7))
 (1 3 5 7)
+
 As an example of a function which takes functional arguments, here is a
-definition of a limited version of remove-if:2.4
-FUNCTIONS AS PROPERTIES
-15
+definition of a limited version of remove-if:
+인자를 함수로 받는게 어떤 것인지 예를 보여드리겠습니다. 아래처럼 간단한 remove-if를 만들어보겠습니다.
+
 (defun our-remove-if (fn lst)
 (if (null lst)
 nil
@@ -343,17 +348,26 @@ Note that within this definition fn is not sharp-quoted. Since functions are dat
 objects, a variable can have a function as its regular value. That’s what’s happening
 here. Sharp-quote is only for referring to the function named by a symbol—usually
 one globally defined as such with defun.
+이렇게 정의한 함수를 보면 fn에 샵-따옴표를 붙이지 않은걸 볼 수 있습니다. 함수가 곧 데이터 객체이기 때문에 변수의 값이 함수일 수 있습니다. 그래서 샵-따옴표가 없는 것입니다. 샵-따옴표는 심볼과 같은 이름의  함수에 접근할 때 쓰는 것입니다. 보통 그런 함수는 defun으로 전역적으로 정의된 함수입니다.
+
 As Chapter 4 will show, writing new utilities which take functional arguments
 is an important element of bottom-up programming. Common Lisp has so many
 utilities built-in that the one you need may exist already. But whether you use
 built-ins like sort, or write your own utilities, the principle is the same. Instead
 of wiring in functionality, pass a functional argument.
+4장에서 보겠지만 인자로 함수를 받는 함수를 구현하는 것은 상향식 프로그래밍에서 중요한 부분입니다. 커먼 리습에는 여러분이 필요로하는 함수들이 대부분 이미 구현되어있을 겁니다. sort같은 빌트인 함수를 쓰거나 직접 만든 함수를 쓰건건에 원칙은 동일합니다. 어떤 기능을 함수 내부에서 구현하는 것보다는 함수에 인자로 전달하는게 우선입니다.(주: 숫자를 정렬할 때 숫자만 정렬하는 함수를 만드는 것보다는 범용적인 함수를 만든다음, 숫자를 처리하는 함수를 따로 만들고, 범용 함수를 전달하는 것입니다. 그러면 범용적인 처리에서 조금씩 더 응용에 특화된 레벨로 올라갈 수 있습니다. 또 개발이 다 끝나갈 무렵에 숫자 처리외에 문자열의 정렬이 필요하다고 요구사항이 바뀌어도 대처할 수 있습니다. 만약 하나의 함수에서 숫자 처리만 가능하도록 만들고 말았다면 설계의 변화나 요구사항의 변화에 대처할 수 없을 것입니다.)
+
+
 2.4 Functions as Properties
+2.4 속성으로 함수를 사용하기
+
 The fact that functions are Lisp objects also allows us to write programs which can
 be extended to deal with new cases on the fly. Suppose we want to write a function
 which takes a type of animal and behaves appropriately. In most languages, the
 way to do this would be with a case statement, and we can do it this way in Lisp
 as well:
+함수가 리습 객체라는 것 덕분에 갑작스러운 기능 추가 등의 프로그램 확장에 유연하게 대처할 수 있습니다. 동물의 종류를 인자로 받아서 해당하는 동물의 행동을 나타내는 함수를 만든다고 생각해보겠습니다. 다른 언어들은 case문을 사용해서 처리할 것입니다. 리습으로하면 아래처럼 될 것입니다.
+
 (defun behave (animal)
 (case animal
 (dog (wag-tail)
@@ -362,34 +376,48 @@ as well:
 (squeak))
 (cat (rub-legs)
 (scratch-carpet))))
+
 What if we want to add a new type of animal? If we were planning to add new
 animals, it would have been better to define behave as follows:
+새로운 타입의 동물을 추가하려면 어떻게 해야할까요? 새로운 동물이 추가될 수 있다는 계획이 있었을 때부터 아래와같이 동물 행동을 구현했다면 더 좋았을 것입니다.
+
 (defun behave (animal)
 (funcall (get animal ’behavior)))
 and to define the behavior of an individual animal as a function stored, for example,
-on the property list of its name:16
-FUNCTIONS
+on the property list of its name:
+그리고 각 동물의 행동을 구현할 때, 다음 예처럼 동물 이름으로된 속성 리스트에 함수로 저장할 수 있습니다. (주: dog가 속성 리스트이고 behavior가 속성입니다. 이 책은 이미 lisp의 기본을 아는 사람을 대상으로 한 책이기 때문에 일일이 새로나온 함수를 설명하지 않습니다.)
+
 (setf (get ’dog ’behavior)
 #’(lambda ()
 (wag-tail)
 (bark)))
+
+
 This way, all we need do in order to add a new animal is define a new property.
 No functions have to be rewritten.
+이렇게하면 새로운 동물을 추가하기 위해 우리가 할 일은 새로운 속성을 정의하는 것밖에 없게됩니다. 함수를 고칠 필요가 없습니다.
+
 The second approach, though more flexible, looks slower. It is. If speed were
 critical, we would use structures instead of property lists and, especially, compiled
 instead of interpreted functions. (Section 2.9 explains how to make these.) With
 structures and compiled functions, the more flexible type of code can approach or
 exceed the speed of versions using case statements.
+두번째 방법은 좀더 유연하지만 더 느려보입니다. 실제로도 그렇습니다. 속도가 중요한 상황이라면 속성 리스트 대신에 구조체를 사용했을겁니다. 또 인터프리터에서 함수를 정의할게 아니라 함수를 컴파일해서 사용하는 것도 중요합니다.
+
 This use of functions corresponds to the concept of a method in object-oriented
 programming. Generally speaking, a method is a function which is a property of
 an object, and that’s just what we have. If we add inheritance to this model, we’ll
 have all the elements of object-oriented programming. Chapter 25 will show that
 this can be done with surprisingly little code.
+이렇게 함수를 사용하는 것은 객체지향 프로그래밍에서 메소드의 개념과 같습니다. 일반적으로 메소드라는 것은 객체의 속성이 함수인 것을 말합니다. 바로 우리가 만든 그대로입니다. 이 방식에 상속 개념을 더하면 객체지향 프로그래밍의 모든 요소를 가지게 됩니다. 25장에서 아주 적은 코드만으로 이런 개념들을 구현하는 것을 보게됩니다.
+
 One of the big selling points of object-oriented programming is that it makes
 programs extensible. This prospect excites less wonder in the Lisp world, where
 extensibility has always been taken for granted. If the kind of extensibility we
 need does not depend too much on inheritance, then plain Lisp may already be
 sufficient.
+객체지향 프로그래밍의 가장 큰 장점이 프로그램을 확장하기 쉽게 만들어준다는 것입니다. 그런 장점이 리습에는 그리 특별한게 아닌게  리습에서는 확장성이 항상  당연한 것이었기 때문입니다. (주: 객체지향 프로그래밍이 나오기 한참 전에 리습이 만들어졌습니다.) 꼭 상속으로만 구현되는 확장성을 빼고는 기본적인 리습만으로도 충분히 확장성을 제공할 수 있습니다.
+
 2.5 Scope
 Common Lisp is a lexically scoped Lisp. Scheme is the oldest dialect with lexical
 scope; before Scheme, dynamic scope was considered one of the defining features
