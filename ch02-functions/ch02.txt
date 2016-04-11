@@ -422,51 +422,62 @@ sufficient.
 Common Lisp is a lexically scoped Lisp. Scheme is the oldest dialect with lexical
 scope; before Scheme, dynamic scope was considered one of the defining features
 of Lisp.
-커먼 리습은 렉시컬 유효 범위를 지원하는 언어입니다. 스킴이 렉시컬 유효 범위를 지원하는 리습의 방언이었고, 스킴이 생기기 전에는 리습의 중요한 특징이 다이나믹 유효 범위였습니다.
+커먼 리습은 렉시컬 유효 범위를 지원하는 언어입니다. 스킴이 첫번째로 렉시컬 유효 범위를 지원하는 리습의 방언이었고, 스킴이 생기기 전에는 리습의 중요한 특징이 다이나믹 유효 범위였습니다.
 
 The difference between lexical and dynamic scope comes down to how an
 implementation deals with free variables. A symbol is bound in an expression
 if it has been established as a variable, either by appearing as a parameter, or by
 variable-binding operators like let and do. Symbols which are not bound are
 said to be free. In this example, scope comes into play:
+렉시컬 유효범위와 동적 유효범위의 차이는 값이 정해지지않은 변수를 어떻게 처리하느냐에 달려있습니다. 만약 어떤 심볼이 함수 매개 변수에 사용되거나 let, do 같은 변수 선언 연산자를 이용한 표현식을 이용해서 변수라고 정의될 수 있습니다. 그렇게 특정하게 연결된 값이 없다면 값이 정해지지 않은 것입니다. 다음 예제를 보면 유효범위가 어떻게 정해지는지를 알 수 있습니다.
 
 (let ((y 7))
 (defun scope-test (x)
 (list x y)))
 Within the defun expression,x is bound and y is free. Free variables are interesting
 because it’s not obvious what their values should be. There’s no uncertainty about
-the value of a bound variable—when scope-test is called, the value of x should2.6
-CLOSURES
-17
+the value of a bound variable—when scope-test is called, the value of x should
 be whatever is passed as the argument. But what should be the value of y? This
 is the question answered by the dialect’s scope rules.
+defun 표현식 내부에서보면 x는 값이 정해졌고 y는 값이 정해지지 않았습니다. 값이 정해지지 않은 변수는 그 값이 뭐가 될지 알 수 없습으므로 주의해야합니다. 값이 지정된 변수는 명확합니다. scope-test 함수가 호출될 때 x의 값은 함수 인자로 전달된 값 그대로입니다. 그럼 y의 값은 뭘까요? 리습의 방언에서 유효범위를 어떻게 규정하느냐에 따라 달라집니다.
+
 In a dynamically scoped Lisp, to find the value of a free variable when exe-
 cuting scope-test, we look back through the chain of functions that called it.
 When we find an environment where y was bound, that binding of y will be the
 one used in scope-test. If we find none, we take the global value of y. Thus, in
 a dynamically scoped Lisp, y would have the value it had in the calling expression:
+동적 유효범위를 지원하는 리습 방언에서는 scope-test를 실행할 때 값이 정해지지 않은 변수의 값을 찾을 때 함수 호출 고리를 거슬러 올라가면서 값을 찾습니다. 그렇게 올라가다가 y의 값이 정해지는 환경을 만나면 그때 y의 값이 scope-test에서 사용할 값입니다. 만약 값을 찾지 못하면 y의 값이 전역 변수인지 확인합니다. 그래서 동적 유효 범위를 가진 리습에서 y는 y를 사용하는 표현식이 호출될 때의 값을 가집니다.
+
 > (let ((y 5))
 (scope-test 3))
 (3 5)
 With dynamic scope, it means nothing that y was bound to 7 when scope-test
 was defined. All that matters is that y had a value of 5 when scope-test was
 called.
+동적 유효범위에서 scope-test가 정의될 때 y의 값이 7이라는 것은 상관이 없습니다. scope-test가 호출될 때 y의 값이 5라는 것만이 중요합니다.
+
 In a lexically scoped Lisp, instead of looking back through the chain of calling
 functions, we look back through the containing environments at the time the
 function was defined. In a lexically scoped Lisp, our example would catch the
 binding of y where scope-test was defined. So this is what would happen in
 Common Lisp:
+렉시컬 유효범위(주: 동적 유효범위의 반대라고해서 정적 유효범위라고 부르기도 합니다.)는 함수 호출 고리를 거슬러 올라가는 대신 함수가 정의될 당시의 환경이 어떠했는지를 찾아봅니다. 렉시컬 유효범위를 지원하는 리습에서 위의 예제를 실행하면 scope-test가 정의되는 곳에서 y의 값을 찾습니다. 그래서 커먼 리습에서는 아래처럼 실행이 됩니다.
+
 > (let ((y 5))
 (scope-test 3))
 (3 7)
 Here the binding of y to 5 at the time of the call has no effect on the returned
 value.
+호출 당시에 y가 5라는 것은 코드의 실행 결과와 상관이 없습니다.
+
 Though you can still get dynamic scope by declaring a variable to be special,
 lexical scope is the default in Common Lisp. On the whole, the Lisp community
 seems to view the passing of dynamic scope with little regret. For one thing, it
 used to lead to horribly elusive bugs. But lexical scope is more than a way of
 avoiding bugs. As the next section will show, it also makes possible some new
 programming techniques.
+특별한 방법을 쓰면 동적 유효 범위를 가지는 변수를 만들 수는 있습니다. 하지만 커먼 리습에서는 렉시컬 유효 범위가 기본입니다. 리습 커뮤니티는 동적 유효 범위를 버린 것에 대해 별로 후회하지 않는것 같습니다. 그것 때문에 정말 찾기 어려운 버그가 생기기도 했었으니까요. 반면에 렉시컬 유효 범위는 버그를 방지하기 쉽습니다. 또 다음 섹션에서 보듯이 새로운 프로그래밍 테크닉이 생겨나기도 했습니다.
+
 2.6 Closures
 Because Common Lisp is lexically scoped, when we define a function containing
 free variables, the system must save copies of the bindings of those variables at
