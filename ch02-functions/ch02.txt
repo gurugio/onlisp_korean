@@ -1,4 +1,5 @@
 Functions
+함수
 
 Functions are the building-blocks of Lisp programs. They are also the building-
 blocks of Lisp. In most languages the + operator is something quite different
@@ -6,7 +7,7 @@ from user-defined functions. But Lisp has a single model, function application, 
 describe all the computation done by a program. The Lisp + operator is a function,
 just like the ones you can define yourself.
 
-리습 프로그램은 함수가 모여서 만들어집니다. 또 리습 자체도 함수들이 모여서 만들어진 것입니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램이 실행하는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 그래서 리습에서 + 연산자는 사용자가 정의한 함수와 동일한 함수입니다.
+리습 프로그램은 함수가 모여서 만들어집니다. 또 리습 자체도 함수가 모여서 만들어진 것입니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램에서 실행되는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 리습에서 + 연산자는 함수입니다. 사용자가 정의해서 사용하는 함수와 같은 함수입니다.
 
 In fact, except for a small number of operators called special forms, the core
 of Lisp is a collection of Lisp functions. What’s to stop you from adding to this
@@ -479,31 +480,42 @@ programming techniques.
 특별한 방법을 쓰면 동적 유효 범위를 가지는 변수를 만들 수는 있습니다. 하지만 커먼 리습에서는 렉시컬 유효 범위가 기본입니다. 리습 커뮤니티는 동적 유효 범위를 버린 것에 대해 별로 후회하지 않는것 같습니다. 그것 때문에 정말 찾기 어려운 버그가 생기기도 했었으니까요. 반면에 렉시컬 유효 범위는 버그를 방지하기 쉽습니다. 또 다음 섹션에서 보듯이 새로운 프로그래밍 테크닉이 생겨나기도 했습니다.
 
 2.6 Closures
+클로저(주: 클로저는 뭐라고 번역할 수가 없었습니다. 그냥 클로저라고 부르겠습니다.)
+
 Because Common Lisp is lexically scoped, when we define a function containing
 free variables, the system must save copies of the bindings of those variables at
 the time the function was defined. Such a combination of a function and a set
 of variable bindings is called a closure. Closures turn out to be useful in a wide
-variety of applications.18
-FUNCTIONS
+variety of applications.
+커먼 리습이 렉시컬 유효범위를 가진다고 말씀드렸습니다. 그래서 함수가 정의될 때 내부에서 정의되지 않은 변수를 가지고 있다면 시스템은 함수가 정의될 때 어떤 변수들이 어떤 값을 가지고 있는지를 기억해놔야합니다. 그렇게 함수와 변수들의 묶음을 클로저라고 부릅니다. 클로저는 다양한 분야의 응용 프로그램에서 유용하게 사용되고 있습니다.
+
 Closures are so pervasive in Common Lisp programs that it’s possible to use
 them without even knowing it. Every time you give mapcar a sharp-quoted
 lambda-expression containing free variables, you’re using closures. For example,
 suppose we want to write a function which takes a list of numbers and adds a
 certain amount to each one. The function list+
+클로저는 워낙 커먼 리습 프로그램에 흔하게 사용되고 있어서 뭔지 모르면서도 사용하기도 합니다. mapcar를 호출 할 때 샤프-따옴표를 이용해서 람다 표현식을 넘길때가 있습니다. 그때 람다 표현식 안에 람다 표현식 밖에서 정의된 변수가 있다면 클로저를 사용한 것입니다. 예제를 만들어보겠습니다. 숫자로 이루어진 리스트를 받아서 특정 수를 더하는 함수를 만드려고 합니다. 함수 이름은 list+ 입니다.
+
 (defun list+ (lst n)
 (mapcar #’(lambda (x) (+ x n))
 lst))
 will do what we want:
+위와같이 만들어서 아래와같이 사용할 수 있습니다.
 > (list+ ’(1 2 3) 10)
 (11 12 13)
+
 If we look closely at the function which is passed to mapcar within list+, it’s
 actually a closure. The instance of n is free, and its binding comes from the
 surrounding environment. Under lexical scope, every such use of a mapping
 function causes the creation of a closure. 1
+list+ 함수를 보면 mapcar에 사용된 람다 표현식이 클로저라는 것을 알 수 있습니다. n의 값이 람다 표현식 밖에서 정의된 것입니다. 렉시컬 스코프에서는 (주:mapcar같은) 맵핑 함수를 사용할 때마다 클로저가 생성된다고 보면 됩니다. (저자주1)
+
 Closures play a more conspicuous role in a style of programming promoted
 ◦ by Abelson and Sussman’s classic Structure and Interpretation of Computer Pro-
 grams. Closures are functions with local state. The simplest way to use this state
 is in a situation like the following:
+클로저는 Abelson과 Sussman 이 쓴 유명한 고전 Structure and Interpretation of Computer Programs 에서 자주 사용하는 프로그래밍 스타일입니다. 클로저는 자신만의 상태를 가지는 함수라고 할 수 있습니다. 이 상태를 사용하는 방법은 다음과 같은 상황에서 잘 나타납니다.
+
 (let ((counter 0))
 (defun new-id ()
 (incf counter))
@@ -512,16 +524,22 @@ These two functions share a variable which serves as a counter. The first one
 returns successive values of the counter, and the second resets the counter to 0.
 The same thing could be done by making the counter a global variable, but this
 way it is protected from unintended references.
+카운터 역할을 하는 변수를 두개의 함수가 공유하고 있습니다. 첫번째 함수는 카운터를 증가시키고 두번째 함수는 0으로 초기화합니다. 전역 변수로 선언된 카운터로 같은 일을 할 수 있지만 위와 같이 구현하면 의도치않은 곳에서 카운터에 접근하는 것을 막을 수 있습니다. 
+
 It’s also useful to be able to return functions with local state. For example, the
 function make-adder
+개별 상태를 가진 함수를 반환하는 것도 유용할 때가 있습니다. 다음과 같은 make-adder 함수를 보면
+
 (defun make-adder (n)
 #’(lambda (x) (+ x n)))
 takes a number, and returns a closure which, when called, adds that number to its
 argument. We can make as many instances of adders as we want:
-1 Under dynamic scope the same idiom will work for a different reason—so long as neither of
-mapcar’s parameter is called x.2.6
-CLOSURES
-19
+숫자를 받아서 클로저를 반환합니다. 이 클로저는 호출될때마다 인자로 전달된 숫자만큼 값을 더합니다. 결국 아래처럼 여러가지의 덧셈기를 만들 수가 있게 됩니다.
+
+(저자주:1. Under dynamic scope the same idiom will work for a different reason—so long as neither of
+mapcar’s parameter is called x.)
+(저자주1: 동적 스코프에서도 똑같이 동작하지만 이유는 다릅니다. (해석못함)
+
 > (setq add2 (make-adder 2)
 add10 (make-adder 10))
 #<Interpreted-Function BF162E>
@@ -531,6 +549,8 @@ add10 (make-adder 10))
 13
 In the closures returned by make-adder, the internal state is fixed, but it’s also
 possible to make closures which can be asked to change their state.
+make-add로 만들어진 클로저들은 내부 상태가 고정되어있습니다. 하지만 내부 상태를 바꿀 수 있게 만들 수도 있습니다.
+
 (defun make-adderb (n)
 #’(lambda (x &optional change)
 (if change
@@ -538,12 +558,16 @@ possible to make closures which can be asked to change their state.
 (+ x n))))
 This new version of make-adder returns closures which, when called with one
 argument, behave just like the old ones.
+새로 만든 make-adder는 인자가 하나일때 이전 클로저와 동일하게 동작하는 클로저를 반환합니다.
+
 > (setq addx (make-adderb 1))
 #<Interpreted-Function BF1C66>
 > (funcall addx 3)
 4
 However, when the new type of adder is called with a non-nil second argument,
 its internal copy of n will be reset to the value passed as the first argument:
+그런데 두번째 인자가 nil값이 아닐때의 동작이 다릅니다. 내부 상태에서 n의 값이 첫번째 인자의 값으로 바뀝니다.
+
 > (funcall addx 100 t)
 100
 > (funcall addx 3)

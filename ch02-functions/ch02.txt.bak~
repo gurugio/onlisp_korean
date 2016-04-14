@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE abiword PUBLIC "-//ABISOURCE//DTD AWML 1.0 Strict//EN" "http://www.abisource.com/awml.dtd">
+<abiword template="false" xmlns:ct="http://www.abisource.com/changetracking.dtd" xmlns:fo="http://www.w3.org/1999/XSL/Format" xmlns:math="http://www.w3.org/1998/Math/MathML" xid-max="855" xmlns:dc="http://purl.org/dc/elements/1.1/" fileformat="1.1" xmlns:svg="http://www.w3.org/2000/svg" xmlns:awml="http://www.abisource.com/awml.dtd" xmlns="http://www.abisource.com/awml.dtd" xmlns:xlink="http://www.w3.org/1999/xlink" version="3.0.1" xml:space="preserve" props="dom-dir:ltr; document-footnote-restart-section:0; document-endnote-type:numeric; document-endnote-place-enddoc:1; document-endnote-initial:1; lang:en-US; document-endnote-restart-section:0; document-footnote-restart-page:0; document-footnote-type:numeric; document-footnote-initial:1; document-endnote-place-endsection:0">
+<!-- ======================================================================== -->
+<!-- This file is an AbiWord document.                                        -->
+<!-- AbiWord is a free, Open Source word processor.                           -->
+<!-- More information about AbiWord is available at http://www.abisource.com/ -->
+<!-- You should not edit this file by hand.                                   -->
+<!-- ======================================================================== -->
+
+<metadata>
+<m key="abiword.date_last_changed">Thu Apr 14 07:08:47 2016
+</m>
+<m key="abiword.generator">AbiWord</m>
+<m key="dc.date">Thu Apr 14 06:58:48 2016
+</m>
+<m key="dc.format">application/x-abiword</m>
+</metadata>
+<rdf>
+</rdf>
+<history version="2" edit-time="4200" last-saved="1460610527" uid="4283eb40-01f7-11e6-90f4-82c715f6de5b">
+<version id="2" started="1460609928" uid="f7cc7d44-01fe-11e6-90f4-82c715f6de5b" auto="0" top-xid="842"/>
+</history>
+<styles>
+<s type="P" name="Normal" basedon="" followedby="Current Settings" props="font-family:Times New Roman; margin-top:0pt; font-variant:normal; margin-left:0pt; text-indent:0in; widows:2; font-style:normal; font-weight:normal; text-decoration:none; color:000000; line-height:1.0; text-align:left; margin-bottom:0pt; text-position:normal; margin-right:0pt; bgcolor:transparent; font-size:12pt; font-stretch:normal"/>
+</styles>
+<pagesize pagetype="A4" orientation="portrait" width="8.267717" height="11.692913" units="in" page-scale="1.000000"/>
+<section xid="3">
+<p style="Normal" xid="4" props="text-align:left; dom-dir:ltr">Functions</p>
+<p style="Normal" xid="5" props="text-align:left; dom-dir:ltr">함수</p>
+<p style="Normal" xid="6"><c></c></p>
+<p style="Normal" xid="7" props="text-align:left; dom-dir:ltr">Functions are the building-blocks of Lisp programs. They are also the building-</p>
+<p style="Normal" xid="8" props="text-align:left; dom-dir:ltr">blocks of Lisp. In most languages the + operator is something quite different</p>
+<p style="Normal" xid="9" props="text-align:left; dom-dir:ltr">from user-defined functions. But Lisp has a single model, function application, to</p>
+<p style="Normal" xid="10" props="text-align:left; dom-dir:ltr">describe all the computation done by a program. The Lisp + operator is a function,</p>
+<p style="Normal" xid="11" props="text-align:left; dom-dir:ltr">just like the ones you can define yourself.</p>
+<p style="Normal" xid="12"><c></c></p>
+<p style="Normal" xid="13" props="text-align:left; dom-dir:ltr">리습 프로그램은 함수가 모여서 만들어집니다. 또 리습 자체도 함수가 모여서 만들어진 것입니다. 대부분의 언어에서 + 연산자와 사용자가 정의한 함수는 완전히 다른 것입니다. 하지만 리습은 프로그램에서 실행되는 모든 연산을 함수로 표현하는 단일 모델을 가지고 있습니다. 리습에서 + 연산자는 함수입니다. 사용자가 정의해서 사용하는 함수와 같은 함수입니다.</p>
+<p style="Normal" xid="14"><c></c></p>
+<p style="Normal" xid="15" props="text-align:left; dom-dir:ltr">In fact, except for a small number of operators called special forms, the core</p>
+<p style="Normal" xid="16" props="text-align:left; dom-dir:ltr">of Lisp is a collection of Lisp functions. What’s to stop you from adding to this</p>
+<p style="Normal" xid="17" props="text-align:left; dom-dir:ltr">collection? Nothing at all: if you think of something you wish Lisp could do, you</p>
+<p style="Normal" xid="18" props="text-align:left; dom-dir:ltr">can write it yourself, and your new function will be treated just like the built-in</p>
+<p style="Normal" xid="19" props="text-align:left; dom-dir:ltr">ones.</p>
+<p style="Normal" xid="20"><c></c></p>
+<p style="Normal" xid="21" props="text-align:left; dom-dir:ltr">사실 특별형식이라고 불리는 몇몇 연산자를 제외하면 리습의 내부구현은 리습 함수들의 모음일 뿐입니다.</p>
+<p style="Normal" xid="22" props="text-align:left; dom-dir:ltr">이 모음에 뭔가 추가하지 못할 이유가 없지요.</p>
+<p style="Normal" xid="23" props="text-align:left; dom-dir:ltr">뭔가 리습이 했으면 하고 생각하신게 있다면, 직접 구현하세요.</p>
+<p style="Normal" xid="24" props="text-align:left; dom-dir:ltr">직접 만든 함수들이나 리습에 있는 함수들이나 똑같이 사용할 수 있습니다.</p>
+<p style="Normal" xid="25"><c></c></p>
+<p style="Normal" xid="26"><c></c></p>
+<p style="Normal" xid="27" props="text-align:left; dom-dir:ltr">This fact has important consequences for the programmer. It means that any</p>
+<p style="Normal" xid="28" props="text-align:left; dom-dir:ltr">new function could be considered either as an addition to Lisp, or as part of a</p>
+<p style="Normal" xid="29" props="text-align:left; dom-dir:ltr">specific application. Typically, an experienced Lisp programmer will write some</p>
+<p style="Normal" xid="30" props="text-align:left; dom-dir:ltr">of each, adjusting the boundary between language and application until the two</p>
+<p style="Normal" xid="31" props="text-align:left; dom-dir:ltr">fit one another perfectly. This book is about how to achieve a good fit between</p>
+<p style="Normal" xid="32" props="text-align:left; dom-dir:ltr">language and application. Since everything we do toward this end ultimately</p>
+<p style="Normal" xid="33" props="text-align:left; dom-dir:ltr">depends on functions, functions are the natural place to begin.</p>
+<p style="Normal" xid="34"><c></c></p>
+<p style="Normal" xid="35" props="text-align:left; dom-dir:ltr">여기서 프로그래머를 위한 중요한 사실이 하나 나타납니다.</p>
+<p style="Normal" xid="36" props="text-align:left; dom-dir:ltr">새로운 함수를 만든다는 것은 리습에 함수를 추가한다는 것도 되고, 또 자신이 만드는 프로그램에 추가하는 것도 됩니다.</p>
+<p style="Normal" xid="37" props="text-align:left; dom-dir:ltr">보통 숙력된 리습 프로그래머는 두가지를 다 구현하면서 만들고자하는 프로그램과 언어가 서로 완벽히 맞아떨어지도록 만들어나갑니다.</p>
+<p style="Normal" xid="38" props="text-align:left; dom-dir:ltr">이 책은 언어와 응용 프로그램이 어떻게하면 잘 어울리게될지를 알려주고자 합니다.</p>
+<p style="Normal" xid="39" props="text-align:left; dom-dir:ltr">가장 중요한게 함수이므로, 함수에서부터 이야기를 시작하겠습니다.</p>
+<p style="Normal" xid="40"><c></c></p>
+<p style="Normal" xid="41" props="text-align:left; dom-dir:ltr">2.1 Functions as Data</p>
+<p style="Normal" xid="42" props="text-align:left; dom-dir:ltr">2.1 데이타처럼 사용되는 함수</p>
+<p style="Normal" xid="43"><c></c></p>
+<p style="Normal" xid="44"><c></c></p>
+<p style="Normal" xid="45" props="text-align:left; dom-dir:ltr">Two things make Lisp functions different. One, mentioned above, is that Lisp</p>
+<p style="Normal" xid="46" props="text-align:left; dom-dir:ltr">itself is a collection of functions. This means that we can add to Lisp new operators</p>
+<p style="Normal" xid="47" props="text-align:left; dom-dir:ltr">of our own. Another important thing to know about functions is that they are Lisp</p>
+<p style="Normal" xid="48" props="text-align:left; dom-dir:ltr">objects.</p>
+<p style="Normal" xid="49"><c></c></p>
+<p style="Normal" xid="50" props="text-align:left; dom-dir:ltr">리습에서 함수를 특별하게 만드는게 2가지가 있습니다. </p>
+<p style="Normal" xid="51" props="text-align:left; dom-dir:ltr">리습 자체가 함수의 모음일 뿐이라는걸 가장 먼저 알아야합니다.</p>
+<p style="Normal" xid="52" props="text-align:left; dom-dir:ltr">그래서 우리가 만든 새로운 연산자를 리습 언어에 추가할 수 있습니다.</p>
+<p style="Normal" xid="53" props="text-align:left; dom-dir:ltr">또 우리가 꼭 알아야 할 것은 함수가 리습의 객체라는 것입니다.</p>
+<p style="Normal" xid="54"><c></c></p>
+<p style="Normal" xid="55"><c></c></p>
+<p style="Normal" xid="56" props="text-align:left; dom-dir:ltr">Lisp offers most of the data types one finds in other languages. We get</p>
+<p style="Normal" xid="57" props="text-align:left; dom-dir:ltr">integers and floating-point numbers, strings, arrays, structures, and so on. But</p>
+<p style="Normal" xid="58" props="text-align:left; dom-dir:ltr">Lisp supports one data type which may at first seem surprising: the function.</p>
+<p style="Normal" xid="59" props="text-align:left; dom-dir:ltr">Nearly all programming languages provide some form of function or procedure.</p>
+<p style="Normal" xid="60" props="text-align:left; dom-dir:ltr">What does it mean to say that Lisp provides them as a data type? It means that in</p>
+<p style="Normal" xid="61" props="text-align:left; dom-dir:ltr">Lisp we can do with functions all the things we expect to do with more familiar</p>
+<p style="Normal" xid="62" props="text-align:left; dom-dir:ltr">data types, like integers: create new ones at runtime, store them in variables and in</p>
+<p style="Normal" xid="63" props="text-align:left; dom-dir:ltr">structures, pass them as arguments to other functions, and return them as results.</p>
+<p style="Normal" xid="64" props="text-align:left; dom-dir:ltr">The ability to create and return functions at runtime is particularly useful.</p>
+<p style="Normal" xid="65"><c></c></p>
+<p style="Normal" xid="66" props="text-align:left; dom-dir:ltr">리습은 다른 언어들이 제공하는 데이타 타입 대부분을 가지고 있습니다.</p>
+<p style="Normal" xid="67" props="text-align:left; dom-dir:ltr">정수와 부동소수점 수부터 문자열, 배열, 구조체 등등이 있습니다.</p>
+<p style="Normal" xid="68" props="text-align:left; dom-dir:ltr">하지만 리습에는 누구나 처음 보면 놀랄만한 데이터 타입이 있습니다. 바로 함수입니다.</p>
+<p style="Normal" xid="69" props="text-align:left; dom-dir:ltr">거의 모든 프로그래밍 언어들이 함수나 프로시저같은 형식을 지원합니다.</p>
+<p style="Normal" xid="70" props="text-align:left; dom-dir:ltr">리습이 함수를 데이터 타입으로 제공한다는게 무슨 의미일까요?</p>
+<p style="Normal" xid="71" props="text-align:left; dom-dir:ltr">리습에서 우리는 함수를  가지고 데이터를 가지고 할 수 있는  일들을 할 수 있다는 것입니다.</p>
+<p style="Normal" xid="72" props="text-align:left; dom-dir:ltr">예를 들면 마치 정수인것처럼 실행중에 새로운 함수를 만들고, 변수나 구조체안에 저장할 수 있습니다.</p>
+<p style="Normal" xid="73" props="text-align:left; dom-dir:ltr">또한 다른 함수에 인자로 전달할 수도 있고, 결과값으로 반환할 수도 있습니다.</p>
+<p style="Normal" xid="74" props="text-align:left; dom-dir:ltr">실행중간에 새로운 함수를 만들거나 결과값으로 함수를 반환할 수 있다는 것이 다른 언어와 차별되는 것입니다.</p>
+<p style="Normal" xid="75"><c></c></p>
+<p style="Normal" xid="76"><c></c></p>
+<p style="Normal" xid="77" props="text-align:left; dom-dir:ltr">This might sound at first like a dubious sort of advantage, like the self-modifying</p>
+<p style="Normal" xid="78" props="text-align:left; dom-dir:ltr">machine language programs one can run on some computers. But creating new</p>
+<p style="Normal" xid="79" props="text-align:left; dom-dir:ltr">functions at runtime turns out to be a routinely used Lisp programming technique.</p>
+<p style="Normal" xid="80"><c></c></p>
+<p style="Normal" xid="81" props="text-align:left; dom-dir:ltr">처음 들으신 분들은 뭐가 장점이라는 것인지 의아하실 것입니다.</p>
+<p style="Normal" xid="82" props="text-align:left; dom-dir:ltr">마치 어떤 사람들이 어디선가 사용한다는  자기 자신을 수정할 수 있는 기계 코드 와 비슷한것 같이 생각될 것입니다.</p>
+<p style="Normal" xid="83" props="text-align:left; dom-dir:ltr">하지만 동적으로 새로운 함수를 만드는 것은 리습 프로그래밍에서 흔하게 사용되는 테크닉입니다.</p>
+<p style="Normal" xid="84"><c></c></p>
+<p style="Normal" xid="85" props="text-align:left; dom-dir:ltr">2.2 Defining Functions</p>
+<p style="Normal" xid="86" props="text-align:left; dom-dir:ltr">2.2 함수 정의</p>
+<p style="Normal" xid="87"><c></c></p>
+<p style="Normal" xid="88" props="text-align:left; dom-dir:ltr">Most people first learn how to make functions with defun. The following expres-</p>
+<p style="Normal" xid="89" props="text-align:left; dom-dir:ltr">sion defines a function called double which returns twice its argument.</p>
+<p style="Normal" xid="90" props="text-align:left; dom-dir:ltr">대부분 함수를 정의하는 것이 defun이라고 배우셨을 겁니다.</p>
+<p style="Normal" xid="91" props="text-align:left; dom-dir:ltr">다음이 인자값의 두배를 반환하는 double이라는 함수를 정의하는 표현입니다.</p>
+<p style="Normal" xid="92"><c></c></p>
+<p style="Normal" xid="93" props="text-align:left; dom-dir:ltr">&gt; (defun double (x) (* x 2))</p>
+<p style="Normal" xid="94" props="text-align:left; dom-dir:ltr">DOUBLE</p>
+<p style="Normal" xid="95"><c></c></p>
+<p style="Normal" xid="96" props="text-align:left; dom-dir:ltr">Having fed this to Lisp, we can call double in other functions, or from the</p>
+<p style="Normal" xid="97" props="text-align:left; dom-dir:ltr">toplevel:</p>
+<p style="Normal" xid="98" props="text-align:left; dom-dir:ltr">리습에 함수를 추가하고나면 다른 함수안에서 double을 호출할 수 있고, 최상위 레벨에서도 호출할 수 있습니다.</p>
+<p style="Normal" xid="99"><c></c></p>
+<p style="Normal" xid="100" props="text-align:left; dom-dir:ltr">&gt; (double 1)</p>
+<p style="Normal" xid="101">2</p>
+<p style="Normal" xid="102"><c></c></p>
+<p style="Normal" xid="103"><c></c></p>
+<p style="Normal" xid="104" props="text-align:left; dom-dir:ltr">A file of Lisp code usually consists mainly of such defuns, and so resembles a</p>
+<p style="Normal" xid="105" props="text-align:left; dom-dir:ltr">file of procedure definitions in a language like C or Pascal. But something quite</p>
+<p style="Normal" xid="106" props="text-align:left; dom-dir:ltr">different is going on. Those defuns are not just procedure definitions, they’re</p>
+<p style="Normal" xid="107" props="text-align:left; dom-dir:ltr">Lisp calls. This distinction will become clearer when we see what’s going on</p>
+<p style="Normal" xid="108" props="text-align:left; dom-dir:ltr">underneath defun.</p>
+<p style="Normal" xid="109"><c></c></p>
+<p style="Normal" xid="110" props="text-align:left; dom-dir:ltr">리습 코드를 보면 대부분 이런  defun들로 이루어졌다는걸 알 수 있습니다.</p>
+<p style="Normal" xid="111" props="text-align:left; dom-dir:ltr">마치 C나 파스칼 언어에서 프로시저 정의들과 비슷합니다.</p>
+<p style="Normal" xid="112" props="text-align:left; dom-dir:ltr">하지만 확연히 다른 점이 존재합나디ㅏ.</p>
+<p style="Normal" xid="113" props="text-align:left; dom-dir:ltr">이 defun들은 단순히 프로시저를 정의하는게 아닙니다.</p>
+<p style="Normal" xid="114" props="text-align:left; dom-dir:ltr">그것들은 리습 호출 그 자체입니다.</p>
+<p style="Normal" xid="115" props="text-align:left; dom-dir:ltr">defun의 내부에  어떤 일이 벌어지는지를 알면 보다 명확해집니다.</p>
+<p style="Normal" xid="116"><c></c></p>
+<p style="Normal" xid="117" props="text-align:left; dom-dir:ltr">Functions are objects in their own right. What defun really does is build one,</p>
+<p style="Normal" xid="118" props="text-align:left; dom-dir:ltr">and store it under the name given as the first argument. So as well as calling</p>
+<p style="Normal" xid="119" props="text-align:left; dom-dir:ltr">double, we can get hold of the function which implements it. The usual way to</p>
+<p style="Normal" xid="120" props="text-align:left; dom-dir:ltr">do so is by using the #’ (sharp-quote) operator. This operator can be understood</p>
+<p style="Normal" xid="121" props="text-align:left; dom-dir:ltr">as mapping names to actual function objects. By affixing it to the name of double</p>
+<p style="Normal" xid="122" props="text-align:left; dom-dir:ltr">함수는 객체와 동일합니다. defun이 실제로 하는 일은 하나의 객체를 만들어서 첫번째 인자로 전달된 이름으로 저장하는 것입니다.</p>
+<p style="Normal" xid="123" props="text-align:left; dom-dir:ltr">그래서 double을 호출하는 것 뿐만 아니라 그것들 정의하는 함수 자체를 맘대로 다룰 수도 있습니다.</p>
+<p style="Normal" xid="124" props="text-align:left; dom-dir:ltr">바로 #’ (샵-따옴표) 연산자를 이용하면 됩니다.</p>
+<p style="Normal" xid="125" props="text-align:left; dom-dir:ltr">이 연산자는 전달된 이름에 해당하는 함수의 객체를 얻을 수 있게 해줍니다.</p>
+<p style="Normal" xid="126" props="text-align:left; dom-dir:ltr">double 이라는 이름에 써보면 </p>
+<p style="Normal" xid="127"><c></c></p>
+<p style="Normal" xid="128"><c></c></p>
+<p style="Normal" xid="129" props="text-align:left; dom-dir:ltr">&gt; #’double</p>
+<p style="Normal" xid="130" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function C66ACE&gt;</p>
+<p style="Normal" xid="131"><c></c></p>
+<p style="Normal" xid="132" props="text-align:left; dom-dir:ltr">we get the actual object created by the definition above. Though its printed</p>
+<p style="Normal" xid="133" props="text-align:left; dom-dir:ltr">representation will vary from implementation to implementation, a Common Lisp</p>
+<p style="Normal" xid="134" props="text-align:left; dom-dir:ltr">function is a first-class object, with all the same rights as more familiar objects</p>
+<p style="Normal" xid="135" props="text-align:left; dom-dir:ltr">like numbers and strings. So we can pass this function as an argument, return it,</p>
+<p style="Normal" xid="136" props="text-align:left; dom-dir:ltr">store it in a data structure, and so on:</p>
+<p style="Normal" xid="137" props="text-align:left; dom-dir:ltr">&gt; (eq #’double (car (list #’double)))</p>
+<p style="Normal" xid="138" props="text-align:left; dom-dir:ltr">T</p>
+<p style="Normal" xid="139" props="text-align:left; dom-dir:ltr">이렇게 함수를 정의할 때 생성된 객체를 얻게 됩니다.</p>
+<p style="Normal" xid="140" props="text-align:left; dom-dir:ltr">리습 구현마다 출력 양식이 다를 수 있습니다만 커먼 리습에서 함수는  일급객체입니다.</p>
+<p style="Normal" xid="141" props="text-align:left; dom-dir:ltr">다른 숫자나 문자열같이 좀더 흔한 객체들과 마찬가지입니다.</p>
+<p style="Normal" xid="142" props="text-align:left; dom-dir:ltr">그래서 우리는 함수를 함수 인자로 전달할 수도 있고, 반환값으로 반환하거나 데이터 구조에 저장하는 등의 일들을 할 수 있게됩니다.</p>
+<p style="Normal" xid="143"><c></c></p>
+<p style="Normal" xid="144" props="text-align:left; dom-dir:ltr">We don’t even need defun to make functions. Like most Lisp objects, we</p>
+<p style="Normal" xid="145" props="text-align:left; dom-dir:ltr">can refer to them literally. When we want to refer to an integer, we just use the</p>
+<p style="Normal" xid="146" props="text-align:left; dom-dir:ltr">integer itself. To represent a string, we use a series of characters surrounded by</p>
+<p style="Normal" xid="147" props="text-align:left; dom-dir:ltr">double-quotes. To represent a function, we use what’s called a lambda-expression.</p>
+<p style="Normal" xid="148" props="text-align:left; dom-dir:ltr">A lambda-expression is a list with three parts: the symbol lambda, a parameter</p>
+<p style="Normal" xid="149" props="text-align:left; dom-dir:ltr">list, and a body of zero or more expressions. This lambda-expression refers to a</p>
+<p style="Normal" xid="150" props="text-align:left; dom-dir:ltr">function equivalent to double:</p>
+<p style="Normal" xid="151"><c></c></p>
+<p style="Normal" xid="152"><c></c></p>
+<p style="Normal" xid="153" props="text-align:left; dom-dir:ltr">꼭 함수를 만들 때 defun이 필요한건 아닙니다.</p>
+<p style="Normal" xid="154" props="text-align:left; dom-dir:ltr">다른 리습 객체들처럼 우리는 함수 그 자체에 접근할 수 있습니다.</p>
+<p style="Normal" xid="155" props="text-align:left; dom-dir:ltr">우리가 정수를 참조하고 싶을 때 정수를 그대로 사용하는 것과 같습니다.</p>
+<p style="Normal" xid="156" props="text-align:left; dom-dir:ltr">문자열을 표현하기 위해서 우리는 쌍따옴표로 둘러싸인 문자들이 나열을 사용합니다.</p>
+<p style="Normal" xid="157" props="text-align:left; dom-dir:ltr">함수를 표현하기 위해서는 람다 표현식이라는걸 사용하면 됩니다.</p>
+<p style="Normal" xid="158" props="text-align:left; dom-dir:ltr">람다 표현식은 3개의 항목으로 구성된 리스트입니다.</p>
+<p style="Normal" xid="159" props="text-align:left; dom-dir:ltr">lambda라는 심볼과, 매개변수 리스트, 0개 이상의 표현식으로 구성된 몸체입니다.</p>
+<p style="Normal" xid="160" props="text-align:left; dom-dir:ltr">람다 표현식으로 double과 동일한 함수를 참조할 수 있습니다.</p>
+<p style="Normal" xid="161" props="text-align:left; dom-dir:ltr">(lambda (x) (* x 2))</p>
+<p style="Normal" xid="162"><c></c></p>
+<p style="Normal" xid="163" props="text-align:left; dom-dir:ltr">It describes a function which takes one argument x, and returns 2x.</p>
+<p style="Normal" xid="164" props="text-align:left; dom-dir:ltr">A lambda-expression can also be considered as the name of a function. If</p>
+<p style="Normal" xid="165" props="text-align:left; dom-dir:ltr">double is a proper name, like “Michelangelo,” then (lambda (x) (* x 2)) is</p>
+<p style="Normal" xid="166" props="text-align:left; dom-dir:ltr">a definite description, like “the man who painted the ceiling of the Sistine Chapel.”</p>
+<p style="Normal" xid="167" props="text-align:left; dom-dir:ltr">By putting a sharp-quote before a lambda-expression, we get the corresponding</p>
+<p style="Normal" xid="168" props="text-align:left; dom-dir:ltr">function:</p>
+<p style="Normal" xid="169"><c></c></p>
+<p style="Normal" xid="170" props="text-align:left; dom-dir:ltr">하나의 인자값 x 를 받아서 2x를 반환하는 함수를 표현해봤습니다.</p>
+<p style="Normal" xid="171" props="text-align:left; dom-dir:ltr">람다라는 표현을 함수의 이름이라고 생각할 수 있습니다.</p>
+<p style="Normal" xid="172" props="text-align:left; dom-dir:ltr">double가 이름이고 (lambda (x) (* x 2))라는 표현은 이름에 대한 설명이라고 생각해봅시다.</p>
+<p style="Normal" xid="173" props="text-align:left; dom-dir:ltr">“미켈란젤로"가 이름이고 “시스틴 예배당의 천장에 그림을 그린 사람"이 설명인것과 같습니다.</p>
+<p style="Normal" xid="174"><c></c></p>
+<p style="Normal" xid="175"><c></c></p>
+<p style="Normal" xid="176" props="text-align:left; dom-dir:ltr">&gt; #’(lambda (x) (* x 2))</p>
+<p style="Normal" xid="177" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function C674CE&gt;</p>
+<p style="Normal" xid="178"><c></c></p>
+<p style="Normal" xid="179"><c></c></p>
+<p style="Normal" xid="180"><c></c></p>
+<p style="Normal" xid="181" props="text-align:left; dom-dir:ltr">This function behaves exactly like double, but the two are distinct objects.</p>
+<p style="Normal" xid="182" props="text-align:left; dom-dir:ltr">In a function call, the name of the function appears first, followed by the</p>
+<p style="Normal" xid="183" props="text-align:left; dom-dir:ltr">arguments:</p>
+<p style="Normal" xid="184"><c></c></p>
+<p style="Normal" xid="185" props="text-align:left; dom-dir:ltr">이 함수는 double과 같은 일을 하는데 각각 다른 객체입니다.</p>
+<p style="Normal" xid="186" props="text-align:left; dom-dir:ltr">함수를 호출할때는 이름을 먼저 쓰고, 그 다음에 인자를 씁니다.</p>
+<p style="Normal" xid="187"><c></c></p>
+<p style="Normal" xid="188" props="text-align:left; dom-dir:ltr">&gt; (double 3)</p>
+<p style="Normal" xid="189">6</p>
+<p style="Normal" xid="190"><c></c></p>
+<p style="Normal" xid="191"><c></c></p>
+<p style="Normal" xid="192" props="text-align:left; dom-dir:ltr">Since lambda-expressions are also names of functions, they can also appear first</p>
+<p style="Normal" xid="193" props="text-align:left; dom-dir:ltr">in function calls:</p>
+<p style="Normal" xid="194" props="text-align:left; dom-dir:ltr">람다 표현도 함수 이름이므로 lambda를 가장 먼저 써야합니다.</p>
+<p style="Normal" xid="195" props="text-align:left; dom-dir:ltr">&gt; ((lambda (x) (* x 2)) 3)</p>
+<p style="Normal" xid="196">6</p>
+<p style="Normal" xid="197"><c></c></p>
+<p style="Normal" xid="198"><c></c></p>
+<p style="Normal" xid="199" props="text-align:left; dom-dir:ltr">In Common Lisp, we can have a function named double and a variable named</p>
+<p style="Normal" xid="200" props="text-align:left; dom-dir:ltr">double at the same time.</p>
+<p style="Normal" xid="201"><c></c></p>
+<p style="Normal" xid="202" props="text-align:left; dom-dir:ltr">커먼 리습에서 double이라는 함수가 있을 때 동시에 double이라는 변수도 있을 수 있습니다.</p>
+<p style="Normal" xid="203" props="text-align:left; dom-dir:ltr">&gt; (setq double 2)</p>
+<p style="Normal" xid="204">2</p>
+<p style="Normal" xid="205" props="text-align:left; dom-dir:ltr">&gt; (double double)</p>
+<p style="Normal" xid="206">4</p>
+<p style="Normal" xid="207"><c></c></p>
+<p style="Normal" xid="208" props="text-align:left; dom-dir:ltr">When a name occurs first in a function call, or is preceded by a sharp-quote, it is</p>
+<p style="Normal" xid="209" props="text-align:left; dom-dir:ltr">taken to refer to a function. Otherwise it is treated as a variable name.</p>
+<p style="Normal" xid="210" props="text-align:left; dom-dir:ltr">It is therefore said that Common Lisp has distinct name-spaces for variables</p>
+<p style="Normal" xid="211" props="text-align:left; dom-dir:ltr">and functions. We can have a variable called foo and a function called foo, and</p>
+<p style="Normal" xid="212" props="text-align:left; dom-dir:ltr">they need not be identical. This situation can be confusing, and leads to a certain</p>
+<p style="Normal" xid="213" props="text-align:left; dom-dir:ltr">amount of ugliness in code, but it is something that Common Lisp programmers</p>
+<p style="Normal" xid="214" props="text-align:left; dom-dir:ltr">have to live with.</p>
+<p style="Normal" xid="215" props="text-align:left; dom-dir:ltr">함수 호출에서 첫번째로 나타나는 이름이나 샤프-따옴표가 붙은 이름은 함수를 나타내는 것입니다. 그 외에는 변수 이름입니다. 이걸보면 함수와 변수가 분리된 이름 공간을 사용한다는걸 알 수 있습니다. foo라는 변수와 foo라는 함수가 있는데 동일한게 아니라니. 혼란스러울 수 있습니다. 코드가 이상해보일 수도 있습니다. 하지만 커먼 리습 프로그래머라면 감당해야합니다.</p>
+<p style="Normal" xid="216"><c></c></p>
+<p style="Normal" xid="217" props="text-align:left; dom-dir:ltr">If necessary, Common Lisp provides two functions which map symbols to the</p>
+<p style="Normal" xid="218" props="text-align:left; dom-dir:ltr">values, or functions, that they represent. The function symbol-value takes a</p>
+<p style="Normal" xid="219" props="text-align:left; dom-dir:ltr">symbol and returns the value of the corresponding special variable:</p>
+<p style="Normal" xid="220" props="text-align:left; dom-dir:ltr">커먼 리습에는 하나의 심볼을 필요에 따라 함수로 쓸건지 변수로 쓸건지 고르게 해주는 2개의 함수를 제공하고 있습니다. symbol-value 함수는 심볼을 받아서 그에 해당하는 변수의 값을 반환합니다.</p>
+<p style="Normal" xid="221"><c></c></p>
+<p style="Normal" xid="222" props="text-align:left; dom-dir:ltr">&gt; (symbol-value ’double)</p>
+<p style="Normal" xid="223">2</p>
+<p style="Normal" xid="224"><c></c></p>
+<p style="Normal" xid="225" props="text-align:left; dom-dir:ltr">while symbol-function does the same for a globally defined function:</p>
+<p style="Normal" xid="226" props="text-align:left; dom-dir:ltr">반면에 symbol-fundtion은 전역 함수를 반환합니다.</p>
+<p style="Normal" xid="227"><c></c></p>
+<p style="Normal" xid="228" props="text-align:left; dom-dir:ltr">&gt; (symbol-function ’double)</p>
+<p style="Normal" xid="229" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function C66ACE&gt;</p>
+<p style="Normal" xid="230" props="text-align:left; dom-dir:ltr">Note that, since functions are ordinary data objects, a variable could have a</p>
+<p style="Normal" xid="231" props="text-align:left; dom-dir:ltr">function as its value:</p>
+<p style="Normal" xid="232" props="text-align:left; dom-dir:ltr">함수가 보통의 데이터 객체이므로 변수의 값으로 함수를 저장할 수도 있습니다.</p>
+<p style="Normal" xid="233"><c></c></p>
+<p style="Normal" xid="234" props="text-align:left; dom-dir:ltr">&gt; (setq x #’append)</p>
+<p style="Normal" xid="235" props="text-align:left; dom-dir:ltr">#&lt;Compiled-Function 46B4BE&gt;</p>
+<p style="Normal" xid="236" props="text-align:left; dom-dir:ltr">&gt; (eq (symbol-value ’x) (symbol-function ’append))</p>
+<p style="Normal" xid="237" props="text-align:left; dom-dir:ltr">T</p>
+<p style="Normal" xid="238"><c></c></p>
+<p style="Normal" xid="239"><c></c></p>
+<p style="Normal" xid="240" props="text-align:left; dom-dir:ltr">Beneath the surface, defun is setting the symbol-function of its first argu-</p>
+<p style="Normal" xid="241" props="text-align:left; dom-dir:ltr">ment to a function constructed from the remaining arguments. The following two</p>
+<p style="Normal" xid="242" props="text-align:left; dom-dir:ltr">expressions do approximately the same thing:</p>
+<p style="Normal" xid="243" props="text-align:left; dom-dir:ltr">내부를 들여다보면 defun이 하는 일은 첫번째 인자로 symbol-function을 호출하고, 나머지인자들로 함수를 만들어서 연결하는 것입니다. 다음 2개의 표현식은 서로 동일하다고 볼 수 있습니다.</p>
+<p style="Normal" xid="244" props="text-align:left; dom-dir:ltr">(defun double (x) (* x 2))</p>
+<p style="Normal" xid="245" props="text-align:left; dom-dir:ltr">(setf (symbol-function ’double)</p>
+<p style="Normal" xid="246" props="text-align:left; dom-dir:ltr">#’(lambda (x) (* x 2)))</p>
+<p style="Normal" xid="247"><c></c></p>
+<p style="Normal" xid="248" props="text-align:left; dom-dir:ltr">So defun has the same effect as procedure definition in other languages—to</p>
+<p style="Normal" xid="249" props="text-align:left; dom-dir:ltr">associate a name with a piece of code. But the underlying mechanism is not the</p>
+<p style="Normal" xid="250" props="text-align:left; dom-dir:ltr">same. We don’t need defun to make functions, and functions don’t have to be</p>
+<p style="Normal" xid="251" props="text-align:left; dom-dir:ltr">stored away as the value of some symbol. Underlying defun, which resembles</p>
+<p style="Normal" xid="252" props="text-align:left; dom-dir:ltr">procedure definition in any other language, is a more general mechanism: building</p>
+<p style="Normal" xid="253" props="text-align:left; dom-dir:ltr">a function and associating it with a certain name are two separate operations.</p>
+<p style="Normal" xid="254" props="text-align:left; dom-dir:ltr">When we don’t need the full generality of Lisp’s notion of a function, defun</p>
+<p style="Normal" xid="255" props="text-align:left; dom-dir:ltr">makes function definition as simple as in more restrictive languages.</p>
+<p style="Normal" xid="256" props="text-align:left; dom-dir:ltr">결국 겉으로보기에 defun은 다른 언어들의 프로시저 정의와 같이 여러개의 코드를 하나의 이름으로 묶는 일을 합니다. 하지만 내부를 들여다보면 같지 않습니다. 함수를 만들기위해 꼭 defun을 써야할 필요가 없습니다. 함수가 특정 심볼에 저장될 필요도 없습니다.  겉으로는 다른 언어들의 프로세저 정의와 같아보이지만 내부에는 좀더 범용적인 메카니즘이 들어있습니다. 함수를 만드는 것과 이름을 붙이는 것이 서로 분리될 수 있기 때문입니다. 우리가 리습에서 정의하는 함수의 범용성을 모두 사용할게 아니라면 defun을 다른 언어들과 같이 단순히 함수를 정의하는데만 사용해도 됩니다.</p>
+<p style="Normal" xid="257"><c></c></p>
+<p style="Normal" xid="258" props="text-align:left; dom-dir:ltr">2.3 Functional Arguments</p>
+<p style="Normal" xid="259" props="text-align:left; dom-dir:ltr">함수 인자에 함수를 전달하기</p>
+<p style="Normal" xid="260"><c></c></p>
+<p style="Normal" xid="261" props="text-align:left; dom-dir:ltr">Having functions as data objects means, among other things, that we can pass</p>
+<p style="Normal" xid="262" props="text-align:left; dom-dir:ltr">them as arguments to other functions. This possibility is partly responsible for the</p>
+<p style="Normal" xid="263" props="text-align:left; dom-dir:ltr">importance of bottom-up programming in Lisp.</p>
+<p style="Normal" xid="264" props="text-align:left; dom-dir:ltr">함수가 데이터 객체라는 것은 -다른 것들도 있겠지만- 다른 함수에 인자로 넘길 수 있다는것입니다. 리습의 상향식 프로그래밍이 가능한 이유중에 하나가 이것입니다.</p>
+<p style="Normal" xid="265"><c></c></p>
+<p style="Normal" xid="266" props="text-align:left; dom-dir:ltr">A language which allows functions as data objects must also provide some</p>
+<p style="Normal" xid="267" props="text-align:left; dom-dir:ltr">way of calling them. In Lisp, this function is apply. Generally, we call apply</p>
+<p style="Normal" xid="268" props="text-align:left; dom-dir:ltr">with two arguments: a function, and a list of arguments for it. The following four</p>
+<p style="Normal" xid="269" props="text-align:left; dom-dir:ltr">expressions all have the same effect:</p>
+<p style="Normal" xid="270" props="text-align:left; dom-dir:ltr">어떤 언어가 함수를 데이터 객체와 같게 만들었다면 당연히 그에 맞는 호출 방식도 제공해야합니다. 리습에서는 apply라는 함수가 그런 역할을 합니다. 보통 apply에 2개의 인자를 전달하면 됩니다. 호출할 함수와 함수에 전달할 인자 리스트입니다. 다음 4개의 표현식들은 모두 같은 일을 합니다.</p>
+<p style="Normal" xid="271"><c></c></p>
+<p style="Normal" xid="272">(+ 1 2)</p>
+<p style="Normal" xid="273" props="text-align:left; dom-dir:ltr">(apply #’+ ’(1 2))</p>
+<p style="Normal" xid="274" props="text-align:left; dom-dir:ltr">(apply (symbol-function ’+) ’(1 2))</p>
+<p style="Normal" xid="275" props="text-align:left; dom-dir:ltr">(apply #’(lambda (x y) (+ x y)) ’(1 2))</p>
+<p style="Normal" xid="276"><c></c></p>
+<p style="Normal" xid="277" props="text-align:left; dom-dir:ltr">In Common Lisp, apply can take any number of arguments, and the function</p>
+<p style="Normal" xid="278" props="text-align:left; dom-dir:ltr">given first will be applied to the list made by consing the rest of the arguments</p>
+<p style="Normal" xid="279" props="text-align:left; dom-dir:ltr">onto the list given last. So the expression</p>
+<p style="Normal" xid="280" props="text-align:left; dom-dir:ltr">커먼 리습에서 apply는 인자의 갯수가 제한돼있지 않습니다. apply에서 호루된 함수는 두번째부터 마지막까지 전달된 인자들의 cons 리스트를 인자로 전달받습니다.</p>
+<p style="Normal" xid="281" props="text-align:left; dom-dir:ltr">(주: cons 리스트라는게 나오는데 나중에 설명이 나옵니다. 간단하게 미리 설명하면 cons 함수로 만든 리스트라는 것입니다.)</p>
+<p style="Normal" xid="282" props="text-align:left; dom-dir:ltr">(apply #’+ 1 ’(2))</p>
+<p style="Normal" xid="283"><c></c></p>
+<p style="Normal" xid="284" props="text-align:left; dom-dir:ltr">is equivalent to the preceding four. If it is inconvenient to give the arguments as</p>
+<p style="Normal" xid="285" props="text-align:left; dom-dir:ltr">a list, we can use funcall, which differs from apply only in this respect. This</p>
+<p style="Normal" xid="286" props="text-align:left; dom-dir:ltr">expression</p>
+<p style="Normal" xid="287" props="text-align:left; dom-dir:ltr">이 표현은 위의 4개의 표현들과 완전히 동일한 것입니다. 함수 인자로 리스트를 넘기는게 불편하시면 funcall을 쓰면 됩니다. 인자가 리스트가 아니라는 것 외에는 apply와 다른게 없습니다.</p>
+<p style="Normal" xid="288" props="text-align:left; dom-dir:ltr">(funcall #’+ 1 2)</p>
+<p style="Normal" xid="289" props="text-align:left; dom-dir:ltr">has the same effect as those above.</p>
+<p style="Normal" xid="290" props="text-align:left; dom-dir:ltr">위의 것들과 같은 일을 하는 표현입니다.</p>
+<p style="Normal" xid="291"><c></c></p>
+<p style="Normal" xid="292" props="text-align:left; dom-dir:ltr">Many built-in Common Lisp functions take functional arguments. Among the</p>
+<p style="Normal" xid="293" props="text-align:left; dom-dir:ltr">most frequently used are the mapping functions. For example, mapcar takes two</p>
+<p style="Normal" xid="294" props="text-align:left; dom-dir:ltr">or more arguments, a function and one or more lists (one for each parameter of</p>
+<p style="Normal" xid="295" props="text-align:left; dom-dir:ltr">the function), and applies the function successively to elements of each list:</p>
+<p style="Normal" xid="296" props="text-align:left; dom-dir:ltr">커널 리습에 있는 많은 빌트인 함수들은 함수를 인자로 받습니다. 자주 사용되는 함수들 중에 맵핑 함수가 있습니다. 그중에 mapcar라는게 있는데 두개 이상의 인자를 받습니다. 그 인자는 함수 하나와 한개 이상의 리스트 (각각이 함수에 전달됩니다.)인데, 각각의 리스트마다 한번식 함수가 호출됩니다.</p>
+<p style="Normal" xid="297" props="text-align:left; dom-dir:ltr">&gt; (mapcar #’(lambda (x) (+ x 10))</p>
+<p style="Normal" xid="298">’(1 2 3))</p>
+<p style="Normal" xid="299">(11 12 13)</p>
+<p style="Normal" xid="300" props="text-align:left; dom-dir:ltr">&gt; (mapcar #’+</p>
+<p style="Normal" xid="301">’(1 2 3)</p>
+<p style="Normal" xid="302">’(10 100 1000))</p>
+<p style="Normal" xid="303">(11 102 1003)</p>
+<p style="Normal" xid="304"><c></c></p>
+<p style="Normal" xid="305" props="text-align:left; dom-dir:ltr">Lisp programs frequently want to do something to each element of a list and get</p>
+<p style="Normal" xid="306" props="text-align:left; dom-dir:ltr">back a list of results. The first example above illustrates the conventional way to</p>
+<p style="Normal" xid="307" props="text-align:left; dom-dir:ltr">do this: make a function which does what you want done, and mapcar it over the</p>
+<p style="Normal" xid="308" props="text-align:left; dom-dir:ltr">list.</p>
+<p style="Normal" xid="309" props="text-align:left; dom-dir:ltr">리습 프로그램에서는 리스트에 있는 각각의 항목을 가지고 뭔가 일을 하는 경우가 많습니다. 위의 예중에 첫번째 것이 바로 그런 일을 간편하게 실행하는 방법을 보여줍니다. 내가 원하는 일을 하는 함수를 하나 만들고, 리스트의 각 항목에 한번씩 맵핑을 합니다. (주:이렇게 리스트에 있는 항목들을 하나씩 꺼내서 함수에 전달하는걸 mapcar라고 부릅니다.)</p>
+<p style="Normal" xid="310"><c></c></p>
+<p style="Normal" xid="311" props="text-align:left; dom-dir:ltr">Already we see how convenient it is to be able to treat functions as data. In</p>
+<p style="Normal" xid="312" props="text-align:left; dom-dir:ltr">many languages, even if we could pass a function as an argument to something like</p>
+<p style="Normal" xid="313" props="text-align:left; dom-dir:ltr">mapcar, it would still have to be a function defined in some source file beforehand.</p>
+<p style="Normal" xid="314" props="text-align:left; dom-dir:ltr">If just one piece of code wanted to add 10 to each element of a list, we would have</p>
+<p style="Normal" xid="315" props="text-align:left; dom-dir:ltr">to define a function, called plus ten or some such, just for this one use. With</p>
+<p style="Normal" xid="316" props="text-align:left; dom-dir:ltr">lambda-expressions, we can refer to functions directly.</p>
+<p style="Normal" xid="317" props="text-align:left; dom-dir:ltr">함수를 데이터처럼 다룰 수 있다는게 얼마나 편리한 것인지를 봤습니다. 다른 많은 언어들에서는 mapcar같은 함수에 함수를 인자로 전달할 수 있다해도 미리 소스 파일 어딘가에 정의된 함수만을 전달할 수 있습니다. 하나의 리스트 안에 있는 항목들 각각에 10을 더하는 단순한 일을 하는 함수를 만드려고 해도 우리는 함수를 정의하고 호출해야합니다. 한번만 사용하는 함수일때도 그렇습니다. 람다 표현식이 있으면 이럴때 함수를 곧바로 사용할 수 있습니다.</p>
+<p style="Normal" xid="318"><c></c></p>
+<p style="Normal" xid="319" props="text-align:left; dom-dir:ltr">One of the big differences between Common Lisp and the dialects which</p>
+<p style="Normal" xid="320" props="text-align:left; dom-dir:ltr">preceded it are the large number of built-in functions that take functional argu-</p>
+<p style="Normal" xid="321" props="text-align:left; dom-dir:ltr">ments. Two of the most commonly used, after the ubiquitous mapcar, are sort</p>
+<p style="Normal" xid="322" props="text-align:left; dom-dir:ltr">and remove-if. The former is a general-purpose sorting function. It takes a list</p>
+<p style="Normal" xid="323" props="text-align:left; dom-dir:ltr">and a predicate, and returns a list sorted by passing each pair of elements to the</p>
+<p style="Normal" xid="324" props="text-align:left; dom-dir:ltr">predicate.</p>
+<p style="Normal" xid="325" props="text-align:left; dom-dir:ltr">커먼리습과 커먼리습에서 갈라져나온 다른 언어들과 다른것중 큰게 함수를 인자로 많은 빌트인 함수가 많다는 것입니다. 많은 곳에서 사용되는 mapcar 다음으로 또 흔하게 사용되는 것들을 두개만 더 말하자면 sort와 remove-if가 있습니다. sort는 범용적으로 사용할 수 있는 정렬 함수입니다. 리스트와 판별자를 받아서 판별자에 의해 정렬된 리스트를 반환합니다.</p>
+<p style="Normal" xid="326"><c></c></p>
+<p style="Normal" xid="327" props="text-align:left; dom-dir:ltr">&gt; (sort ’(1 4 2 5 6 7 3) #’&lt;)</p>
+<p style="Normal" xid="328">(1 2 3 4 5 6 7)</p>
+<p style="Normal" xid="329"><c></c></p>
+<p style="Normal" xid="330" props="text-align:left; dom-dir:ltr">To remember how sort works, it helps to remember that if you sort a list with no</p>
+<p style="Normal" xid="331" props="text-align:left; dom-dir:ltr">duplicates by &lt;, and then apply &lt; to the resulting list, it will return true.</p>
+<p style="Normal" xid="332" props="text-align:left; dom-dir:ltr">sort가 어떻게 동작하는지를 잘 기억하려면 중복된 항목이 없는 리스트를 &lt;로 정렬할 때 정렬된 리스트에 다시 &lt;를 적용했을 때 참이 반환된다는 것을 기억하면 됩니다.</p>
+<p style="Normal" xid="333"><c></c></p>
+<p style="Normal" xid="334" props="text-align:left; dom-dir:ltr">If remove-if weren’t included in Common Lisp, it might be the first utility</p>
+<p style="Normal" xid="335" props="text-align:left; dom-dir:ltr">you would write. It takes a function and a list, and returns all the elements of the</p>
+<p style="Normal" xid="336" props="text-align:left; dom-dir:ltr">list for which the function returns false.</p>
+<p style="Normal" xid="337" props="text-align:left; dom-dir:ltr">remove-if가 커먼 리습에 이미 포함되어있지 않았다면 우리가 만들어야 할 첫번째 라이브러리 함수가  remove-if였을 겁니다.(주: 그만큼 자주 쓸거란 이야기입니다.)  함수와 리스트를 인자로 받아서 함수가 거짓을 반환한 항목들을 리스트로 만들어서 반환해줍니다.</p>
+<p style="Normal" xid="338" props="text-align:left; dom-dir:ltr">&gt; (remove-if #’evenp ’(1 2 3 4 5 6 7))</p>
+<p style="Normal" xid="339">(1 3 5 7)</p>
+<p style="Normal" xid="340"><c></c></p>
+<p style="Normal" xid="341" props="text-align:left; dom-dir:ltr">As an example of a function which takes functional arguments, here is a</p>
+<p style="Normal" xid="342" props="text-align:left; dom-dir:ltr">definition of a limited version of remove-if:</p>
+<p style="Normal" xid="343" props="text-align:left; dom-dir:ltr">인자를 함수로 받는게 어떤 것인지 예를 보여드리겠습니다. 아래처럼 간단한 remove-if를 만들어보겠습니다.</p>
+<p style="Normal" xid="344"><c></c></p>
+<p style="Normal" xid="345" props="text-align:left; dom-dir:ltr">(defun our-remove-if (fn lst)</p>
+<p style="Normal" xid="346" props="text-align:left; dom-dir:ltr">(if (null lst)</p>
+<p style="Normal" xid="347" props="text-align:left; dom-dir:ltr">nil</p>
+<p style="Normal" xid="348" props="text-align:left; dom-dir:ltr">(if (funcall fn (car lst))</p>
+<p style="Normal" xid="349" props="text-align:left; dom-dir:ltr">(our-remove-if fn (cdr lst))</p>
+<p style="Normal" xid="350" props="text-align:left; dom-dir:ltr">(cons (car lst) (our-remove-if fn (cdr lst))))))</p>
+<p style="Normal" xid="351" props="text-align:left; dom-dir:ltr">Note that within this definition fn is not sharp-quoted. Since functions are data</p>
+<p style="Normal" xid="352" props="text-align:left; dom-dir:ltr">objects, a variable can have a function as its regular value. That’s what’s happening</p>
+<p style="Normal" xid="353" props="text-align:left; dom-dir:ltr">here. Sharp-quote is only for referring to the function named by a symbol—usually</p>
+<p style="Normal" xid="354" props="text-align:left; dom-dir:ltr">one globally defined as such with defun.</p>
+<p style="Normal" xid="355" props="text-align:left; dom-dir:ltr">이렇게 정의한 함수를 보면 fn에 샵-따옴표를 붙이지 않은걸 볼 수 있습니다. 함수가 곧 데이터 객체이기 때문에 변수의 값이 함수일 수 있습니다. 그래서 샵-따옴표가 없는 것입니다. 샵-따옴표는 심볼과 같은 이름의  함수에 접근할 때 쓰는 것입니다. 보통 그런 함수는 defun으로 전역적으로 정의된 함수입니다.</p>
+<p style="Normal" xid="356"><c></c></p>
+<p style="Normal" xid="357" props="text-align:left; dom-dir:ltr">As Chapter 4 will show, writing new utilities which take functional arguments</p>
+<p style="Normal" xid="358" props="text-align:left; dom-dir:ltr">is an important element of bottom-up programming. Common Lisp has so many</p>
+<p style="Normal" xid="359" props="text-align:left; dom-dir:ltr">utilities built-in that the one you need may exist already. But whether you use</p>
+<p style="Normal" xid="360" props="text-align:left; dom-dir:ltr">built-ins like sort, or write your own utilities, the principle is the same. Instead</p>
+<p style="Normal" xid="361" props="text-align:left; dom-dir:ltr">of wiring in functionality, pass a functional argument.</p>
+<p style="Normal" xid="362" props="text-align:left; dom-dir:ltr">4장에서 보겠지만 인자로 함수를 받는 함수를 구현하는 것은 상향식 프로그래밍에서 중요한 부분입니다. 커먼 리습에는 여러분이 필요로하는 함수들이 대부분 이미 구현되어있을 겁니다. sort같은 빌트인 함수를 쓰거나 직접 만든 함수를 쓰건건에 원칙은 동일합니다. 어떤 기능을 함수 내부에서 구현하는 것보다는 함수에 인자로 전달하는게 우선입니다.(주: 숫자를 정렬할 때 숫자만 정렬하는 함수를 만드는 것보다는 범용적인 함수를 만든다음, 숫자를 처리하는 함수를 따로 만들고, 범용 함수를 전달하는 것입니다. 그러면 범용적인 처리에서 조금씩 더 응용에 특화된 레벨로 올라갈 수 있습니다. 또 개발이 다 끝나갈 무렵에 숫자 처리외에 문자열의 정렬이 필요하다고 요구사항이 바뀌어도 대처할 수 있습니다. 만약 하나의 함수에서 숫자 처리만 가능하도록 만들고 말았다면 설계의 변화나 요구사항의 변화에 대처할 수 없을 것입니다.)</p>
+<p style="Normal" xid="363"><c></c></p>
+<p style="Normal" xid="364"><c></c></p>
+<p style="Normal" xid="365" props="text-align:left; dom-dir:ltr">2.4 Functions as Properties</p>
+<p style="Normal" xid="366" props="text-align:left; dom-dir:ltr">2.4 속성으로 함수를 사용하기</p>
+<p style="Normal" xid="367"><c></c></p>
+<p style="Normal" xid="368" props="text-align:left; dom-dir:ltr">The fact that functions are Lisp objects also allows us to write programs which can</p>
+<p style="Normal" xid="369" props="text-align:left; dom-dir:ltr">be extended to deal with new cases on the fly. Suppose we want to write a function</p>
+<p style="Normal" xid="370" props="text-align:left; dom-dir:ltr">which takes a type of animal and behaves appropriately. In most languages, the</p>
+<p style="Normal" xid="371" props="text-align:left; dom-dir:ltr">way to do this would be with a case statement, and we can do it this way in Lisp</p>
+<p style="Normal" xid="372" props="text-align:left; dom-dir:ltr">as well:</p>
+<p style="Normal" xid="373" props="text-align:left; dom-dir:ltr">함수가 리습 객체라는 것 덕분에 갑작스러운 기능 추가 등의 프로그램 확장에 유연하게 대처할 수 있습니다. 동물의 종류를 인자로 받아서 해당하는 동물의 행동을 나타내는 함수를 만든다고 생각해보겠습니다. 다른 언어들은 case문을 사용해서 처리할 것입니다. 리습으로하면 아래처럼 될 것입니다.</p>
+<p style="Normal" xid="374"><c></c></p>
+<p style="Normal" xid="375" props="text-align:left; dom-dir:ltr">(defun behave (animal)</p>
+<p style="Normal" xid="376" props="text-align:left; dom-dir:ltr">(case animal</p>
+<p style="Normal" xid="377" props="text-align:left; dom-dir:ltr">(dog (wag-tail)</p>
+<p style="Normal" xid="378" props="text-align:left; dom-dir:ltr">(bark))</p>
+<p style="Normal" xid="379" props="text-align:left; dom-dir:ltr">(rat (scurry)</p>
+<p style="Normal" xid="380" props="text-align:left; dom-dir:ltr">(squeak))</p>
+<p style="Normal" xid="381" props="text-align:left; dom-dir:ltr">(cat (rub-legs)</p>
+<p style="Normal" xid="382" props="text-align:left; dom-dir:ltr">(scratch-carpet))))</p>
+<p style="Normal" xid="383"><c></c></p>
+<p style="Normal" xid="384" props="text-align:left; dom-dir:ltr">What if we want to add a new type of animal? If we were planning to add new</p>
+<p style="Normal" xid="385" props="text-align:left; dom-dir:ltr">animals, it would have been better to define behave as follows:</p>
+<p style="Normal" xid="386" props="text-align:left; dom-dir:ltr">새로운 타입의 동물을 추가하려면 어떻게 해야할까요? 새로운 동물이 추가될 수 있다는 계획이 있었을 때부터 아래와같이 동물 행동을 구현했다면 더 좋았을 것입니다.</p>
+<p style="Normal" xid="387"><c></c></p>
+<p style="Normal" xid="388" props="text-align:left; dom-dir:ltr">(defun behave (animal)</p>
+<p style="Normal" xid="389" props="text-align:left; dom-dir:ltr">(funcall (get animal ’behavior)))</p>
+<p style="Normal" xid="390" props="text-align:left; dom-dir:ltr">and to define the behavior of an individual animal as a function stored, for example,</p>
+<p style="Normal" xid="391" props="text-align:left; dom-dir:ltr">on the property list of its name:</p>
+<p style="Normal" xid="392" props="text-align:left; dom-dir:ltr">그리고 각 동물의 행동을 구현할 때, 다음 예처럼 동물 이름으로된 속성 리스트에 함수로 저장할 수 있습니다. (주: dog가 속성 리스트이고 behavior가 속성입니다. 이 책은 이미 lisp의 기본을 아는 사람을 대상으로 한 책이기 때문에 일일이 새로나온 함수를 설명하지 않습니다.)</p>
+<p style="Normal" xid="393"><c></c></p>
+<p style="Normal" xid="394" props="text-align:left; dom-dir:ltr">(setf (get ’dog ’behavior)</p>
+<p style="Normal" xid="395" props="text-align:left; dom-dir:ltr">#’(lambda ()</p>
+<p style="Normal" xid="396" props="text-align:left; dom-dir:ltr">(wag-tail)</p>
+<p style="Normal" xid="397" props="text-align:left; dom-dir:ltr">(bark)))</p>
+<p style="Normal" xid="398"><c></c></p>
+<p style="Normal" xid="399"><c></c></p>
+<p style="Normal" xid="400" props="text-align:left; dom-dir:ltr">This way, all we need do in order to add a new animal is define a new property.</p>
+<p style="Normal" xid="401" props="text-align:left; dom-dir:ltr">No functions have to be rewritten.</p>
+<p style="Normal" xid="402" props="text-align:left; dom-dir:ltr">이렇게하면 새로운 동물을 추가하기 위해 우리가 할 일은 새로운 속성을 정의하는 것밖에 없게됩니다. 함수를 고칠 필요가 없습니다.</p>
+<p style="Normal" xid="403"><c></c></p>
+<p style="Normal" xid="404" props="text-align:left; dom-dir:ltr">The second approach, though more flexible, looks slower. It is. If speed were</p>
+<p style="Normal" xid="405" props="text-align:left; dom-dir:ltr">critical, we would use structures instead of property lists and, especially, compiled</p>
+<p style="Normal" xid="406" props="text-align:left; dom-dir:ltr">instead of interpreted functions. (Section 2.9 explains how to make these.) With</p>
+<p style="Normal" xid="407" props="text-align:left; dom-dir:ltr">structures and compiled functions, the more flexible type of code can approach or</p>
+<p style="Normal" xid="408" props="text-align:left; dom-dir:ltr">exceed the speed of versions using case statements.</p>
+<p style="Normal" xid="409" props="text-align:left; dom-dir:ltr">두번째 방법은 좀더 유연하지만 더 느려보입니다. 실제로도 그렇습니다. 속도가 중요한 상황이라면 속성 리스트 대신에 구조체를 사용했을겁니다. 또 인터프리터에서 함수를 정의할게 아니라 함수를 컴파일해서 사용하는 것도 중요합니다.</p>
+<p style="Normal" xid="410"><c></c></p>
+<p style="Normal" xid="411" props="text-align:left; dom-dir:ltr">This use of functions corresponds to the concept of a method in object-oriented</p>
+<p style="Normal" xid="412" props="text-align:left; dom-dir:ltr">programming. Generally speaking, a method is a function which is a property of</p>
+<p style="Normal" xid="413" props="text-align:left; dom-dir:ltr">an object, and that’s just what we have. If we add inheritance to this model, we’ll</p>
+<p style="Normal" xid="414" props="text-align:left; dom-dir:ltr">have all the elements of object-oriented programming. Chapter 25 will show that</p>
+<p style="Normal" xid="415" props="text-align:left; dom-dir:ltr">this can be done with surprisingly little code.</p>
+<p style="Normal" xid="416" props="text-align:left; dom-dir:ltr">이렇게 함수를 사용하는 것은 객체지향 프로그래밍에서 메소드의 개념과 같습니다. 일반적으로 메소드라는 것은 객체의 속성이 함수인 것을 말합니다. 바로 우리가 만든 그대로입니다. 이 방식에 상속 개념을 더하면 객체지향 프로그래밍의 모든 요소를 가지게 됩니다. 25장에서 아주 적은 코드만으로 이런 개념들을 구현하는 것을 보게됩니다.</p>
+<p style="Normal" xid="417"><c></c></p>
+<p style="Normal" xid="418" props="text-align:left; dom-dir:ltr">One of the big selling points of object-oriented programming is that it makes</p>
+<p style="Normal" xid="419" props="text-align:left; dom-dir:ltr">programs extensible. This prospect excites less wonder in the Lisp world, where</p>
+<p style="Normal" xid="420" props="text-align:left; dom-dir:ltr">extensibility has always been taken for granted. If the kind of extensibility we</p>
+<p style="Normal" xid="421" props="text-align:left; dom-dir:ltr">need does not depend too much on inheritance, then plain Lisp may already be</p>
+<p style="Normal" xid="422" props="text-align:left; dom-dir:ltr">sufficient.</p>
+<p style="Normal" xid="423" props="text-align:left; dom-dir:ltr">객체지향 프로그래밍의 가장 큰 장점이 프로그램을 확장하기 쉽게 만들어준다는 것입니다. 그런 장점이 리습에는 그리 특별한게 아닌게  리습에서는 확장성이 항상  당연한 것이었기 때문입니다. (주: 객체지향 프로그래밍이 나오기 한참 전에 리습이 만들어졌습니다.) 꼭 상속으로만 구현되는 확장성을 빼고는 기본적인 리습만으로도 충분히 확장성을 제공할 수 있습니다.</p>
+<p style="Normal" xid="424"><c></c></p>
+<p style="Normal" xid="425" props="text-align:left; dom-dir:ltr">2.5 Scope</p>
+<p style="Normal" xid="426" props="text-align:left; dom-dir:ltr">Common Lisp is a lexically scoped Lisp. Scheme is the oldest dialect with lexical</p>
+<p style="Normal" xid="427" props="text-align:left; dom-dir:ltr">scope; before Scheme, dynamic scope was considered one of the defining features</p>
+<p style="Normal" xid="428" props="text-align:left; dom-dir:ltr">of Lisp.</p>
+<p style="Normal" xid="429" props="text-align:left; dom-dir:ltr">커먼 리습은 렉시컬 유효 범위를 지원하는 언어입니다. 스킴이 첫번째로 렉시컬 유효 범위를 지원하는 리습의 방언이었고, 스킴이 생기기 전에는 리습의 중요한 특징이 다이나믹 유효 범위였습니다.</p>
+<p style="Normal" xid="430"><c></c></p>
+<p style="Normal" xid="431" props="text-align:left; dom-dir:ltr">The difference between lexical and dynamic scope comes down to how an</p>
+<p style="Normal" xid="432" props="text-align:left; dom-dir:ltr">implementation deals with free variables. A symbol is bound in an expression</p>
+<p style="Normal" xid="433" props="text-align:left; dom-dir:ltr">if it has been established as a variable, either by appearing as a parameter, or by</p>
+<p style="Normal" xid="434" props="text-align:left; dom-dir:ltr">variable-binding operators like let and do. Symbols which are not bound are</p>
+<p style="Normal" xid="435" props="text-align:left; dom-dir:ltr">said to be free. In this example, scope comes into play:</p>
+<p style="Normal" xid="436" props="text-align:left; dom-dir:ltr">렉시컬 유효범위와 동적 유효범위의 차이는 값이 정해지지않은 변수를 어떻게 처리하느냐에 달려있습니다. 만약 어떤 심볼이 함수 매개 변수에 사용되거나 let, do 같은 변수 선언 연산자를 이용한 표현식을 이용해서 변수라고 정의될 수 있습니다. 그렇게 특정하게 연결된 값이 없다면 값이 정해지지 않은 것입니다. 다음 예제를 보면 유효범위가 어떻게 정해지는지를 알 수 있습니다.</p>
+<p style="Normal" xid="437"><c></c></p>
+<p style="Normal" xid="438" props="text-align:left; dom-dir:ltr">(let ((y 7))</p>
+<p style="Normal" xid="439" props="text-align:left; dom-dir:ltr">(defun scope-test (x)</p>
+<p style="Normal" xid="440" props="text-align:left; dom-dir:ltr">(list x y)))</p>
+<p style="Normal" xid="441" props="text-align:left; dom-dir:ltr">Within the defun expression,x is bound and y is free. Free variables are interesting</p>
+<p style="Normal" xid="442" props="text-align:left; dom-dir:ltr">because it’s not obvious what their values should be. There’s no uncertainty about</p>
+<p style="Normal" xid="443" props="text-align:left; dom-dir:ltr">the value of a bound variable—when scope-test is called, the value of x should</p>
+<p style="Normal" xid="444" props="text-align:left; dom-dir:ltr">be whatever is passed as the argument. But what should be the value of y? This</p>
+<p style="Normal" xid="445" props="text-align:left; dom-dir:ltr">is the question answered by the dialect’s scope rules.</p>
+<p style="Normal" xid="446" props="text-align:left; dom-dir:ltr">defun 표현식 내부에서보면 x는 값이 정해졌고 y는 값이 정해지지 않았습니다. 값이 정해지지 않은 변수는 그 값이 뭐가 될지 알 수 없습으므로 주의해야합니다. 값이 지정된 변수는 명확합니다. scope-test 함수가 호출될 때 x의 값은 함수 인자로 전달된 값 그대로입니다. 그럼 y의 값은 뭘까요? 리습의 방언에서 유효범위를 어떻게 규정하느냐에 따라 달라집니다.</p>
+<p style="Normal" xid="447"><c></c></p>
+<p style="Normal" xid="448" props="text-align:left; dom-dir:ltr">In a dynamically scoped Lisp, to find the value of a free variable when exe-</p>
+<p style="Normal" xid="449" props="text-align:left; dom-dir:ltr">cuting scope-test, we look back through the chain of functions that called it.</p>
+<p style="Normal" xid="450" props="text-align:left; dom-dir:ltr">When we find an environment where y was bound, that binding of y will be the</p>
+<p style="Normal" xid="451" props="text-align:left; dom-dir:ltr">one used in scope-test. If we find none, we take the global value of y. Thus, in</p>
+<p style="Normal" xid="452" props="text-align:left; dom-dir:ltr">a dynamically scoped Lisp, y would have the value it had in the calling expression:</p>
+<p style="Normal" xid="453" props="text-align:left; dom-dir:ltr">동적 유효범위를 지원하는 리습 방언에서는 scope-test를 실행할 때 값이 정해지지 않은 변수의 값을 찾을 때 함수 호출 고리를 거슬러 올라가면서 값을 찾습니다. 그렇게 올라가다가 y의 값이 정해지는 환경을 만나면 그때 y의 값이 scope-test에서 사용할 값입니다. 만약 값을 찾지 못하면 y의 값이 전역 변수인지 확인합니다. 그래서 동적 유효 범위를 가진 리습에서 y는 y를 사용하는 표현식이 호출될 때의 값을 가집니다.</p>
+<p style="Normal" xid="454"><c></c></p>
+<p style="Normal" xid="455" props="text-align:left; dom-dir:ltr">&gt; (let ((y 5))</p>
+<p style="Normal" xid="456" props="text-align:left; dom-dir:ltr">(scope-test 3))</p>
+<p style="Normal" xid="457">(3 5)</p>
+<p style="Normal" xid="458" props="text-align:left; dom-dir:ltr">With dynamic scope, it means nothing that y was bound to 7 when scope-test</p>
+<p style="Normal" xid="459" props="text-align:left; dom-dir:ltr">was defined. All that matters is that y had a value of 5 when scope-test was</p>
+<p style="Normal" xid="460" props="text-align:left; dom-dir:ltr">called.</p>
+<p style="Normal" xid="461" props="text-align:left; dom-dir:ltr">동적 유효범위에서 scope-test가 정의될 때 y의 값이 7이라는 것은 상관이 없습니다. scope-test가 호출될 때 y의 값이 5라는 것만이 중요합니다.</p>
+<p style="Normal" xid="462"><c></c></p>
+<p style="Normal" xid="463" props="text-align:left; dom-dir:ltr">In a lexically scoped Lisp, instead of looking back through the chain of calling</p>
+<p style="Normal" xid="464" props="text-align:left; dom-dir:ltr">functions, we look back through the containing environments at the time the</p>
+<p style="Normal" xid="465" props="text-align:left; dom-dir:ltr">function was defined. In a lexically scoped Lisp, our example would catch the</p>
+<p style="Normal" xid="466" props="text-align:left; dom-dir:ltr">binding of y where scope-test was defined. So this is what would happen in</p>
+<p style="Normal" xid="467" props="text-align:left; dom-dir:ltr">Common Lisp:</p>
+<p style="Normal" xid="468" props="text-align:left; dom-dir:ltr">렉시컬 유효범위(주: 동적 유효범위의 반대라고해서 정적 유효범위라고 부르기도 합니다.)는 함수 호출 고리를 거슬러 올라가는 대신 함수가 정의될 당시의 환경이 어떠했는지를 찾아봅니다. 렉시컬 유효범위를 지원하는 리습에서 위의 예제를 실행하면 scope-test가 정의되는 곳에서 y의 값을 찾습니다. 그래서 커먼 리습에서는 아래처럼 실행이 됩니다.</p>
+<p style="Normal" xid="469"><c></c></p>
+<p style="Normal" xid="470" props="text-align:left; dom-dir:ltr">&gt; (let ((y 5))</p>
+<p style="Normal" xid="471" props="text-align:left; dom-dir:ltr">(scope-test 3))</p>
+<p style="Normal" xid="472">(3 7)</p>
+<p style="Normal" xid="473" props="text-align:left; dom-dir:ltr">Here the binding of y to 5 at the time of the call has no effect on the returned</p>
+<p style="Normal" xid="474" props="text-align:left; dom-dir:ltr">value.</p>
+<p style="Normal" xid="475" props="text-align:left; dom-dir:ltr">호출 당시에 y가 5라는 것은 코드의 실행 결과와 상관이 없습니다.</p>
+<p style="Normal" xid="476"><c></c></p>
+<p style="Normal" xid="477" props="text-align:left; dom-dir:ltr">Though you can still get dynamic scope by declaring a variable to be special,</p>
+<p style="Normal" xid="478" props="text-align:left; dom-dir:ltr">lexical scope is the default in Common Lisp. On the whole, the Lisp community</p>
+<p style="Normal" xid="479" props="text-align:left; dom-dir:ltr">seems to view the passing of dynamic scope with little regret. For one thing, it</p>
+<p style="Normal" xid="480" props="text-align:left; dom-dir:ltr">used to lead to horribly elusive bugs. But lexical scope is more than a way of</p>
+<p style="Normal" xid="481" props="text-align:left; dom-dir:ltr">avoiding bugs. As the next section will show, it also makes possible some new</p>
+<p style="Normal" xid="482" props="text-align:left; dom-dir:ltr">programming techniques.</p>
+<p style="Normal" xid="483" props="text-align:left; dom-dir:ltr">특별한 방법을 쓰면 동적 유효 범위를 가지는 변수를 만들 수는 있습니다. 하지만 커먼 리습에서는 렉시컬 유효 범위가 기본입니다. 리습 커뮤니티는 동적 유효 범위를 버린 것에 대해 별로 후회하지 않는것 같습니다. 그것 때문에 정말 찾기 어려운 버그가 생기기도 했었으니까요. 반면에 렉시컬 유효 범위는 버그를 방지하기 쉽습니다. 또 다음 섹션에서 보듯이 새로운 프로그래밍 테크닉이 생겨나기도 했습니다.</p>
+<p style="Normal" xid="484"><c></c></p>
+<p style="Normal" xid="485" props="text-align:left; dom-dir:ltr">2.6 Closures</p>
+<p style="Normal" xid="486" props="text-align:left; dom-dir:ltr">클로저(주: 클로저는 뭐라고 번역할 수가 없었습니다. 그냥 클로저라고 부르겠습니다.)</p>
+<p style="Normal" xid="487"><c></c></p>
+<p style="Normal" xid="488" props="text-align:left; dom-dir:ltr">Because Common Lisp is lexically scoped, when we define a function containing</p>
+<p style="Normal" xid="489" props="text-align:left; dom-dir:ltr">free variables, the system must save copies of the bindings of those variables at</p>
+<p style="Normal" xid="490" props="text-align:left; dom-dir:ltr">the time the function was defined. Such a combination of a function and a set</p>
+<p style="Normal" xid="491" props="text-align:left; dom-dir:ltr">of variable bindings is called a closure. Closures turn out to be useful in a wide</p>
+<p style="Normal" xid="492" props="text-align:left; dom-dir:ltr">variety of applications.</p>
+<p style="Normal" xid="493" props="text-align:left; dom-dir:ltr">커먼 리습이 렉시컬 유효범위를 가진다고 말씀드렸습니다. 그래서 함수가 정의될 때 내부에서 정의되지 않은 변수를 가지고 있다면 시스템은 함수가 정의될 때 어떤 변수들이 어떤 값을 가지고 있는지를 기억해놔야합니다. 그렇게 함수와 변수들의 묶음을 클로저라고 부릅니다. 클로저는 다양한 분야의 응용 프로그램에서 유용하게 사용되고 있습니다.</p>
+<p style="Normal" xid="494"><c></c></p>
+<p style="Normal" xid="495" props="text-align:left; dom-dir:ltr">Closures are so pervasive in Common Lisp programs that it’s possible to use</p>
+<p style="Normal" xid="496" props="text-align:left; dom-dir:ltr">them without even knowing it. Every time you give mapcar a sharp-quoted</p>
+<p style="Normal" xid="497" props="text-align:left; dom-dir:ltr">lambda-expression containing free variables, you’re using closures. For example,</p>
+<p style="Normal" xid="498" props="text-align:left; dom-dir:ltr">suppose we want to write a function which takes a list of numbers and adds a</p>
+<p style="Normal" xid="499" props="text-align:left; dom-dir:ltr">certain amount to each one. The function list+</p>
+<p style="Normal" xid="1" props="text-align:left; dom-dir:ltr">클로저는 워낙 커먼 리습 프로그램에 흔하게 사용되고 있어서 뭔지 모르면서도 사용하기도 합니다. mapcar를 호출 할 때 샤프-따옴표를 이용해서 람다 표현식을 넘길때가 있습니다. 그때 람다 표현식 안에 람다 표현식 밖에서 정의된 변수가 있다면 클로저를 사용한 것입니다. 예제를 만들어보겠습니다. 숫자로 이루어진 리스트를 받아서 특정 수를 더하는 함수를 만드려고 합니다. 함수 이름은 list+ 입니다.</p>
+<p style="Normal" xid="2" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="500" props="text-align:left; dom-dir:ltr">(defun list+ (lst n)</p>
+<p style="Normal" xid="501" props="text-align:left; dom-dir:ltr">(mapcar #’(lambda (x) (+ x n))</p>
+<p style="Normal" xid="502" props="text-align:left; dom-dir:ltr">lst))</p>
+<p style="Normal" xid="503" props="text-align:left; dom-dir:ltr">will do what we want:</p>
+<p style="Normal" xid="837" props="text-align:left; dom-dir:ltr">위와같이 만들어서 아래와같이 사용할 수 있습니다.</p>
+<p style="Normal" xid="504" props="text-align:left; dom-dir:ltr">&gt; (list+ ’(1 2 3) 10)</p>
+<p style="Normal" xid="505">(11 12 13)</p>
+<p style="Normal" xid="838"><c></c></p>
+<p style="Normal" xid="506" props="text-align:left; dom-dir:ltr">If we look closely at the function which is passed to mapcar within list+, it’s</p>
+<p style="Normal" xid="507" props="text-align:left; dom-dir:ltr">actually a closure. The instance of n is free, and its binding comes from the</p>
+<p style="Normal" xid="508" props="text-align:left; dom-dir:ltr">surrounding environment. Under lexical scope, every such use of a mapping</p>
+<p style="Normal" xid="509" props="text-align:left; dom-dir:ltr">function causes the creation of a closure. 1</p>
+<p style="Normal" xid="839" props="text-align:left; dom-dir:ltr">list+ 함수를 보면 mapcar에 사용된 람다 표현식이 클로저라는 것을 알 수 있습니다. n의 값이 람다 표현식 밖에서 정의된 것입니다. 렉시컬 스코프에서는 (주:mapcar같은) 맵핑 함수를 사용할 때마다 클로저가 생성된다고 보면 됩니다. (저자주1)</p>
+<p style="Normal" xid="840" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="510" props="text-align:left; dom-dir:ltr">Closures play a more conspicuous role in a style of programming promoted</p>
+<p style="Normal" xid="511" props="text-align:left; dom-dir:ltr">◦ by Abelson and Sussman’s classic Structure and Interpretation of Computer Pro-</p>
+<p style="Normal" xid="512" props="text-align:left; dom-dir:ltr">grams. Closures are functions with local state. The simplest way to use this state</p>
+<p style="Normal" xid="513" props="text-align:left; dom-dir:ltr">is in a situation like the following:</p>
+<p style="Normal" xid="841" props="text-align:left; dom-dir:ltr">클로저는 Abelson과 Sussman 이 쓴 유명한 고전 <c props="font-family:Times New Roman; font-size:12pt; color:000000; text-decoration:none; text-position:normal; font-weight:normal; font-style:normal; lang:en-US">Structure and Interpretation of Computer Pro</c><c props="font-family:Times New Roman; font-size:12pt; lang:en-US; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none">grams</c><c props="font-family:Times New Roman; text-decoration:none; color:000000; font-size:12pt; text-position:normal; font-weight:normal; font-style:normal; lang:en-US"> 에서 자주 사용하는 프로그래밍 스타일입니다. 클로저는 자신만의 상태를 가지는 함수라고 할 수 있습니다. 이 상태를 사용하는 방법은 다음과 같은 상황에서 잘 나타납니다.</c></p>
+<p style="Normal" xid="842" props="font-family:Times New Roman; font-size:12pt; dom-dir:ltr; color:000000; lang:en-US; text-align:left; text-position:normal; font-weight:normal; font-style:normal; text-decoration:none"><c></c></p>
+<p style="Normal" xid="514" props="text-align:left; dom-dir:ltr">(let ((counter 0))</p>
+<p style="Normal" xid="515" props="text-align:left; dom-dir:ltr">(defun new-id ()</p>
+<p style="Normal" xid="516" props="text-align:left; dom-dir:ltr">(incf counter))</p>
+<p style="Normal" xid="517" props="text-align:left; dom-dir:ltr">(defun reset-id () (setq counter 0)))</p>
+<p style="Normal" xid="518" props="text-align:left; dom-dir:ltr">These two functions share a variable which serves as a counter. The first one</p>
+<p style="Normal" xid="519" props="text-align:left; dom-dir:ltr">returns successive values of the counter, and the second resets the counter to 0.</p>
+<p style="Normal" xid="520" props="text-align:left; dom-dir:ltr">The same thing could be done by making the counter a global variable, but this</p>
+<p style="Normal" xid="521" props="text-align:left; dom-dir:ltr">way it is protected from unintended references.</p>
+<p style="Normal" xid="844" props="text-align:left; dom-dir:ltr">카운터 역할을 하는 변수를 두개의 함수가 공유하고 있습니다. 첫번째 함수는 카운터를 증가시키고 두번째 함수는 0으로 초기화합니다. 전역 변수로 선언된 카운터로 같은 일을 할 수 있지만 위와 같이 구현하면 의도치않은 곳에서 카운터에 접근하는 것을 막을 수 있습니다. </p>
+<p style="Normal" xid="845" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="522" props="text-align:left; dom-dir:ltr">It’s also useful to be able to return functions with local state. For example, the</p>
+<p style="Normal" xid="523" props="text-align:left; dom-dir:ltr">function make-adder</p>
+<p style="Normal" xid="846" props="text-align:left; dom-dir:ltr">개별 상태를 가진 함수를 반환하는 것도 유용할 때가 있습니다. 다음과 같은 make-adder 함수를 보면</p>
+<p style="Normal" xid="847" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="524" props="text-align:left; dom-dir:ltr">(defun make-adder (n)</p>
+<p style="Normal" xid="525" props="text-align:left; dom-dir:ltr">#’(lambda (x) (+ x n)))</p>
+<p style="Normal" xid="526" props="text-align:left; dom-dir:ltr">takes a number, and returns a closure which, when called, adds that number to its</p>
+<p style="Normal" xid="527" props="text-align:left; dom-dir:ltr">argument. We can make as many instances of adders as we want:</p>
+<p style="Normal" xid="850" props="text-align:left; dom-dir:ltr">숫자를 받아서 클로저를 반환합니다. 이 클로저는 호출될때마다 인자로 전달된 숫자만큼 값을 더합니다. 결국 아래처럼 여러가지의 덧셈기를 만들 수가 있게 됩니다.</p>
+<p style="Normal" xid="848" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="528" props="text-align:left; dom-dir:ltr">(저자주:1. Under dynamic scope the same idiom will work for a different reason—so long as neither of</p>
+<p style="Normal" xid="529" props="text-align:left; dom-dir:ltr">mapcar’s parameter is called x.)</p>
+<p style="Normal" xid="851" props="text-align:left; dom-dir:ltr">(저자주1: 동적 스코프에서도 똑같이 동작하지만 이유는 다릅니다. (해석못함)</p>
+<p style="Normal" xid="849" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="530" props="text-align:left; dom-dir:ltr">&gt; (setq add2 (make-adder 2)</p>
+<p style="Normal" xid="533" props="text-align:left; dom-dir:ltr">add10 (make-adder 10))</p>
+<p style="Normal" xid="534" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function BF162E&gt;</p>
+<p style="Normal" xid="535" props="text-align:left; dom-dir:ltr">&gt; (funcall add2 5)</p>
+<p style="Normal" xid="536">7</p>
+<p style="Normal" xid="537" props="text-align:left; dom-dir:ltr">&gt; (funcall add10 3)</p>
+<p style="Normal" xid="538">13</p>
+<p style="Normal" xid="539" props="text-align:left; dom-dir:ltr">In the closures returned by make-adder, the internal state is fixed, but it’s also</p>
+<p style="Normal" xid="540" props="text-align:left; dom-dir:ltr">possible to make closures which can be asked to change their state.</p>
+<p style="Normal" xid="852" props="text-align:left; dom-dir:ltr">make-add로 만들어진 클로저들은 내부 상태가 고정되어있습니다. 하지만 내부 상태를 바꿀 수 있게 만들 수도 있습니다.</p>
+<p style="Normal" xid="853" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="541" props="text-align:left; dom-dir:ltr">(defun make-adderb (n)</p>
+<p style="Normal" xid="542" props="text-align:left; dom-dir:ltr">#’(lambda (x &amp;optional change)</p>
+<p style="Normal" xid="543" props="text-align:left; dom-dir:ltr">(if change</p>
+<p style="Normal" xid="544" props="text-align:left; dom-dir:ltr">(setq n x)</p>
+<p style="Normal" xid="545" props="text-align:left; dom-dir:ltr">(+ x n))))</p>
+<p style="Normal" xid="546" props="text-align:left; dom-dir:ltr">This new version of make-adder returns closures which, when called with one</p>
+<p style="Normal" xid="547" props="text-align:left; dom-dir:ltr">argument, behave just like the old ones.</p>
+<p style="Normal" xid="854" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="855" props="text-align:left; dom-dir:ltr"><c></c></p>
+<p style="Normal" xid="548" props="text-align:left; dom-dir:ltr">&gt; (setq addx (make-adderb 1))</p>
+<p style="Normal" xid="549" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function BF1C66&gt;</p>
+<p style="Normal" xid="550" props="text-align:left; dom-dir:ltr">&gt; (funcall addx 3)</p>
+<p style="Normal" xid="551">4</p>
+<p style="Normal" xid="552" props="text-align:left; dom-dir:ltr">However, when the new type of adder is called with a non-nil second argument,</p>
+<p style="Normal" xid="553" props="text-align:left; dom-dir:ltr">its internal copy of n will be reset to the value passed as the first argument:</p>
+<p style="Normal" xid="554" props="text-align:left; dom-dir:ltr">&gt; (funcall addx 100 t)</p>
+<p style="Normal" xid="555">100</p>
+<p style="Normal" xid="556" props="text-align:left; dom-dir:ltr">&gt; (funcall addx 3)</p>
+<p style="Normal" xid="557">103</p>
+<p style="Normal" xid="558" props="text-align:left; dom-dir:ltr">It’s even possible to return a group of closures which share the same data</p>
+<p style="Normal" xid="559" props="text-align:left; dom-dir:ltr">objects. Figure 2.1 contains a function which creates primitive databases. It takes</p>
+<p style="Normal" xid="560" props="text-align:left; dom-dir:ltr">an assoc-list (db), and returns a list of three closures which query, add, and delete</p>
+<p style="Normal" xid="561" props="text-align:left; dom-dir:ltr">entries, respectively.</p>
+<p style="Normal" xid="562" props="text-align:left; dom-dir:ltr">Each call to make-dbms makes a new database—a new set of functions closed</p>
+<p style="Normal" xid="563" props="text-align:left; dom-dir:ltr">over their own shared copy of an assoc-list.</p>
+<p style="Normal" xid="564" props="text-align:left; dom-dir:ltr">&gt; (setq cities (make-dbms ’((boston . us) (paris . france))))</p>
+<p style="Normal" xid="565" props="text-align:left; dom-dir:ltr">(#&lt;Interpreted-Function 8022E7&gt;</p>
+<p style="Normal" xid="566" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function 802317&gt;</p>
+<p style="Normal" xid="567" props="text-align:left; dom-dir:ltr">#&lt;Interpreted-Function 802347&gt;)20</p>
+<p style="Normal" xid="568" props="text-align:left; dom-dir:ltr">FUNCTIONS</p>
+<p style="Normal" xid="569" props="text-align:left; dom-dir:ltr">(defun make-dbms (db)</p>
+<p style="Normal" xid="570" props="text-align:left; dom-dir:ltr">(list</p>
+<p style="Normal" xid="571" props="text-align:left; dom-dir:ltr">#’(lambda (key)</p>
+<p style="Normal" xid="572" props="text-align:left; dom-dir:ltr">(cdr (assoc key db)))</p>
+<p style="Normal" xid="573" props="text-align:left; dom-dir:ltr">#’(lambda (key val)</p>
+<p style="Normal" xid="574" props="text-align:left; dom-dir:ltr">(push (cons key val) db)</p>
+<p style="Normal" xid="575" props="text-align:left; dom-dir:ltr">key)</p>
+<p style="Normal" xid="576" props="text-align:left; dom-dir:ltr">#’(lambda (key)</p>
+<p style="Normal" xid="577" props="text-align:left; dom-dir:ltr">(setf db (delete key db :key #’car))</p>
+<p style="Normal" xid="578" props="text-align:left; dom-dir:ltr">key)))</p>
+<p style="Normal" xid="579" props="text-align:left; dom-dir:ltr">Figure 2.1: Three closures share a list.</p>
+<p style="Normal" xid="580" props="text-align:left; dom-dir:ltr">The actual assoc-list within the database is invisible from the outside world—we</p>
+<p style="Normal" xid="581" props="text-align:left; dom-dir:ltr">can’t even tell that it’s an assoc-list—but it can be reached through the functions</p>
+<p style="Normal" xid="582" props="text-align:left; dom-dir:ltr">which are components of cities:</p>
+<p style="Normal" xid="583" props="text-align:left; dom-dir:ltr">&gt; (funcall (car cities) ’boston)</p>
+<p style="Normal" xid="584" props="text-align:left; dom-dir:ltr">US</p>
+<p style="Normal" xid="585" props="text-align:left; dom-dir:ltr">&gt; (funcall (second cities) ’london ’england)</p>
+<p style="Normal" xid="586" props="text-align:left; dom-dir:ltr">LONDON</p>
+<p style="Normal" xid="587" props="text-align:left; dom-dir:ltr">&gt; (funcall (car cities) ’london)</p>
+<p style="Normal" xid="588" props="text-align:left; dom-dir:ltr">ENGLAND</p>
+<p style="Normal" xid="589" props="text-align:left; dom-dir:ltr">Calling the car of a list is a bit ugly. In real programs, the access functions might</p>
+<p style="Normal" xid="590" props="text-align:left; dom-dir:ltr">instead be entries in a structure. Using them could also be cleaner—databases</p>
+<p style="Normal" xid="591" props="text-align:left; dom-dir:ltr">could be reached indirectly via functions like:</p>
+<p style="Normal" xid="592" props="text-align:left; dom-dir:ltr">(defun lookup (key db)</p>
+<p style="Normal" xid="593" props="text-align:left; dom-dir:ltr">(funcall (car db) key))</p>
+<p style="Normal" xid="594" props="text-align:left; dom-dir:ltr">However, the basic behavior of closures is independent of such refinements.</p>
+<p style="Normal" xid="595" props="text-align:left; dom-dir:ltr">In real programs, the closures and data structures would also be more elaborate</p>
+<p style="Normal" xid="596" props="text-align:left; dom-dir:ltr">than those we see in make-adder or make-dbms. The single shared variable could</p>
+<p style="Normal" xid="597" props="text-align:left; dom-dir:ltr">be any number of variables, each bound to any sort of data structure.</p>
+<p style="Normal" xid="598" props="text-align:left; dom-dir:ltr">Closures are one of the distinct, tangible benefits of Lisp. Some Lisp programs</p>
+<p style="Normal" xid="599" props="text-align:left; dom-dir:ltr">could, with effort, be translated into less powerful languages. But just try to</p>
+<p style="Normal" xid="600" props="text-align:left; dom-dir:ltr">translate a program which uses closures as above, and it will become evident how</p>
+<p style="Normal" xid="601" props="text-align:left; dom-dir:ltr">much work this abstraction is saving us. Later chapters will deal with closures in</p>
+<p style="Normal" xid="602" props="text-align:left; dom-dir:ltr">more detail. Chapter 5 shows how to use them to build compound functions, and</p>
+<p style="Normal" xid="603" props="text-align:left; dom-dir:ltr">Chapter 6 looks at their use as a substitute for traditional data structures.2.7</p>
+<p style="Normal" xid="604" props="text-align:left; dom-dir:ltr">LOCAL FUNCTIONS</p>
+<p style="Normal" xid="605">21</p>
+<p style="Normal" xid="606" props="text-align:left; dom-dir:ltr">2.7 Local Functions</p>
+<p style="Normal" xid="607" props="text-align:left; dom-dir:ltr">When we define functions with lambda-expressions, we face a restriction which</p>
+<p style="Normal" xid="608" props="text-align:left; dom-dir:ltr">doesn’t arise with defun: a function defined in a lambda-expression doesn’t have</p>
+<p style="Normal" xid="609" props="text-align:left; dom-dir:ltr">a name and therefore has no way of referring to itself. This means that in Common</p>
+<p style="Normal" xid="610" props="text-align:left; dom-dir:ltr">Lisp we can’t use lambda to define a recursive function.</p>
+<p style="Normal" xid="611">◦</p>
+<p style="Normal" xid="612" props="text-align:left; dom-dir:ltr">If we want to apply some function to all the elements of a list, we use the most</p>
+<p style="Normal" xid="613" props="text-align:left; dom-dir:ltr">familiar of Lisp idioms:</p>
+<p style="Normal" xid="614" props="text-align:left; dom-dir:ltr">&gt; (mapcar #’(lambda (x) (+ 2 x))</p>
+<p style="Normal" xid="615">’(2 5 7 3))</p>
+<p style="Normal" xid="616">(4 7 9 5)</p>
+<p style="Normal" xid="617" props="text-align:left; dom-dir:ltr">What about cases where we want to give a recursive function as the first argument</p>
+<p style="Normal" xid="618" props="text-align:left; dom-dir:ltr">to mapcar? If the function has been defined with defun, we can simply refer to</p>
+<p style="Normal" xid="619" props="text-align:left; dom-dir:ltr">it by name:</p>
+<p style="Normal" xid="620" props="text-align:left; dom-dir:ltr">&gt; (mapcar #’copy-tree ’((a b) (c d e)))</p>
+<p style="Normal" xid="621" props="text-align:left; dom-dir:ltr">((A B) (C D E))</p>
+<p style="Normal" xid="622" props="text-align:left; dom-dir:ltr">But now suppose that the function has to be a closure, taking some bindings from</p>
+<p style="Normal" xid="623" props="text-align:left; dom-dir:ltr">the environment in which the mapcar occurs. In our example list+,</p>
+<p style="Normal" xid="624" props="text-align:left; dom-dir:ltr">(defun list+ (lst n)</p>
+<p style="Normal" xid="625" props="text-align:left; dom-dir:ltr">(mapcar #’(lambda (x) (+ x n))</p>
+<p style="Normal" xid="626" props="text-align:left; dom-dir:ltr">lst))</p>
+<p style="Normal" xid="627" props="text-align:left; dom-dir:ltr">the first argument to mapcar, #’(lambda (x) (+ x n)), must be defined within</p>
+<p style="Normal" xid="628" props="text-align:left; dom-dir:ltr">list+ because it needs to catch the binding of n. So far so good, but what if we</p>
+<p style="Normal" xid="629" props="text-align:left; dom-dir:ltr">want to give mapcar a function which both needs local bindings and is recursive?</p>
+<p style="Normal" xid="630" props="text-align:left; dom-dir:ltr">We can’t use a function defined elsewhere with defun, because we need bindings</p>
+<p style="Normal" xid="631" props="text-align:left; dom-dir:ltr">from the local environment. And we can’t use lambda to define a recursive</p>
+<p style="Normal" xid="632" props="text-align:left; dom-dir:ltr">function, because the function will have no way of referring to itself.</p>
+<p style="Normal" xid="633" props="text-align:left; dom-dir:ltr">Common Lisp gives us labels as a way out of this dilemma. With one</p>
+<p style="Normal" xid="634" props="text-align:left; dom-dir:ltr">important reservation, labels could be described as a sort of let for functions.</p>
+<p style="Normal" xid="635" props="text-align:left; dom-dir:ltr">Each of the binding specifications in a labels expression should have the form</p>
+<p style="Normal" xid="636" props="text-align:left; dom-dir:ltr">(?name? ?parameters? . ?body?)</p>
+<p style="Normal" xid="637" props="text-align:left; dom-dir:ltr">Within the labels expression, ?name? will refer to a function equivalent to:</p>
+<p style="Normal" xid="638" props="text-align:left; dom-dir:ltr">#’(lambda ?parameters? . ?body?)</p>
+<p style="Normal" xid="639" props="text-align:left; dom-dir:ltr">So for example:22</p>
+<p style="Normal" xid="640" props="text-align:left; dom-dir:ltr">FUNCTIONS</p>
+<p style="Normal" xid="641" props="text-align:left; dom-dir:ltr">&gt; (labels ((inc (x) (1+ x)))</p>
+<p style="Normal" xid="642" props="text-align:left; dom-dir:ltr">(inc 3))</p>
+<p style="Normal" xid="643">4</p>
+<p style="Normal" xid="644" props="text-align:left; dom-dir:ltr">However, there is an important difference between let and labels. In a let</p>
+<p style="Normal" xid="645" props="text-align:left; dom-dir:ltr">expression, the value of one variable can’t depend on another variable made by</p>
+<p style="Normal" xid="646" props="text-align:left; dom-dir:ltr">the same let—that is, you can’t say</p>
+<p style="Normal" xid="647" props="text-align:left; dom-dir:ltr">(let ((x 10) (y x))</p>
+<p style="Normal" xid="648" props="text-align:left; dom-dir:ltr">y)</p>
+<p style="Normal" xid="649" props="text-align:left; dom-dir:ltr">and expect the value of the new y to reflect that of the new x. In contrast, the body of</p>
+<p style="Normal" xid="650" props="text-align:left; dom-dir:ltr">a function f defined in a labels expression may refer to any other function defined</p>
+<p style="Normal" xid="651" props="text-align:left; dom-dir:ltr">there, including f itself, which makes recursive function definitions possible.</p>
+<p style="Normal" xid="652" props="text-align:left; dom-dir:ltr">Using labels we can write a function analogous to list+, but in which the</p>
+<p style="Normal" xid="653" props="text-align:left; dom-dir:ltr">first argument to mapcar is a recursive function:</p>
+<p style="Normal" xid="654" props="text-align:left; dom-dir:ltr">(defun count-instances (obj lsts)</p>
+<p style="Normal" xid="655" props="text-align:left; dom-dir:ltr">(labels ((instances-in (lst)</p>
+<p style="Normal" xid="656" props="text-align:left; dom-dir:ltr">(if (consp lst)</p>
+<p style="Normal" xid="657" props="text-align:left; dom-dir:ltr">(+ (if (eq (car lst) obj) 1 0)</p>
+<p style="Normal" xid="658" props="text-align:left; dom-dir:ltr">(instances-in (cdr lst)))</p>
+<p style="Normal" xid="659">0)))</p>
+<p style="Normal" xid="660" props="text-align:left; dom-dir:ltr">(mapcar #’instances-in lsts)))</p>
+<p style="Normal" xid="661" props="text-align:left; dom-dir:ltr">This function takes an object and a list, and returns a list of the number of</p>
+<p style="Normal" xid="662" props="text-align:left; dom-dir:ltr">occurrences of the object in each element:</p>
+<p style="Normal" xid="663" props="text-align:left; dom-dir:ltr">&gt; (count-instances ’a ’((a b c) (d a r p a) (d a r) (a a)))</p>
+<p style="Normal" xid="664">(1 2 1 2)</p>
+<p style="Normal" xid="665" props="text-align:left; dom-dir:ltr">2.8 Tail-Recursion</p>
+<p style="Normal" xid="666" props="text-align:left; dom-dir:ltr">A recursive function is one that calls itself. Such a call is tail-recursive if no</p>
+<p style="Normal" xid="667" props="text-align:left; dom-dir:ltr">work remains to be done in the calling function afterwards. This function is not</p>
+<p style="Normal" xid="668" props="text-align:left; dom-dir:ltr">tail-recursive</p>
+<p style="Normal" xid="669" props="text-align:left; dom-dir:ltr">(defun our-length (lst)</p>
+<p style="Normal" xid="670" props="text-align:left; dom-dir:ltr">(if (null lst)</p>
+<p style="Normal" xid="671">0</p>
+<p style="Normal" xid="672" props="text-align:left; dom-dir:ltr">(1+ (our-length (cdr lst)))))</p>
+<p style="Normal" xid="673" props="text-align:left; dom-dir:ltr">because on returning from the recursive call we have to pass the result to 1+. The</p>
+<p style="Normal" xid="674" props="text-align:left; dom-dir:ltr">following function is tail-recursive, though2.8</p>
+<p style="Normal" xid="675" props="text-align:left; dom-dir:ltr">TAIL - RECURSION</p>
+<p style="Normal" xid="676">23</p>
+<p style="Normal" xid="677" props="text-align:left; dom-dir:ltr">(defun our-find-if (fn lst)</p>
+<p style="Normal" xid="678" props="text-align:left; dom-dir:ltr">(if (funcall fn (car lst))</p>
+<p style="Normal" xid="679" props="text-align:left; dom-dir:ltr">(car lst)</p>
+<p style="Normal" xid="680" props="text-align:left; dom-dir:ltr">(our-find-if fn (cdr lst))))</p>
+<p style="Normal" xid="681" props="text-align:left; dom-dir:ltr">because the value of the recursive call is immediately returned.</p>
+<p style="Normal" xid="682" props="text-align:left; dom-dir:ltr">Tail-recursion is desirable because many Common Lisp compilers can trans-</p>
+<p style="Normal" xid="683" props="text-align:left; dom-dir:ltr">form tail-recursive functions into loops. With such a compiler, you can have the</p>
+<p style="Normal" xid="684" props="text-align:left; dom-dir:ltr">elegance of recursion in your source code without the overhead of function calls</p>
+<p style="Normal" xid="685" props="text-align:left; dom-dir:ltr">at runtime. The gain in speed is usually great enough that programmers go out of</p>
+<p style="Normal" xid="686" props="text-align:left; dom-dir:ltr">their way to make functions tail-recursive.</p>
+<p style="Normal" xid="687" props="text-align:left; dom-dir:ltr">A function which isn’t tail-recursive can often be transformed into one that is</p>
+<p style="Normal" xid="688" props="text-align:left; dom-dir:ltr">by embedding in it a local function which uses an accumulator. In this context, an</p>
+<p style="Normal" xid="689" props="text-align:left; dom-dir:ltr">accumulator is a parameter representing the value computed so far. For example,</p>
+<p style="Normal" xid="690" props="text-align:left; dom-dir:ltr">our-length could be transformed into</p>
+<p style="Normal" xid="691" props="text-align:left; dom-dir:ltr">(defun our-length (lst)</p>
+<p style="Normal" xid="692" props="text-align:left; dom-dir:ltr">(labels ((rec (lst acc)</p>
+<p style="Normal" xid="693" props="text-align:left; dom-dir:ltr">(if (null lst)</p>
+<p style="Normal" xid="694" props="text-align:left; dom-dir:ltr">acc</p>
+<p style="Normal" xid="695" props="text-align:left; dom-dir:ltr">(rec (cdr lst) (1+ acc)))))</p>
+<p style="Normal" xid="696" props="text-align:left; dom-dir:ltr">(rec lst 0)))</p>
+<p style="Normal" xid="697" props="text-align:left; dom-dir:ltr">where the number of list elements seen so far is contained in a second parameter,</p>
+<p style="Normal" xid="698" props="text-align:left; dom-dir:ltr">acc. When the recursion reaches the end of the list, the value of acc will be</p>
+<p style="Normal" xid="699" props="text-align:left; dom-dir:ltr">the total length, which can just be returned. By accumulating the value as we go</p>
+<p style="Normal" xid="700" props="text-align:left; dom-dir:ltr">down the calling tree instead of constructing it on the way back up, we can make</p>
+<p style="Normal" xid="701" props="text-align:left; dom-dir:ltr">rec tail-recursive.</p>
+<p style="Normal" xid="702" props="text-align:left; dom-dir:ltr">Many Common Lisp compilers can do tail-recursion optimization, but not all</p>
+<p style="Normal" xid="703" props="text-align:left; dom-dir:ltr">of them do it by default. So after writing your functions to be tail-recursive, you</p>
+<p style="Normal" xid="704" props="text-align:left; dom-dir:ltr">may also want to put</p>
+<p style="Normal" xid="705" props="text-align:left; dom-dir:ltr">(proclaim ’(optimize speed))</p>
+<p style="Normal" xid="706" props="text-align:left; dom-dir:ltr">at the top of the file, to ensure that the compiler can take advantage of your efforts. 2</p>
+<p style="Normal" xid="707" props="text-align:left; dom-dir:ltr">Given tail-recursion and type declarations, existing Common Lisp compilers</p>
+<p style="Normal" xid="708" props="text-align:left; dom-dir:ltr">can generate code that runs as fast as, or faster than, C. Richard Gabriel gives as ◦</p>
+<p style="Normal" xid="709" props="text-align:left; dom-dir:ltr">an example the following function, which returns the sum of the integers from 1</p>
+<p style="Normal" xid="710" props="text-align:left; dom-dir:ltr">to n:</p>
+<p style="Normal" xid="711" props="text-align:left; dom-dir:ltr">2 The</p>
+<p style="Normal" xid="712" props="text-align:left; dom-dir:ltr">declaration (optimize speed) ought to be an abbreviation for (optimize (speed 3)).</p>
+<p style="Normal" xid="713" props="text-align:left; dom-dir:ltr">However, one Common Lisp implementation does tail-recursion optimization with the former, but not</p>
+<p style="Normal" xid="714" props="text-align:left; dom-dir:ltr">the latter.24</p>
+<p style="Normal" xid="715" props="text-align:left; dom-dir:ltr">FUNCTIONS</p>
+<p style="Normal" xid="716" props="text-align:left; dom-dir:ltr">(defun triangle (n)</p>
+<p style="Normal" xid="717" props="text-align:left; dom-dir:ltr">(labels ((tri (c n)</p>
+<p style="Normal" xid="718" props="text-align:left; dom-dir:ltr">(declare (type fixnum n c))</p>
+<p style="Normal" xid="719" props="text-align:left; dom-dir:ltr">(if (zerop n)</p>
+<p style="Normal" xid="720" props="text-align:left; dom-dir:ltr">c</p>
+<p style="Normal" xid="721" props="text-align:left; dom-dir:ltr">(tri (the fixnum (+ n c))</p>
+<p style="Normal" xid="722" props="text-align:left; dom-dir:ltr">(the fixnum (- n 1))))))</p>
+<p style="Normal" xid="723" props="text-align:left; dom-dir:ltr">(tri 0 n)))</p>
+<p style="Normal" xid="724" props="text-align:left; dom-dir:ltr">This is what fast Common Lisp code looks like. At first it may not seem natural</p>
+<p style="Normal" xid="725" props="text-align:left; dom-dir:ltr">to write functions this way. It’s often a good idea to begin by writing a function</p>
+<p style="Normal" xid="726" props="text-align:left; dom-dir:ltr">in whatever way seems most natural, and then, if necessary, transforming it into a</p>
+<p style="Normal" xid="727" props="text-align:left; dom-dir:ltr">tail-recursive equivalent.</p>
+<p style="Normal" xid="728" props="text-align:left; dom-dir:ltr">2.9 Compilation</p>
+<p style="Normal" xid="729" props="text-align:left; dom-dir:ltr">Lisp functions can be compiled either individually or by the file. If you just type</p>
+<p style="Normal" xid="730" props="text-align:left; dom-dir:ltr">a defun expression into the toplevel,</p>
+<p style="Normal" xid="731" props="text-align:left; dom-dir:ltr">&gt; (defun foo (x) (1+ x))</p>
+<p style="Normal" xid="732" props="text-align:left; dom-dir:ltr">FOO</p>
+<p style="Normal" xid="733" props="text-align:left; dom-dir:ltr">many implementations will create an interpreted function. You can check whether</p>
+<p style="Normal" xid="734" props="text-align:left; dom-dir:ltr">a given function is compiled by feeding it to compiled-function-p:</p>
+<p style="Normal" xid="735" props="text-align:left; dom-dir:ltr">&gt; (compiled-function-p #’foo)</p>
+<p style="Normal" xid="736" props="text-align:left; dom-dir:ltr">NIL</p>
+<p style="Normal" xid="737" props="text-align:left; dom-dir:ltr">We can have foo compiled by giving its name to compile</p>
+<p style="Normal" xid="738" props="text-align:left; dom-dir:ltr">&gt; (compile ’foo)</p>
+<p style="Normal" xid="739" props="text-align:left; dom-dir:ltr">FOO</p>
+<p style="Normal" xid="740" props="text-align:left; dom-dir:ltr">which will compile the definition of foo and replace the interpreted version with</p>
+<p style="Normal" xid="741" props="text-align:left; dom-dir:ltr">◦ a compiled one.</p>
+<p style="Normal" xid="742" props="text-align:left; dom-dir:ltr">&gt; (compiled-function-p #’foo)</p>
+<p style="Normal" xid="743" props="text-align:left; dom-dir:ltr">T</p>
+<p style="Normal" xid="744" props="text-align:left; dom-dir:ltr">Compiled and interpreted functions are both Lisp objects, and behave the same,</p>
+<p style="Normal" xid="745" props="text-align:left; dom-dir:ltr">except with respect to compiled-function-p. Literal functions can also be</p>
+<p style="Normal" xid="746" props="text-align:left; dom-dir:ltr">compiled: compile expects its first argument to be a name, but if you give nil</p>
+<p style="Normal" xid="747" props="text-align:left; dom-dir:ltr">as the first argument, it will compile the lambda-expression given as the second</p>
+<p style="Normal" xid="748" props="text-align:left; dom-dir:ltr">argument.2.9</p>
+<p style="Normal" xid="749" props="text-align:left; dom-dir:ltr">COMPILATION</p>
+<p style="Normal" xid="750">25</p>
+<p style="Normal" xid="751" props="text-align:left; dom-dir:ltr">&gt; (compile nil ’(lambda (x) (+ x 2)))</p>
+<p style="Normal" xid="752" props="text-align:left; dom-dir:ltr">#&lt;Compiled-Function BF55BE&gt;</p>
+<p style="Normal" xid="753" props="text-align:left; dom-dir:ltr">If you give both the name and function arguments, compile becomes a sort of</p>
+<p style="Normal" xid="754" props="text-align:left; dom-dir:ltr">compiling defun:</p>
+<p style="Normal" xid="755" props="text-align:left; dom-dir:ltr">&gt; (progn (compile ’bar ’(lambda (x) (* x 3)))</p>
+<p style="Normal" xid="756" props="text-align:left; dom-dir:ltr">(compiled-function-p #’bar))</p>
+<p style="Normal" xid="757" props="text-align:left; dom-dir:ltr">T</p>
+<p style="Normal" xid="758" props="text-align:left; dom-dir:ltr">Having compile in the language means that a program could build and compile</p>
+<p style="Normal" xid="759" props="text-align:left; dom-dir:ltr">new functions on the fly. However, calling compile explicitly is a drastic measure,</p>
+<p style="Normal" xid="760" props="text-align:left; dom-dir:ltr">comparable to calling eval, and should be viewed with the same suspicion. 3</p>
+<p style="Normal" xid="761" props="text-align:left; dom-dir:ltr">When Section 2.1 said that creating new functions at runtime was a routinely</p>
+<p style="Normal" xid="762" props="text-align:left; dom-dir:ltr">used programming technique, it referred to new closures like those made by</p>
+<p style="Normal" xid="763" props="text-align:left; dom-dir:ltr">make-adder, not functions made by calling compile on raw lists. Calling</p>
+<p style="Normal" xid="764" props="text-align:left; dom-dir:ltr">compile is not a routinely used programming technique—it’s an extremely rare</p>
+<p style="Normal" xid="765" props="text-align:left; dom-dir:ltr">one. So beware of doing it unnecessarily. Unless you’re implementing another</p>
+<p style="Normal" xid="766" props="text-align:left; dom-dir:ltr">language on top of Lisp (and much of the time, even then), what you need to do</p>
+<p style="Normal" xid="767" props="text-align:left; dom-dir:ltr">may be possible with macros.</p>
+<p style="Normal" xid="768" props="text-align:left; dom-dir:ltr">There are two sorts of functions which you can’t give as an argument to</p>
+<p style="Normal" xid="769" props="text-align:left; dom-dir:ltr">compile. According to CLTL 2 (p. 677), you can’t compile a function “defined</p>
+<p style="Normal" xid="770" props="text-align:left; dom-dir:ltr">interpretively in a non-null lexical environment.” That is, if at the toplevel you</p>
+<p style="Normal" xid="771" props="text-align:left; dom-dir:ltr">define foo within a let</p>
+<p style="Normal" xid="772" props="text-align:left; dom-dir:ltr">&gt; (let ((y 2))</p>
+<p style="Normal" xid="773" props="text-align:left; dom-dir:ltr">(defun foo (x) (+ x y)))</p>
+<p style="Normal" xid="774" props="text-align:left; dom-dir:ltr">then (compile ’foo) will not necessarily work. 4 You also can’t call compile</p>
+<p style="Normal" xid="775" props="text-align:left; dom-dir:ltr">on a function which is already compiled. In this situation, CLTL 2 hints darkly that</p>
+<p style="Normal" xid="776" props="text-align:left; dom-dir:ltr">“the consequences. . .are unspecified.”</p>
+<p style="Normal" xid="777" props="text-align:left; dom-dir:ltr">The usual way to compile Lisp code is not to compile functions individually</p>
+<p style="Normal" xid="778" props="text-align:left; dom-dir:ltr">with compile, but to compile whole files with compile-file. This function</p>
+<p style="Normal" xid="779" props="text-align:left; dom-dir:ltr">takes a filename and creates a compiled version of the source file—typically with</p>
+<p style="Normal" xid="780" props="text-align:left; dom-dir:ltr">the same base name but a different extension. When the compiled file is loaded,</p>
+<p style="Normal" xid="781" props="text-align:left; dom-dir:ltr">compiled-function-p should return true for all the functions defined in the file.</p>
+<p style="Normal" xid="782" props="text-align:left; dom-dir:ltr">Later chapters will depend on another effect of compilation: when one function</p>
+<p style="Normal" xid="783" props="text-align:left; dom-dir:ltr">occurs within another function, and the containing function is compiled, the inner</p>
+<p style="Normal" xid="784" props="text-align:left; dom-dir:ltr">3 An</p>
+<p style="Normal" xid="785" props="text-align:left; dom-dir:ltr">explanation of why it is bad to call eval explicitly appears on page 278.</p>
+<p style="Normal" xid="786" props="text-align:left; dom-dir:ltr">The restriction is imposed on interpreted</p>
+<p style="Normal" xid="787" props="text-align:left; dom-dir:ltr">code for implementation reasons, not because there’s anything wrong with defining functions in distinct</p>
+<p style="Normal" xid="788" props="text-align:left; dom-dir:ltr">lexical environments.</p>
+<p style="Normal" xid="789" props="text-align:left; dom-dir:ltr">4 It’s ok to have this code in a file and then compile the file.26</p>
+<p style="Normal" xid="790" props="text-align:left; dom-dir:ltr">FUNCTIONS</p>
+<p style="Normal" xid="791" props="text-align:left; dom-dir:ltr">function will also get compiled. C LTL 2 does not seem to say explicitly that this</p>
+<p style="Normal" xid="792" props="text-align:left; dom-dir:ltr">will happen, but in a decent implementation you can count on it.</p>
+<p style="Normal" xid="793" props="text-align:left; dom-dir:ltr">The compiling of inner functions becomes evident in functions which return</p>
+<p style="Normal" xid="794" props="text-align:left; dom-dir:ltr">functions. When make-adder (page 18) is compiled, it will return compiled</p>
+<p style="Normal" xid="795" props="text-align:left; dom-dir:ltr">functions:</p>
+<p style="Normal" xid="796" props="text-align:left; dom-dir:ltr">&gt; (compile ’make-adder)</p>
+<p style="Normal" xid="797" props="text-align:left; dom-dir:ltr">MAKE-ADDER</p>
+<p style="Normal" xid="798" props="text-align:left; dom-dir:ltr">&gt; (compiled-function-p (make-adder 2))</p>
+<p style="Normal" xid="799" props="text-align:left; dom-dir:ltr">T</p>
+<p style="Normal" xid="800" props="text-align:left; dom-dir:ltr">As later chapters will show, this fact is of great importance in the implementation</p>
+<p style="Normal" xid="801" props="text-align:left; dom-dir:ltr">of embedded languages. If a new language is implemented by transformation,</p>
+<p style="Normal" xid="802" props="text-align:left; dom-dir:ltr">and the transformation code is compiled, then it yields compiled output—and</p>
+<p style="Normal" xid="803" props="text-align:left; dom-dir:ltr">so becomes in effect a compiler for the new language. (A simple example is</p>
+<p style="Normal" xid="804" props="text-align:left; dom-dir:ltr">described on page 81.)</p>
+<p style="Normal" xid="805" props="text-align:left; dom-dir:ltr">If we have a particularly small function, we may want to request that it be</p>
+<p style="Normal" xid="806" props="text-align:left; dom-dir:ltr">compiled inline. Otherwise, the machinery of calling it could entail more effort</p>
+<p style="Normal" xid="807" props="text-align:left; dom-dir:ltr">than the function itself. If we define a function:</p>
+<p style="Normal" xid="808" props="text-align:left; dom-dir:ltr">(defun 50th (lst) (nth 49 lst))</p>
+<p style="Normal" xid="809" props="text-align:left; dom-dir:ltr">and make the declaration:</p>
+<p style="Normal" xid="810" props="text-align:left; dom-dir:ltr">(proclaim ’(inline 50th))</p>
+<p style="Normal" xid="811" props="text-align:left; dom-dir:ltr">then a reference to 50th within a compiled function should no longer require a</p>
+<p style="Normal" xid="812" props="text-align:left; dom-dir:ltr">real function call. If we define and compile a function which calls 50th,</p>
+<p style="Normal" xid="813" props="text-align:left; dom-dir:ltr">(defun foo (lst)</p>
+<p style="Normal" xid="814" props="text-align:left; dom-dir:ltr">(+ (50th lst) 1))</p>
+<p style="Normal" xid="815" props="text-align:left; dom-dir:ltr">then when foo is compiled, the code for 50th should be compiled right into it,</p>
+<p style="Normal" xid="816" props="text-align:left; dom-dir:ltr">just as if we had written</p>
+<p style="Normal" xid="817" props="text-align:left; dom-dir:ltr">(defun foo (lst)</p>
+<p style="Normal" xid="818" props="text-align:left; dom-dir:ltr">(+ (nth 49 lst) 1))</p>
+<p style="Normal" xid="819" props="text-align:left; dom-dir:ltr">in the first place. The drawback is that if we redefine 50th, we also have to</p>
+<p style="Normal" xid="820" props="text-align:left; dom-dir:ltr">recompile foo, or it will still reflect the old definition. The restrictions on inline</p>
+<p style="Normal" xid="821" props="text-align:left; dom-dir:ltr">◦ functions are basically the same as those on macros (see Section 7.9).2.10</p>
+<p style="Normal" xid="822" props="text-align:left; dom-dir:ltr">FUNCTIONS FROM LISTS</p>
+<p style="Normal" xid="823">27</p>
+<p style="Normal" xid="824" props="text-align:left; dom-dir:ltr">2.10 Functions from Lists</p>
+<p style="Normal" xid="825" props="text-align:left; dom-dir:ltr">In some earlier dialects of Lisp, functions were represented as lists. This gave Lisp</p>
+<p style="Normal" xid="826" props="text-align:left; dom-dir:ltr">programs the remarkable ability to write and execute their own Lisp programs.</p>
+<p style="Normal" xid="827" props="text-align:left; dom-dir:ltr">In Common Lisp, functions are no longer made of lists—good implementations</p>
+<p style="Normal" xid="828" props="text-align:left; dom-dir:ltr">compile them into native machine code. But you can still write programs that</p>
+<p style="Normal" xid="829" props="text-align:left; dom-dir:ltr">write programs, because lists are the input to the compiler.</p>
+<p style="Normal" xid="830" props="text-align:left; dom-dir:ltr">It cannot be overemphasized how important it is that Lisp programs can</p>
+<p style="Normal" xid="831" props="text-align:left; dom-dir:ltr">write Lisp programs, especially since this fact is so often overlooked. Even</p>
+<p style="Normal" xid="832" props="text-align:left; dom-dir:ltr">experienced Lisp users rarely realize the advantages they derive from this feature</p>
+<p style="Normal" xid="833" props="text-align:left; dom-dir:ltr">of the language. This is why Lisp macros are so powerful, for example. Most</p>
+<p style="Normal" xid="834" props="text-align:left; dom-dir:ltr">of the techniques described in this book depend on the ability to write programs</p>
+<p style="Normal" xid="835" props="text-align:left; dom-dir:ltr">which manipulate Lisp expressions.</p>
+<p style="Normal" xid="836"></p>
+</section>
+</abiword>
