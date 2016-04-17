@@ -639,44 +639,59 @@ When we define functions with lambda-expressions, we face a restriction which
 doesn’t arise with defun: a function defined in a lambda-expression doesn’t have
 a name and therefore has no way of referring to itself. This means that in Common
 Lisp we can’t use lambda to define a recursive function.
-
+람다 표현식으로 함수를 만들 때 defun으로 함수를 만들 때에는 없던 제약이 있습니다. 람다 표현식으로 함수를 만들면 함수의 이름이 없기 때문에 자기 자신을 호출할 방법이 없습니다. 즉 커먼 리습에서 람다를 이용한 재귀 함수를 만들 수 없다는 이야기가 됩니다.
 
 ◦
 If we want to apply some function to all the elements of a list, we use the most
 familiar of Lisp idioms:
+리스트에 있는 각 항목에 어떤 함수를 적용하고 싶을 때 보통 아래처럼 합니다.
+
 > (mapcar #’(lambda (x) (+ 2 x))
 ’(2 5 7 3))
 (4 7 9 5)
 What about cases where we want to give a recursive function as the first argument
 to mapcar? If the function has been defined with defun, we can simply refer to
 it by name:
+map의 첫번째 인자로 재귀 함수를 지정하고 싶을 때는 어떻게 해야할까요? defun으로 정의된 함수라면 다음처럼 간단하게 해결됩니다.
+
 > (mapcar #’copy-tree ’((a b) (c d e)))
 ((A B) (C D E))
 But now suppose that the function has to be a closure, taking some bindings from
 the environment in which the mapcar occurs. In our example list+,
+mapcar가 실행될 때의 환경을 기억하는 클로저로 함수를 만드는걸 생각해보겠습니다. 다음 예제의 list+ 함수를 보겠습니다.
+
 (defun list+ (lst n)
 (mapcar #’(lambda (x) (+ x n))
 lst))
 the first argument to mapcar, #’(lambda (x) (+ x n)), must be defined within
 list+ because it needs to catch the binding of n. So far so good, but what if we
 want to give mapcar a function which both needs local bindings and is recursive?
+mapcar의 첫번째 인자는 #’(lambda (x) (+ x n))입니다. 이 람다 함수는 list+ 안에서만 정의될 수 있습니다. n 변수를 list+함수에서 받아야하기 때문입니다. 여기까지는 문제가 없습니다. 그런데 만약 mapcar에 지역 변수와 재귀가 필요한 함수를 전달하고 싶을 때는 어떻게 해야할까요?
+
 We can’t use a function defined elsewhere with defun, because we need bindings
 from the local environment. And we can’t use lambda to define a recursive
 function, because the function will have no way of referring to itself.
 Common Lisp gives us labels as a way out of this dilemma. With one
 important reservation, labels could be described as a sort of let for functions.
+defun 밖에서 정의된 함수를 쓸수 없습니다. defun 내부의 환경을 사용하기 때문입니다. 그리고 람다로 재귀 함수를 만들 수 없습니다. 람다 함수 내부에서 다시 자기 자신을 호출할 방법이 없기 때문입니다. 커먼 리습은 이런 문제의 해결책으로 labels을 제공하고 있습니다. labels는 함수에게 let과 같은 역할을 합니다.
+
 Each of the binding specifications in a labels expression should have the form
-(?name? ?parameters? . ?body?)
-Within the labels expression, ?name? will refer to a function equivalent to:
-#’(lambda ?parameters? . ?body?)
-So for example:22
-FUNCTIONS
+labels 표현식에 뭔가를 선언하려면 다음과 같은 형태로 하면 됩니다.
+(<name> <parameters> . <body>)
+Within the labels expression, <name> will refer to a function equivalent to:
+labels 표현식의 <name>은 함수 이름입니다.
+
+#’(lambda <parameters> . <body>)
+So for example:
+예를 들면 이렇습니다.
 > (labels ((inc (x) (1+ x)))
 (inc 3))
 4
 However, there is an important difference between let and labels. In a let
 expression, the value of one variable can’t depend on another variable made by
 the same let—that is, you can’t say
+let과 labels 사이에 중요한 차이가 있습니다. let은 동시에 같은 let에서 선언된 다른 변수에 접근할 수 없습니다.
+
 (let ((x 10) (y x))
 y)
 and expect the value of the new y to reflect that of the new x. In contrast, the body of
