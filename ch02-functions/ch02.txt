@@ -690,15 +690,19 @@ So for example:
 However, there is an important difference between let and labels. In a let
 expression, the value of one variable can’t depend on another variable made by
 the same let—that is, you can’t say
-let과 labels 사이에 중요한 차이가 있습니다. let은 동시에 같은 let에서 선언된 다른 변수에 접근할 수 없습니다.
+let과 labels 사이에 중요한 차이가 있습니다. let은 같은 let에서 선언된 변수에 접근할 수 없습니다. 다음같은 코드를 보면
 
 (let ((x 10) (y x))
 y)
 and expect the value of the new y to reflect that of the new x. In contrast, the body of
 a function f defined in a labels expression may refer to any other function defined
 there, including f itself, which makes recursive function definitions possible.
+y가 x의 값을 그대로 갖을 수 없습니다. 하지만 반대로 labels 표현식에서 정의된 함수 f는 자기 자신을 포함해서 그 안에 정의된 다른 함수들을 호출할 수 있습니다. 그래서 재귀함수가 가능해집니다.
+
 Using labels we can write a function analogous to list+, but in which the
 first argument to mapcar is a recursive function:
+labels을 써서 list+와 비슷하지만, mapcar의 첫번째 인자로 재귀함수를 전달하는 예를 만들어보겠습니다.
+
 (defun count-instances (obj lsts)
 (labels ((instances-in (lst)
 (if (consp lst)
@@ -708,34 +712,46 @@ first argument to mapcar is a recursive function:
 (mapcar #’instances-in lsts)))
 This function takes an object and a list, and returns a list of the number of
 occurrences of the object in each element:
+이 함수는 객체와 리스트를 인자로 받아서 리스트의 각 항목안에 해당 객체가 몇개 들어있는지를 리스트로 반환합니다.
+
 > (count-instances ’a ’((a b c) (d a r p a) (d a r) (a a)))
 (1 2 1 2)
 2.8 Tail-Recursion
+2.8 꼬리재귀
+
 A recursive function is one that calls itself. Such a call is tail-recursive if no
 work remains to be done in the calling function afterwards. This function is not
 tail-recursive
+재귀 함수는 자기 자신을 호출하는 함수입니다. 그중에서 자기 자신을 호출하는 것이 가장 마지막에 하는 일인 함수를 꼬리재귀 함수라고 부릅니다. 다음 함수는 꼬리 재귀함수가 아닙니다.
+
 (defun our-length (lst)
 (if (null lst)
 0
 (1+ (our-length (cdr lst)))))
 because on returning from the recursive call we have to pass the result to 1+. The
-following function is tail-recursive, though2.8
-TAIL - RECURSION
-23
+following function is tail-recursive, though
+재귀 호출이 끝나서 받은 결과에 1을 더해서 반환하기 때문입니다. 다음 함수가 꼬리재귀함수입니다.
+
 (defun our-find-if (fn lst)
 (if (funcall fn (car lst))
 (car lst)
 (our-find-if fn (cdr lst))))
 because the value of the recursive call is immediately returned.
+재귀 함수의 결과값이 곧바로 반환되기 때문입니다.
+
 Tail-recursion is desirable because many Common Lisp compilers can trans-
 form tail-recursive functions into loops. With such a compiler, you can have the
 elegance of recursion in your source code without the overhead of function calls
 at runtime. The gain in speed is usually great enough that programmers go out of
 their way to make functions tail-recursive.
+꼬리재귀함수가 좋은 이유가 많은 커먼 리습 컴파일러들이 꼬리재귀함수를 루프로 바꿀 수 있기 때문입니다. 그럼 컴파일러를 이용하면 재귀 호출을 써서 코드가 명료해지면서도 함수 호출에 들어가는 성능저하가 없어집니다. 그렇게 얻어지는 성능향상이 꽤 커서 프로그래머들은 함수를 만들 때 최대한 꼬리 재귀로 만들려고 노력합니다.
+
 A function which isn’t tail-recursive can often be transformed into one that is
 by embedding in it a local function which uses an accumulator. In this context, an
 accumulator is a parameter representing the value computed so far. For example,
 our-length could be transformed into
+꼬리재귀가 아닌 많은 함수들을 누적계산을 하는 지역함수를 이용한 다른 함수로 변환할 수 있습니다. 누적계산기는 지금까지 계산된 결과를 가지게됩니다. 예를 들어 our-length 함수도 아래처럼 바꿀 수 있습니다.
+
 (defun our-length (lst)
 (labels ((rec (lst acc)
 (if (null lst)
@@ -747,20 +763,29 @@ acc. When the recursion reaches the end of the list, the value of acc will be
 the total length, which can just be returned. By accumulating the value as we go
 down the calling tree instead of constructing it on the way back up, we can make
 rec tail-recursive.
+예제를보면 리스트에 있는 항목들이 갯수가 두번째 매개변수 acc에 저장됩니다. 재귀호출이 리스트의 끝을 만나면 acc의 값인 리스트의 길이가 됩니다. 값을 따로 저장하는게 아니라 함수 호출이 진행되면서 값을 누적해나가는 방식을 사용하면 rec 함수를 꼬리재귀함수로 만들 수 있습니다.
+
 Many Common Lisp compilers can do tail-recursion optimization, but not all
 of them do it by default. So after writing your functions to be tail-recursive, you
 may also want to put
+많은 커먼 리습 컴파일러들은 꼬리재귀 최적화를 할 수 있습니다만 디폴트 동작이 아닌 경우도 있습니다. 그래서 꼬리재귀함수를 만들었다면 다음과 같은 내용을
+
 (proclaim ’(optimize speed))
-at the top of the file, to ensure that the compiler can take advantage of your efforts. 2
+at the top of the file, to ensure that the compiler can take advantage of your efforts.(저자주2)
+파일의 가장 윗부분에 써줘서 컴파일러가 확실하게 알도록 해주어야합니다.
+
 Given tail-recursion and type declarations, existing Common Lisp compilers
 can generate code that runs as fast as, or faster than, C. Richard Gabriel gives as ◦
 an example the following function, which returns the sum of the integers from 1
 to n:
-2 The
+꼬리재귀와 타입선언을 이용하면 현재의 커먼 리습 컴파일러로 C보다 더 빠른 코드를 만들어낼 수 있습니다. Richard Gabriel은 다음가 같이 1부터 n까지의 정수를 더하는 함수를 그 예로 들었습니다.
+
+(저자주2 The
 declaration (optimize speed) ought to be an abbreviation for (optimize (speed 3)).
 However, one Common Lisp implementation does tail-recursion optimization with the former, but not
-the latter.24
-FUNCTIONS
+the latter.)
+(저자주2 (optimize speed)라는 선언은 (optimize (speed 3))을 줄여서 쓴 것입니다. 그런데 어떤 커먼 리습 구현체는 (optimize speed)라고 쓰면 꼬리재귀 최적화를 하는데 (optimize (speed 3))라고 쓰면 하지 않습니다.) 
+
 (defun triangle (n)
 (labels ((tri (c n)
 (declare (type fixnum n c))
@@ -773,6 +798,8 @@ This is what fast Common Lisp code looks like. At first it may not seem natural
 to write functions this way. It’s often a good idea to begin by writing a function
 in whatever way seems most natural, and then, if necessary, transforming it into a
 tail-recursive equivalent.
+이로서 빠른 커먼 리습 코드가 어떻게 생겼는지 알 수 있습니다. 처음 봤을 때는 함수를 이런식으로 만든다는게 이상해보일것입니다. 시작단계에서는 보통의 함수를 만들고, 필요에 따라서 동일한 일을 하는 꼬리재귀 함수로 바꿔나가는게 좋습니다.
+
 2.9 Compilation
 Lisp functions can be compiled either individually or by the file. If you just type
 a defun expression into the toplevel,
