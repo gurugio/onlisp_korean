@@ -798,41 +798,54 @@ This is what fast Common Lisp code looks like. At first it may not seem natural
 to write functions this way. It’s often a good idea to begin by writing a function
 in whatever way seems most natural, and then, if necessary, transforming it into a
 tail-recursive equivalent.
-이로서 빠른 커먼 리습 코드가 어떻게 생겼는지 알 수 있습니다. 처음 봤을 때는 함수를 이런식으로 만든다는게 이상해보일것입니다. 시작단계에서는 보통의 함수를 만들고, 필요에 따라서 동일한 일을 하는 꼬리재귀 함수로 바꿔나가는게 좋습니다.
+이로서 빠른 커먼 리습 코드가 어떻게 생겼는지 알 수 있습니다. 처음 봤을 때는 함수를 이런식으로 만든다는게 이상해보일것입니다. 일반적인 함수를 만드는 걸로 시작했다가  필요에 따라서 동일한 일을 하는 꼬리재귀 함수로 바꿔나가는게 좋은 접근 방식입니다.
 
 2.9 Compilation
+2.9 컴파일하기
 Lisp functions can be compiled either individually or by the file. If you just type
 a defun expression into the toplevel,
+리습의 함수는 개별적으로도 컴파일할 수 있고, 파일 단위로도 컴파일할 수 있습니다. 최상위 레벨에서 다음처럼 defun으로 함수를 만들 수 있습니다. (역자주: 리습의 evaluator를 이 책에서는 최상위 레벨 toplevel이라고 부르고 있습니다. 리습을 사용자가 가장 직접 사용하는 레벨이라는 뜻인것 같습니다.)
+
 > (defun foo (x) (1+ x))
 FOO
 many implementations will create an interpreted function. You can check whether
 a given function is compiled by feeding it to compiled-function-p:
+많은 구현체에서 인터프리터에서 함수를 사용하는 것이 컴파일된 함수와는 다른 경우가 있습니다. compiled-function-p 에 함수를 전달하면 컴파일된 함수인지를 알려줍니다.
+
 > (compiled-function-p #’foo)
 NIL
 We can have foo compiled by giving its name to compile
+아직 컴파일된게 아닌 foo 함수를 다음처럼 compile을 이용해서 컴파일할 수 있습니다.
+
 > (compile ’foo)
 FOO
 which will compile the definition of foo and replace the interpreted version with
 ◦ a compiled one.
+compile은 foo의 정의에 따라 함수를 컴파일하고 인터프리터에서 사용중인 함수를 컴파일된 함수로 대체합니다.
+
 > (compiled-function-p #’foo)
 T
 Compiled and interpreted functions are both Lisp objects, and behave the same,
 except with respect to compiled-function-p. Literal functions can also be
 compiled: compile expects its first argument to be a name, but if you give nil
 as the first argument, it will compile the lambda-expression given as the second
-argument.2.9
-COMPILATION
-25
+argument.
+컴파일되었건 인터프리터에서 사용중이건 모두 리습의 객체입니다. 완전히 같은 동작을 하기때문에 compiled-function-p에 전달했을 때만 구별할 수 있습니다. 함수를 문자열로 표현해놓은 것도 컴파일할 수 있습니다. compile의 첫번째 인자에는 이름을 써야하는데 nil로 지정하면 두번째 인자로 전달된 람다 표현식을 컴파일하라는 의미가 됩니다.
+
 > (compile nil ’(lambda (x) (+ x 2)))
 #<Compiled-Function BF55BE>
 If you give both the name and function arguments, compile becomes a sort of
 compiling defun:
+이름과 함수를 모두 전달하면 compile은 defun으로 정의된 함수를 컴파일하는 것과 같습니다.
+
 > (progn (compile ’bar ’(lambda (x) (* x 3)))
 (compiled-function-p #’bar))
 T
 Having compile in the language means that a program could build and compile
 new functions on the fly. However, calling compile explicitly is a drastic measure,
-comparable to calling eval, and should be viewed with the same suspicion. 3
+comparable to calling eval, and should be viewed with the same suspicion. (저자주3)
+(역자주:개별 툴이 아니라) 언어 자체에 컴파일 명령이 들어있다는 실행 중에 새로운 함수를 생성해서 컴파일할 수도 있다는 것입니다. 그렇지만 그렇게 실행 중에 컴파일을 한다는 것은 정상적으로 eval에서 하는 것에 비해 아주 예외적인 경우이므로 주의해서 살펴봐야합니다. (저자주3)
+
 When Section 2.1 said that creating new functions at runtime was a routinely
 used programming technique, it referred to new closures like those made by
 make-adder, not functions made by calling compile on raw lists. Calling
@@ -840,29 +853,39 @@ compile is not a routinely used programming technique—it’s an extremely rare
 one. So beware of doing it unnecessarily. Unless you’re implementing another
 language on top of Lisp (and much of the time, even then), what you need to do
 may be possible with macros.
+2.1장에서 런타임에 새로운 함수를 생성하는 것이 일상적으로 사용되는 프로그래밍 테크닉이라고 설명했었는데, 그건 make-adder에서 본 것과 같은 클로저를 만드는 것을 말한 것이었습니다. 문자열을 가지고 compile을 호출해서 함수를 만드는 경우를 말하는게 아닙니다. compile을 호출하는 것은 일상적으로 사용되는 테크닉이 아닙니다. 정말 드문 경우입니다. 꼭 필요한 경우인지 잘 생각해야합니다. 리습을 기반으로 다른 언어를 만드려는 경우가 아닌 이상, (그외의 어떤 경우에도 대부분) 매크로만으로도 충분할 것입니다.
+
 There are two sorts of functions which you can’t give as an argument to
 compile. According to CLTL 2 (p. 677), you can’t compile a function “defined
 interpretively in a non-null lexical environment.” That is, if at the toplevel you
 define foo within a let
+compile에 인자로 전달할 수 없는 함수가 2종류있습니다. CLTL 2(677페이지:역자주:원서의 677페이지입니다)에 따르면 “렉시컬 환경을 가지고 인터프리터 환경에서 정의된” 함수는 컴파일할 수 없습니다. 그게 무슨 말이냐면 다음처럼 최상위 레벨에서 let에서 foo를 정의한 경우를 말합니다.
+
 > (let ((y 2))
 (defun foo (x) (+ x y)))
-then (compile ’foo) will not necessarily work. 4 You also can’t call compile
+then (compile ’foo) will not necessarily work. (주4) You also can’t call compile
 on a function which is already compiled. In this situation, CLTL 2 hints darkly that
 “the consequences. . .are unspecified.”
+(compile ‘foo)가 동작하지 않을 수도 있습니다. 이미 컴파일된 함수에서 compile을 호출하는 것도 안됩니다. CLTL2에서는 “결과를 보장할 수 없음"이라고만 설명하고 있습니다.
+
 The usual way to compile Lisp code is not to compile functions individually
 with compile, but to compile whole files with compile-file. This function
 takes a filename and creates a compiled version of the source file—typically with
 the same base name but a different extension. When the compiled file is loaded,
 compiled-function-p should return true for all the functions defined in the file.
-Later chapters will depend on another effect of compilation: when one function
-occurs within another function, and the containing function is compiled, the inner
-3 An
-explanation of why it is bad to call eval explicitly appears on page 278.
+리습 코드를 컴파일하는 일반적인 방법은 compile을 써서 함수를 하나씩 컴파일하는게 아니라 compile-file을 써서 전체 파일을 컴파일하는 것입니다. %$$$$$$$$$$$$$$계속
+
+(저자주3 An
+explanation of why it is bad to call eval explicitly appears on page 278.)
 The restriction is imposed on interpreted
 code for implementation reasons, not because there’s anything wrong with defining functions in distinct
 lexical environments.
-4 It’s ok to have this code in a file and then compile the file.26
-FUNCTIONS
+(주4 It’s ok to have this code in a file and then compile the file. The restriction is imposed on interpreted
+code for implementation reasons, not because there’s anything wrong with defining functions in distinct
+lexical environments.)
+
+Later chapters will depend on another effect of compilation: when one function
+occurs within another function, and the containing function is compiled, the inner
 function will also get compiled. C LTL 2 does not seem to say explicitly that this
 will happen, but in a decent implementation you can count on it.
 The compiling of inner functions becomes evident in functions which return
