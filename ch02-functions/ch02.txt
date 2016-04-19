@@ -106,7 +106,7 @@ underneath defun.
 
 리습 코드를 보면 대부분 이런  defun들로 이루어졌다는걸 알 수 있습니다.
 마치 C나 파스칼 언어에서 프로시저 정의들과 비슷합니다.
-하지만 확연히 다른 점이 존재합나디ㅏ.
+하지만 확연히 다른 점이 존재합니다.
 이 defun들은 단순히 프로시저를 정의하는게 아닙니다.
 그것들은 리습 호출 그 자체입니다.
 defun의 내부에  어떤 일이 벌어지는지를 알면 보다 명확해집니다.
@@ -873,24 +873,28 @@ with compile, but to compile whole files with compile-file. This function
 takes a filename and creates a compiled version of the source file—typically with
 the same base name but a different extension. When the compiled file is loaded,
 compiled-function-p should return true for all the functions defined in the file.
-리습 코드를 컴파일하는 일반적인 방법은 compile을 써서 함수를 하나씩 컴파일하는게 아니라 compile-file을 써서 전체 파일을 컴파일하는 것입니다. %$$$$$$$$$$$$$$계속
+리습 코드를 컴파일할때는 보통 compile을 써서 함수 하나씩 컴파일하는게 아니라 compile-file을 써서 전체 파일을 컴파일하게됩니다. compile-file은 파일 이름을 전달받아서 컴파일된 파일을 생성합니다. 보통 파일 이름은 같고 확장자만 다른 이름을 가집니다. 컴파일된 파일을 읽어들인 다음 파일에 정의된 모든 함수들에 대해 compiled-function-p를 호출하면 참을 반환합니다.
 
 (저자주3 An
 explanation of why it is bad to call eval explicitly appears on page 278.)
-The restriction is imposed on interpreted
-code for implementation reasons, not because there’s anything wrong with defining functions in distinct
-lexical environments.
-(주4 It’s ok to have this code in a file and then compile the file. The restriction is imposed on interpreted
+원서 278 페이지에 왜 eval을 직접 호출하는게 나쁜지 설명이 있습니다.
+
+(저자주4 It’s ok to have this code in a file and then compile the file. The restriction is imposed on interpreted
 code for implementation reasons, not because there’s anything wrong with defining functions in distinct
 lexical environments.)
+(역자주: 해석도 안되고 이해도 안되는 설명입니다.)
 
 Later chapters will depend on another effect of compilation: when one function
 occurs within another function, and the containing function is compiled, the inner
 function will also get compiled. C LTL 2 does not seem to say explicitly that this
 will happen, but in a decent implementation you can count on it.
+컴파일을 함으로써 생기는 결과가 하나 더 있습니다. 어떤 함수가 다른 함수를 포함할 때, 그 함수가 컴파일된다면, 포함된 함수도 컴파일된다는 것입니다. CLTL2에서 이것을 명시하고 있지는 않습니다만, 최신 구현체들에은 지원하고 있는 사항입니다.
+
 The compiling of inner functions becomes evident in functions which return
 functions. When make-adder (page 18) is compiled, it will return compiled
 functions:
+내부 함수들도 자동으로 컴파일된다는 것은 함수를 반환하는 함수를 만들어보면 알 수 있습니다. make-adder가 컴파일되면 반환되는 함수들도 컴파일된 함수들일 것입니다.
+
 > (compile ’make-adder)
 MAKE-ADDER
 > (compiled-function-p (make-adder 2))
@@ -900,26 +904,38 @@ of embedded languages. If a new language is implemented by transformation,
 and the transformation code is compiled, then it yields compiled output—and
 so becomes in effect a compiler for the new language. (A simple example is
 described on page 81.)
+나중에 다른 챕터에서 보겠지만, 내장 언어를 만드는데 있어서 이것이 중요한 역할을 하게됩니다. 새로운 언어를 만들어내는 변환기를 구현했는데, 이 변환기 코드를 컴파일한다면, 그 결과물도 컴파일된 것일거고, 결국 자동으로 새로운 언어의 컴파일러가 될 것입니다. (원서 81페이지에서 간단한 예제를 만들어 설명합니다.)
+
 If we have a particularly small function, we may want to request that it be
 compiled inline. Otherwise, the machinery of calling it could entail more effort
 than the function itself. If we define a function:
+매우 작은 함수를 만들 때, 인라인 함수로 만들고 싶을 때가 있습니다. 함수가 너무 작아서 함수를 호출하는 시간이 함수의 실행보다 더 길 수 있기 때문입니다. 아래처럼 50th라는 함수를 만들고
+
 (defun 50th (lst) (nth 49 lst))
 and make the declaration:
+아래처럼 선언하면
+
 (proclaim ’(inline 50th))
 then a reference to 50th within a compiled function should no longer require a
 real function call. If we define and compile a function which calls 50th,
+컴파일된 함수안에서 50th를 호출한다면 함수 호출을 실행하지 않게됩니다. 다음처럼 50th를 호출하는 함수를 만들어서 컴파일하면
+
 (defun foo (lst)
 (+ (50th lst) 1))
 then when foo is compiled, the code for 50th should be compiled right into it,
 just as if we had written
+foo를 컴파일할 때 50th에 해당하는 코드가 함수 호루하는 자리에 들어가게되서, 결과적으로 다음처럼 만든것과 동일하게 됩니다.
+
 (defun foo (lst)
 (+ (nth 49 lst) 1))
 in the first place. The drawback is that if we redefine 50th, we also have to
 recompile foo, or it will still reflect the old definition. The restrictions on inline
-◦ functions are basically the same as those on macros (see Section 7.9).2.10
-FUNCTIONS FROM LISTS
-27
+◦ functions are basically the same as those on macros (see Section 7.9).
+부작용도 있는데 50th를 다시 만들게되면 foo를 다시 컴파일해야한다는 것입니다. 다시 컴파일하지 않으면 이전의 50th를 계속 호출하게됩니다. 인라인 함수를 사용하는데 있어서 제약사항들이 있는데 매크로의 제약사항과 기본적으로는 같습니다. (7.9장을 참고하세요)
+
 2.10 Functions from Lists
+2.10 리스트와 함수
+
 In some earlier dialects of Lisp, functions were represented as lists. This gave Lisp
 programs the remarkable ability to write and execute their own Lisp programs.
 In Common Lisp, functions are no longer made of lists—good implementations
@@ -931,3 +947,5 @@ experienced Lisp users rarely realize the advantages they derive from this featu
 of the language. This is why Lisp macros are so powerful, for example. Most
 of the techniques described in this book depend on the ability to write programs
 which manipulate Lisp expressions.
+초기 리습의 방언들은 함수를 리스트로 표현했었습니다. 그덕분에 리습 프로그래머들은 그들만의 리습 프로그램을 만들고 실행할 수 있었습니다. 커먼 리습에서는 함수가 더이상 리스트로 만들어지지 않습니다. 좋은 구현체들은 네이티브 머신 코드로 컴파일해버립니다. 하지만 여전히 프로그램을 만드는 프로그램을 만들 수 있습니다. 컴파일러가 리스트를 입력으로 받기 때문입니다.
+리습 프로그래머에게 그런 사실은 너무나 중요합니다. 하지만 자주 간과되는 것도 사실입니다. 리습의 이런 기능을 이용해서 얼마나 좋은 일들을 할 수 있는지를 경험많은 리습 사용자들도 알지 못하는 경우가 많습니다.  매크로가 강력한 이유가 바로 프로그램을 만드는 프로그램을 만들 수 있다는 것입니다. 이 책에서 설명하는 대부분의 프로그래밍 테크닉들이 리습이 리습 표현식을 만들어내는 프로그램을 만들 수 있기 때문에 가능한 것들입니다.
