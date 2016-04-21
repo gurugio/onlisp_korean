@@ -31,13 +31,11 @@ changes to objects (e.g. by rplaca) and assignments to variables (e.g. by setq).
 If side-effects are few and localized, programs become easier to read, test, and 
 debug. Lisp programs have not always been written in this style, but over time 
 Lisp and functional programming have gradually become inseparable. 
-
+함수형 프로그래밍은 사이드 이팩트를 이용하지않고 반환값만을 가지고 동작하는 프로그램을 만드는 것을 의미합니다. 사이드 이팩트에는 객체의 상태를 바꾸는 부작용(rplaca를 사용하는 경우)이나 값을 할당하는 (setq를 이용하는 경우) 동작들이 있습니다. 사이드 이팩트를 최소화하고 한곳에 몰아놓을 수 있다면 프로그램어느 더 읽기 쉽고 테스트하고 디버깅하기 쉬워질 것입니다. 리습 프로그램이 항상 함수형으로 구현되는 것은 아니지만, 리습과 함수형 프로그래밍은 오랫동안 점점 더 뗄 수 없는 관계를 가지게 되었습니다.
 
 An example will show how functional programming differs from what you 
 might do in another language. Suppose for some reason we want the elements of 
-283.1 
-FUNCTIONAL DESIGN 
-29 
+ 
 (defun bad-reverse (lst) 
 (let* ((len (length lst)) 
 (ilimit (truncate (/ len 2)))) 
@@ -46,25 +44,36 @@ FUNCTIONAL DESIGN
 ((>= i ilimit)) 
 (rotatef (nth i lst) (nth j lst))))) 
 Figure 3.1: A function to reverse lists. 
+그림 3.1: 리스트를 뒤집는 함수
+
 a list in the reverse order. Instead of writing a function to reverse lists, we write a 
 function which takes a list, and returns a list with the same elements in the reverse 
 order. 
+이 예제를 보면 함수형 프로그래밍이 지금까지 써오던 다른 언어들과 어떻게 다른건지 아실 수 있을 겁니다.  어떤 이유에서건 리스트를 뒤집을 필요가 있다고 해보겠습니다. 리스트 자체를 바꾸는 함수가 아니라, 리스트의 원소들을 그대로 사용하되 순서만 바꿔서 반환하는 함수를 만들어보겠습니다.
+
 Figure 3.1 contains a function to reverse lists. It treats the list as an array, 
 reversing it in place; its return value is irrelevant: 
+그림 3.1에는 리스트 자체를 뒤집는 함수가 있습니다. 리스트를 배열로 생각하고, 그 자체를 뒤집어 버립니다. 반환된 값은 완전히 새로운 값입니다.
+
 > (setq lst ’(a b c)) 
 (A B C) 
 > (bad-reverse lst) 
 NIL 
 > lst 
 (C B A) 
+
 As its name suggests, bad-reverse is far from good Lisp style. Moreover, its 
 ugliness is contagious: because it works by side-effects, it will also draw its callers 
 away from the functional ideal. 
+이름만 봐도 알수있듯이 좋은 리습 프로그래밍 스타일이 아닙니다. 단순히 보기에만 나쁜게 아닙니다. 사이트 이팩트를 가지고 있기 때문에 이런 함수를 쓰게되면 함수형 프로그래밍의 이상과는 멀어지게 만듭니다.
+
 Though cast in the role of the villain, bad-reverse does have one merit: it 
 shows the Common Lisp idiom for swapping two values. The rotatef macro 
 rotates the values of any number of generalized variables—that is, expressions 
 you could give as the first argument to setf. When applied to just two arguments, 
 the effect is to swap them. 
+
+
 In contrast, Figure 3.2 shows a function which returns reversed lists. With 
 good-reverse, we get the reversed list as the return value; the original list is not 
 touched. 
