@@ -72,7 +72,7 @@ shows the Common Lisp idiom for swapping two values. The rotatef macro
 rotates the values of any number of generalized variables—that is, expressions 
 you could give as the first argument to setf. When applied to just two arguments, 
 the effect is to swap them. 
-
+bad-reverse는 나쁜 예를 보여주는 것이지만 한가지는 제대로 하고 있습니다. 커먼 리습에서 두 값을 서로 바꿀 때 어떻게 해야하는지를 보여줍니다. rotatef 매크로를 쓰면 갯수에 상관없이 변수들의 값을 옆 변수로 옮길 수 있습니다. 인자가 두개일때는 서로 맞바꾸는 효과가 나게됩니다.
 
 In contrast, Figure 3.2 shows a function which returns reversed lists. With 
 good-reverse, we get the reversed list as the return value; the original list is not 
