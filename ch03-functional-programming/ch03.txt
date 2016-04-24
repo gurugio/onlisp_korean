@@ -72,18 +72,21 @@ shows the Common Lisp idiom for swapping two values. The rotatef macro
 rotates the values of any number of generalized variables—that is, expressions 
 you could give as the first argument to setf. When applied to just two arguments, 
 the effect is to swap them. 
-bad-reverse는 나쁜 예를 보여주는 것이지만 한가지는 제대로 하고 있습니다. 커먼 리습에서 두 값을 서로 바꿀 때 어떻게 해야하는지를 보여줍니다. rotatef 매크로를 쓰면 갯수에 상관없이 변수들의 값을 옆 변수로 옮길 수 있습니다. 인자가 두개일때는 서로 맞바꾸는 효과가 나게됩니다.
+bad-reverse는 나쁜 예를 보여주는 것이지만 한가지 좋은게 배울게 있습니다. 커먼 리습에서 두 값을 서로 바꿀 때 어떻게 해야하는지를 보여줍니다. rotatef 매크로를 쓰면 갯수에 상관없이 변수들의 값을 옆 변수로 옮길 수 있습니다. 인자가 두개일때는 서로 맞바꾸는 효과가 나게됩니다.
 
 In contrast, Figure 3.2 shows a function which returns reversed lists. With 
 good-reverse, we get the reversed list as the return value; the original list is not 
 touched. 
+그림 3.2에서는 다른 방식으로 리스트를 뒤집는 함수를 보여줍니다. good-reverse라는 함수는 반환값으로 뒤집어진 리스트를 반환하는데 원래의 리스트는 그대로 남게됩니다.
+
 > (setq lst ’(a b c)) 
 (A B C) 
 > (good-reverse lst) 
 (C B A) 
 > lst 
-(A B C)30 
-FUNCTIONAL PROGRAMMING 
+(A B C)
+
+
 (defun good-reverse (lst) 
 (labels ((rev (lst acc) 
 (if (null lst) 
@@ -91,13 +94,17 @@ acc
 (rev (cdr lst) (cons (car lst) acc))))) 
 (rev lst nil))) 
 Figure 3.2: A function to return reversed lists. 
+그림3.2: 뒤집어진 리스트를 반환하는 함수
+
 It used to be thought that you could judge someone’s character by looking at 
 the shape of his head. Whether or not this is true of people, it is generally true 
 of Lisp programs. Functional programs have a different shape from imperative 
 ones. The structure in a functional program comes entirely from the composition 
 of arguments within expressions, and since arguments are indented, functional 
-code will show more variation in indentation. Functional code looks fluid 1 on the 
+code will show more variation in indentation. Functional code looks fluid (저자주1) on the 
 page; imperative code looks solid and blockish, like Basic. 
+사람 헤어 스타일만 보고 그 사람의 성격에 대해 선입견을 가져본 적이 있으실겁니다. 그렇게 외모로 사람을 짐작하면 맞을 때도 있고 틀릴 때도 있지만, 리습 프로그램은 겉으로만 봐도 거의 특성을 알 수 있습니다. 함수형 프로그램은 명령형 프로그램과 모양부터 다릅니다. 함수형 프로그램의 구조는 각 표현에서 함수 인자를 어떻게 만들어나가느냐에따라 결정됩니다. 함수 인자들마다 한 줄을 차지하거나 들여쓰기가 되므로, 함수형 프로그램을 보면 들여쓰기의 모양이 다양합니다. 함수형 프로그램의 코드가 유동적이라면, 명령형 프로그램의 코드는 정적이고 고정된 형태입니다. 베이직이 그렇습니다.
+
 Even from a distance, the shapes of bad- and good-reverse suggest which 
 is the better program. And despite being shorter, good-reverse is also more 
 efficient: O(n) instead of O(n 2 ). 
