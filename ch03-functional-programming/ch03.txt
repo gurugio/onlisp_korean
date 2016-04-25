@@ -108,6 +108,8 @@ page; imperative code looks solid and blockish, like Basic.
 Even from a distance, the shapes of bad- and good-reverse suggest which 
 is the better program. And despite being shorter, good-reverse is also more 
 efficient: O(n) instead of O(n 2 ). 
+대강 모양만봐도 bad-reverse와 good-reverse중에서 어떤게 더 좋은 프로그램인지 알 수 있습니다. good-reverse가 더 짧기도하고 더 효율적이기도합니다. good-reverse는 O(n)이고 bad-reverse는 O(n^2)이니까요.
+
 We are spared the trouble of writing reverse because Common Lisp has 
 it built-in. It is worth looking briefly at this function, because it is one that 
 often brings to the surface misconceptions about functional programming. Like 
