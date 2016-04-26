@@ -117,15 +117,22 @@ good-reverse, the built-in reverse works by returning a value—it doesn’t tou
 its arguments. But people learning Lisp may assume that, like bad-reverse, it 
 works by side-effects. If in some part of a program they want a list lst to be 
 reversed, they may write 
+리습에 reverse 함수가 있으니 굳이 새로 만드는 수고를 할 필요가 없습니다. 하지만 함수형 프로그래밍에 대해 오해를 줄 수 있는 요지가 있으므로 간단하게 보고 넘어가겠습니다. good-reverse와 같이 리습에 포함된 reverse 함수는 인자로 전달된 리스트를 수정하지 않고, 반환된 값을 이용하게돼있습니다. 리습을 배우는 사람들은 reverse가 bad-reverse와 같이 사이드 이팩트를 가지고 있을거라고 생각할 수 있습니다. lst라는 리스트가 있을 때, 이걸 뒤집고 싶다면
+
 (reverse lst) 
 and wonder why the call seems to have no effect. In fact, if we want effects from 
 such a function, we have to see to it ourselves in the calling code. That is, we 
 need to write 
+이렇게 호출하게 됩니다. 그리고는 왜 lst의 값이 바뀌지 않는지 의아해합니다. 생각한 대로 lst의 값을 바꾸고 싶다면 우리가 직접 값을 바꾸도록 작성해야합니다.
+
 (setq lst (reverse lst)) 
 instead. Operators like reverse are intended to be called for return values, not 
 side-effects. It is worth writing your own programs in this style too—not only for 
 its inherent benefits, but because, if you don’t, you will be working against the 
 language. 
+이렇게 말입니다. reverse와 같은 연산자들은 연산자의 반환값을 활용하도록 만들어진 것이지 사이드 이팩트를 활용할 목적으로 만들어진 것이 아닙니다. 프로그램을 만들 때 이런 방식으로 값을 바꾸도록 합시다. 어떤 특별한 장점이 있어서가 아니라 그렇게하는게 리습 언어의 철학에 맞기때문입니다.
+
+
 1 For 
 a characteristic example, see page 242.3.1 
 FUNCTIONAL DESIGN 
