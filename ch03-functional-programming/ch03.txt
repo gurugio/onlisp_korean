@@ -72,7 +72,7 @@ shows the Common Lisp idiom for swapping two values. The rotatef macro
 rotates the values of any number of generalized variables—that is, expressions 
 you could give as the first argument to setf. When applied to just two arguments, 
 the effect is to swap them. 
-bad-reverse는 나쁜 예를 보여주는 것이지만 한가지 좋은게 배울게 있습니다. 커먼 리습에서 두 값을 서로 바꿀 때 어떻게 해야하는지를 보여줍니다. rotatef 매크로를 쓰면 갯수에 상관없이 변수들의 값을 옆 변수로 옮길 수 있습니다. 인자가 두개일때는 서로 맞바꾸는 효과가 나게됩니다.
+bad-reverse는 나쁜 예를 보여주는 것이지만 한가지는 배울게 있습니다. 커먼 리습에서 두 값을 서로 바꿀 때 어떻게 해야하는지를 보여줍니다. rotatef 매크로를 쓰면 갯수에 상관없이 변수들의 값을 옆 변수로 옮길 수 있습니다. 인자가 두개일때는 서로 맞바꾸는 효과가 나게됩니다.
 
 In contrast, Figure 3.2 shows a function which returns reversed lists. With 
 good-reverse, we get the reversed list as the return value; the original list is not 
@@ -103,7 +103,7 @@ ones. The structure in a functional program comes entirely from the composition
 of arguments within expressions, and since arguments are indented, functional 
 code will show more variation in indentation. Functional code looks fluid (저자주1) on the 
 page; imperative code looks solid and blockish, like Basic. 
-사람 헤어 스타일만 보고 그 사람의 성격에 대해 선입견을 가져본 적이 있으실겁니다. 그렇게 외모로 사람을 짐작하면 맞을 때도 있고 틀릴 때도 있지만, 리습 프로그램은 겉으로만 봐도 거의 특성을 알 수 있습니다. 함수형 프로그램은 명령형 프로그램과 모양부터 다릅니다. 함수형 프로그램의 구조는 각 표현에서 함수 인자를 어떻게 만들어나가느냐에따라 결정됩니다. 함수 인자들마다 한 줄을 차지하거나 들여쓰기가 되므로, 함수형 프로그램을 보면 들여쓰기의 모양이 다양합니다. 함수형 프로그램의 코드가 유동적이라면, 명령형 프로그램의 코드는 정적이고 고정된 형태입니다. 베이직이 그렇습니다.
+사람 헤어 스타일만 보고 그 사람의 성격에 대해 선입견을 가져본 적이 있으실겁니다. 그렇게 외모로 사람을 짐작하면 맞을 때도 있고 틀릴 때도 있지만, 리습 프로그램은 겉으로만 봐도 거의 특성을 알 수 있습니다. 함수형 프로그램은 명령형 프로그램과 모양부터 다릅니다. 함수형 프로그램의 구조는 각 표현에서 함수 인자를 어떻게 만들어나가느냐에따라 결정됩니다. 함수 인자들마다 한 줄을 차지하거나 들여쓰기가 되므로, 함수형 프로그램을 보면 들여쓰기의 모양이 다양합니다. 함수형 프로그램의 코드가 유동적이라면(저자주1), 명령형 프로그램의 코드는 정적이고 고정된 형태입니다. 베이직이 그렇습니다.
 
 Even from a distance, the shapes of bad- and good-reverse suggest which 
 is the better program. And despite being shorter, good-reverse is also more 
@@ -133,15 +133,16 @@ language.
 이렇게 말입니다. reverse와 같은 연산자들은 연산자의 반환값을 활용하도록 만들어진 것이지 사이드 이팩트를 활용할 목적으로 만들어진 것이 아닙니다. 프로그램을 만들 때 이런 방식으로 값을 바꾸도록 합시다. 어떤 특별한 장점이 있어서가 아니라 그렇게하는게 리습 언어의 철학에 맞기때문입니다.
 
 
-1 For 
-a characteristic example, see page 242.3.1 
-FUNCTIONAL DESIGN 
-31 
+(저자주1 For a characteristic example, see page 242)
+그 특성을 잘 보여주는 예가 242페이지에 있습니다.
+
 One of the points we ignored in the comparison of bad- and good-reverse is 
 that bad-reverse doesn’t cons. Instead of building new list structure, it operates 
 on the original list. This can be dangerous—the list could be needed elsewhere 
 in the program—but for efficiency it is sometimes necessary. For such cases, 
-Common Lisp provides an O(n) destructive reversing function called nreverse. ◦ 
+Common Lisp provides an O(n) destructive reversing function called nreverse.
+good-reverse와 bad-reverse를 비교하면서 아직까지 생각못한게 하나 있는데, 바로 bad-reverse가 cons를 실행하지 않는다는 것입니다. (역자주: cons는 리스트를 만드는 명령입니다. 이 책은 리습 초보를 대상으로하는 책이 아닙니다. 앞으로도 새로 나오는 명령들에 대한 설명이 없을 수 있습니다.) 새로운 리스트 구조체를 만드는게 아니라 원래 있던 리스트의 데이터를 수정합니다. 그 리스트가 다른데서도 쓰이는 리스트일 수도 있으므로, 프로그램이 위험해질 수도 있습니다. 하지만 반대로 성능을 생각한다면 필요한 것일 수도 있습니다. 그래서 커먼 리습에서는 그렇게 성능을 필요로 하는 경우에 사용하도록 객체의 값을 바꾸지만 O(n) 성능을 내는 nrever라는 함수를 제공하고 있습니다.
+
 A destructive function is one that can alter the arguments passed to it. However, 
 even destructive functions usually work by returning values: you have to assume 
 that nreverse will recycle lists you give to it as arguments, but you still can’t 
