@@ -5,14 +5,14 @@ Functional Programming
 The previous chapter explained how Lisp and Lisp programs are both built out 
 of a single raw material: the function. Like any building material, its qualities 
 influence both the kinds of things we build, and the way we build them. 
-이전 장에서는 리습 자체와 리습 프로그램을 구성하는 가장 기본적인재료인 함수에 대해서 설명했습니다.무엇을 만들던지 그 재료가완재품의 품질에 큰 영향을 줄 뿐 아니라, 완재품을 어떻게 만들지에도 영향을 줄 것이 분명합니다.함수또한리습에비슷한영향을 미칩니다. 
+이전 장에서는 리습 자체와 리습으로 만든 프로그램을 구성하는 가장 기본적인재료인 함수에 대해서 설명했습니다. 무엇을 만들던지 그 재료가 완재품의 품질에 큰 영향을 줄 뿐 아니라, 완재품을 어떻게 만들지에도 영향을 줄 것이 분명합니다. 함수 또한 리습에 비슷한 영향을 미칩니다. 
 
 This chapter describes the kind of construction methods which prevail in 
 the Lisp world. The sophistication of these methods allows us to attempt more 
 ambitious kinds of programs. The next chapter will describe one particularly 
 important class of programs which become possible in Lisp: programs which 
 evolve instead of being developed by the old plan-and-implement method. 
-이번 장에서는 리습 세계에서 많이 사용하는 설계 방법들에 어떤 것들이 있는지를 설명하겠습니다. 그런 방법론은 우리가 지금까지보다 더 방대한 프로그램을 계획할 수 있도록 해줍니다. 예전에 계획대로만 구현하던 시절에서 그런 방법론을 기반으로 진화해온 프로그램들이 있습니다. 다음 장에서는 그런 프로그램중에 중요한 한가지를 설명하도록 하겠습니다.
+이번 장에서는 리습 세계에서 많이 사용하는 설계 방법들에 어떤 것들이 있는지를 설명하겠습니다. 이 설계방법덕분에 우리는 더 거대한 프로그램을 계획할 수 있게 됐습니다. 옛날에 계획을 세우고 그대로 구현하던 시절부터 있었던 프로그램이지만, 이번장에서 설명할 설계방법덕분에 진화할 수 있었던 프로그램들이 있습니다. 다음 장에서는 그런 프로그램중에 중요한 한가지를 설명하도록 하겠습니다.
 
 
 3.1 Functional Design 
@@ -148,20 +148,31 @@ even destructive functions usually work by returning values: you have to assume
 that nreverse will recycle lists you give to it as arguments, but you still can’t 
 assume that it will reverse them. As before, the reversed list has to be found in 
 the return value. You still can’t write 
+유해함수(저자주:어쨌든 부르는 이름이 필요하긴 하므로 사이드이팩트가 있는 함수를 억지로 번역해서 유해함수라고 부르겠습니다.)는 인자로 받은 객체를 수정합니다. 그런데 유해함수라해도 보통은 반환값을 활용하도록 만들어져있습니다. nreverse 함수가 인자로 받은 리스트를 재활용하는걸 알고있겠지만, 뒤바뀐 리스트도 저장할 거라고 생각했다면 틀린 것입니다.
+
 (nreverse lst) 
 in the middle of a function and assume that afterwards lst will be reversed. This 
 is what happens in most implementations: 
+위와같이 호출해놓고, lst에 뒤바뀐 리스트가 저장될거라고 생각하면 안됩니다.
+
 > (setq lst ’(a b c)) 
 (A B C) 
 > (nreverse lst) 
 (C B A) 
 > lst 
 (A) 
+이렇게 만들었어야합니다.
+
 To reverse lst, you have would have to set lst to the return value, as with plain 
 reverse. 
+lst를 뒤집기 위해서 reverse를 쓸때와 같이 nreverse 함수의 반환값을 lst에 저쟁했어야합니다.
+
 If a function is advertised as destructive, that doesn’t mean that it’s meant 
 to be called for side-effects. The danger is, some destructive functions give the 
 impression that they are. For example, 
+
+
+
 (nconc x y) 
 almost always has the same effect as 
 (setq x (nconc x y)) 
