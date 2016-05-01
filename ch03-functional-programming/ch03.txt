@@ -207,47 +207,63 @@ In other languages, one of the most common causes of side-effects is the need
 for a function to return multiple values. If functions can only return one value, 
 they have to “return” the rest by altering their parameters. Fortunately, this isn’t 
 necessary in Common Lisp, because any function can return multiple values. 
-어떤 언어들은 사이드 이팩트를 여러개의 반환값을 반환하는 함수를 위해 사용합니다. (역자주: C언어는 반환값이 한개뿐이므로 인자로 전달된 객체의 포인터를 이용해서 객체의 값을 바꾸고, 에러값만 반환하는게 절대적입니다.)
+어떤 언어들은 사이드 이팩트를 여러개의 반환값을 반환하는 함수를 위해 사용합니다. (역자주: C언어는 반환값이 한개뿐이므로 인자로 전달된 객체의 포인터를 이용해서 객체의 값을 바꾸고, 에러값만 반환하는게 절대적입니다.) 함수가 1개의 값만 반환할 수 있다면, 나머지 반환값들은 인자의 값을 수정해서 반환할 수 밖에 없습니다. 다행히 커먼 리습에서는 그럴 필요가 없습니다. 커먼 리습에서는 여러개의 값을 반환할 수 있으니까요.
 
 The built-in function truncate returns two values, for example—the trun- 
 cated integer, and what was cut off in order to create it. A typical implementation 
 will print both when truncate is called at the toplevel: 
+내장함수 truncate는 두개의 값을 반환할 수 있습니다. 정수 부분과 나머지 부분으로요. 대부분의 리습 구현체에서는 최상위에서 truncate를 호출하면 다음처럼 두 값을 모두 출력해줍니다.
+
 > (truncate 26.21875) 
 26 
 0.21875 
 When the calling code only wants one value, the first one is used: 
+다음처럼 한개의 값만 사용하게되는 코드에서는 첫번째 값이 사용됩니다.
+
 > (= (truncate 26.21875) 26) 
 T 
 The calling code can catch both return values by using a multiple-value-bind. 
 This operator takes a list of variables, a call, and a body of code. The body is 
 evaluated with the variables bound to the respective return values from the call: 
+두개의 값을 모두 사용해야된다면 multiple-value-bind를 사용하면 됩니다. 이 연산자는 값들의 리스트와 호출부분, 함수 바디를 인자로 받습니다. 호출부분에서 반한된 값들이 리스트의 각 요소들에 저장되고, 함수바디에서 사용합니다.
+
 > (multiple-value-bind (int frac) (truncate 26.21875) 
 (list int frac)) 
 (26 0.21875) 
 Finally, to return multiple values, we use the values operator: 
+그리고 values 연산자를 써서 여러개의 값을 반환할 수 있습니다.
+
 > (defun powers (x) 
 (values x (sqrt x) (expt x 2))) 
 POWERS 
 > (multiple-value-bind (base root square) (powers 4) 
 (list base root square)) 
-(4 2.0 16)3.2 
-IMPERATIVE OUTSIDE - IN 
-33 
+(4 2.0 16)
+
 Functional programming is a good idea in general. It is a particularly good idea 
 in Lisp, because Lisp has evolved to support it. Built-in operators like reverse 
 and nreverse are meant to be used in this way. Other operators, like values 
 and multiple-value-bind, have been provided specifically to make functional 
 programming easier. 
+함수형 프로그래밍은 다른 언어들에서도 활용할만한 좋은 아이디어입니다. 특히 리습에서 잘 적용될 수 있는데, 리습이 함수형 프로그래밍에 맞게 진화되어왔기 대문입니다. reverse나 nreverse같은 내장 연산자들은 함수형 프로그래밍 기법에 맞게 사용될 수 있습니다. values나 multiple-value-bind같은 다른 연산자들은 함수형 프로그래밍을 좀더 쉽게 사용하기위해 제공되는 연산자들입니다.
+
+
 3.2 Imperative Outside-In 
+3.2 명령형 입출력
+
 The aims of functional programming may show more clearly when contrasted 
 with those of the more common approach, imperative programming. A functional 
 program tells you what it wants; an imperative program tells you what to do. A 
 functional program says “Return a list of a and the square of the first element of 
 x:” 
+명령형 프로그래밍과 비교를 해보면 함수형 프로그래밍이 뭘 지향하는지를 더 잘 보여줄 수 있을것 같습니다. 함수형 프로그래밍은 뭘 원하는지가 중점인데, 명령형 프로그래밍을 뭘 해야하는지가 중점입니다. 함수형 프로그래밍으로 “a의 값과 x의 첫번째 요소의 제곱 값을 리스트로 묶어서 반환하라"를 표현해보면 아래처럼 됩니다.
+
 (defun fun (x) 
 (list ’a (expt (car x) 2))) 
 An imperative programs says “Get the first element of x, then square it, then return 
 a list of a and the square:” 
+명령형 프로그래밍으로 “x에서 첫번째 요소를 꺼내서 제곱한 후 a와 리스트로묶어서 반환해라"를 표현하면 아래처럼 됩니다.
+
 (defun imp (x) 
 (let (y sqr) 
 (setq y (car x)) 
@@ -257,6 +273,8 @@ Lisp users are fortunate in being able to write this program both ways. Some
 languages are only suited to imperative programming—notably Basic, along with 
 most machine languages. In fact, the definition of imp is similar in form to the 
 machine language code that most Lisp compilers would generate for fun. 
+
+
 Why write such code when the compiler could do it for you? For many 
 programmers, this question does not even arise. A language stamps its pattern on 
 our thoughts: someone used to programming in an imperative language may have 
