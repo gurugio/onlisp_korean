@@ -248,7 +248,7 @@ programming easier.
 
 
 3.2 Imperative Outside-In 
-3.2 명령형 입출력
+3.2 명령형 프로그래밍을 뒤집어보기
 
 The aims of functional programming may show more clearly when contrasted 
 with those of the more common approach, imperative programming. A functional 
@@ -302,36 +302,49 @@ that, you will begin to conceive of programs in functional terms from the start.
 The trick is to realize that an imperative program is a functional program 
 turned inside-out. To find the functional program implicit in our imperative one, 
 we just turn it outside-in. Let’s try this technique on imp. 
-
+다행히 명령형 프로그램을 함수형으로 바꿀 방법이 있습니다. 처음에는 일단 명령혀으로 프로그램을 만들고나서 이 방법대로 바꾸면 됩니다. 점차 혜안이 생기면 코드를 쓰면서 동시에 함수형으로 바꿀 수 있게 될겁니다. 그리고 얼마안가서 시작부터 함수형 프로그래밍 관점에서 프로그램을 바라볼 수 있게 될겁니다. 이 방법이라는 것은 명령형 프로그램이 함수형 프로그램을 뒤집은 것이라는걸 깨닫는 것입니다. 명령형 프로그램에서 함수형 프로그램을 찾아보려면 마찬가지로 뒤집으면 됩니다. 이 방법을 imp를 만드는데 써먹어보겠습니다.
 
 The first thing we notice is the creation of y and sqr in the initial let. This is 
 a sign that bad things are to follow. Like eval at runtime, uninitialized variables 
 are so rarely needed that they should generally be treated as a symptom of some 
 illness in the program. Such variables are often used like pins which hold the 
 program down and keep it from coiling into its natural shape. 
+처음으로 볼 것은 첫번째 let에의해 y와 sqr가 만들어지는 것입니다. 이것만봐도 다음에 뭔가 나쁜 코드가 있을거라는 신호가 옵니다.  eval을 런타임에 쓰는게 나쁜 것처럼, 초기화가 안된 변수는 거의 쓸일이 없기 때문에, 이게 나타났다는 것은 뭔가 나쁘게 돌아가고 있다는 증거가 됩니다. 그런 변수들은 프로그램이 자연스럽게 실행되지 못하게 방해하는 방해물이 됩니다. (역자주: 이 문장은 의미가 제가 해석이 안되서 완전히 의역을 했습니다. 원문은 Such variables are often used like pins which hold the program down and keep it from coiling into its natural shape. 입니다.)
+
 However, we ignore them for the time being, and go straight to the end of 
 the function. What occurs last in an imperative program occurs outermost in a 
 functional one. So our first step is to grab the final call to list and begin stuffing 
 the rest of the program inside it—just like turning a shirt inside-out. We continue 
 by applying the same transformation repeatedly, just as we would with the sleeves 
 of the shirt, and in turn with their cuffs. 
+지금은 일단 그냥 무시하고 함수 끝을 한번 보겠습니다. 명령형 프로그램의 끝 부분에서 하는 일과 함수형 프로그램의 긑부분에서 하는 일은 같습니다. 그러므로 우리가 첫번째로 해야할 일은 리스트에 대한 호출 중에 마지막 것을 찾아내서, 프로그램의 나머지 부분들을 거기에 쑤셔넣는 일입니다. 우리가 셔츠를 뒤집을 때 처럼말이지요. 셔츠의 양쪽 팔을 뒤집어서 소매를 똑바로 꺼내는 것처럼, 뒤집는걸 반복하면 됩니다.
+
 Starting at the end, we replace sqr with (expt y 2), yielding: 
+함수의 끝부분부터 바꿔나가라면 sqr을 (expt y 2)로 바꿔서 다음과 같이 만들면 됩니다.
+
 (list ’a (expt y 2))) 
 Then we replace y by (car x): 
+그다음 y를 (car x)로 바굽니다.
+
 (list ’a (expt (car x) 2)) 
+
 Now we can throw away the rest of the code, having stuffed it all into the last 
 expression. In the process we removed the need for the variables y and sqr, so 
 we can discard the let as well. 
+필요한건 다 집어넣었으니 이제 나머지 코드는 버릴 수 있습니다. 이 과정에서 우리는 변수 y와 sqr을 지웠습니다. 또 let도 버릴 수가 있습니다.
+
 The final result is shorter than what we began with, and easier to understand. 
 In the original code, we’re faced with the final expression (list ’a sqr), and 
 it’s not immediately clear where the value of sqr comes from. Now the source of 
 the return value is laid out for us like a road map. 
+결과적으로 처음보다 훨씬 짧아졌습니다. 이해하기도 더 쉬워졌습니다. 원래 코드에서는 (list ‘a sqr) 문장을 봐도 sqr이 어디서 어떻게 만들어진 변수인지 바로 알 수가 없었습니다. 지금은 지도를 보는 것처럼 어떤 변수가 어디에서 왔는지를 알 수 있습니다.
+
 The example in this section was a short one, but the technique scales up. 
 Indeed, it becomes more valuable as it is applied to larger functions. Even 
 functions which perform side-effects can be cleaned up in the portions which 
-don’t.3.3 
-FUNCTIONAL INTERFACES 
-35 
+don’t.
+여기서 본 예제는 짧은 것이지만, 거기에 들어간 테크닉은 얼마든지 확장할 수 있습니다. 더 큰 함수에 적용될 수록 더 좋겠지요. 사이드 이팩트가 있는 함수라고 할지라도, 사이드이팩트가 없는 부분을 개선하는데 적용할 수 있을 것입니다.
+
 3.3 Functional Interfaces 
 Some side-effects are worse than others. For example, though this function calls 
 nconc 
