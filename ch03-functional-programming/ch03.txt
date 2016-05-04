@@ -346,19 +346,28 @@ don’t.
 여기서 본 예제는 짧은 것이지만, 거기에 들어간 테크닉은 얼마든지 확장할 수 있습니다. 더 큰 함수에 적용될 수록 더 좋겠지요. 사이드 이팩트가 있는 함수라고 할지라도, 사이드이팩트가 없는 부분을 개선하는데 적용할 수 있을 것입니다.
 
 3.3 Functional Interfaces 
+3.3 함수간의 인터페이스
+
 Some side-effects are worse than others. For example, though this function calls 
 nconc 
+어떤 사이드이팩트는 다른 사이드이팩트보다 더 나쁠 수 있습니다. nconc를 호출하는 이 함수를 보세요.
+
 (defun qualify (expr) 
 (nconc (copy-list expr) (list ’maybe))) 
-it preserves referential transparency. 2 If you call it with a given argument, it will 
+
+it preserves referential transparency. (저자주2) If you call it with a given argument, it will 
 always return the same (equal) value. From the caller’s point of view, qualify 
 might as well be purely functional code. We can’t say the same for bad-reverse 
 (page 29), which actually modifies its argument. 
+비록 nconc를 호출하지만 참조 투명성(역자주: 같은 인자를 주면 항상 같은 값을 반환하는 함수를 참조 투명성이 있다고 말합니다.)을 가지고 있습니다. (저자주2)(역자주: (nconc x y)는 x와 y를 연결한 리스트를 반환하는데 x의 값이 바뀝니다. 그런데 qualify처럼 만들면 expr의 값이 바뀌지 않고도 연결된 리스트를 반환할 수 있습니다.) 이 함수를 호출할 때 같은 인자를 전달하면 항상 같은 값을 반환할 것입니다. 호출하는 입장에서 qualify함수는 순수한 함수형 코드입니다. 분명히 bad-reverse처럼 인자로 넘어온 객체를 수정하지않으니까요.
+
 Instead of treating all side-effects as equally bad, it would be helpful if we had 
 some way of distinguishing between such cases. Informally, we could say that it’s 
 harmless for a function to modify something that no one else owns. For example, 
 the nconc in qualify is harmless because the list given as the first argument is 
 freshly consed. No one else could own it. 
+
+
 In the general case, we have to talk about ownership not by functions, but by 
 invocations of functions. Though no one else owns the variable x here, 
 (let ((x 0)) 
