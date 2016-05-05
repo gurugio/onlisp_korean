@@ -359,35 +359,46 @@ it preserves referential transparency. (저자주2) If you call it with a given 
 always return the same (equal) value. From the caller’s point of view, qualify 
 might as well be purely functional code. We can’t say the same for bad-reverse 
 (page 29), which actually modifies its argument. 
-비록 nconc를 호출하지만 참조 투명성(역자주: 같은 인자를 주면 항상 같은 값을 반환하는 함수를 참조 투명성이 있다고 말합니다.)을 가지고 있습니다. (저자주2)(역자주: (nconc x y)는 x와 y를 연결한 리스트를 반환하는데 x의 값이 바뀝니다. 그런데 qualify처럼 만들면 expr의 값이 바뀌지 않고도 연결된 리스트를 반환할 수 있습니다.) 이 함수를 호출할 때 같은 인자를 전달하면 항상 같은 값을 반환할 것입니다. 호출하는 입장에서 qualify함수는 순수한 함수형 코드입니다. 분명히 bad-reverse처럼 인자로 넘어온 객체를 수정하지않으니까요.
+비록 nconc를 호출하지만 참조 투명성(역자주: 같은 인자를 주면 항상 같은 값을 반환하는 함수를 참조 투명성이 있다고 말합니다.)을 가지고 있습니다. (저자주2)(역자주: (nconc x y)는 x와 y를 연결한 리스트를 반환하는데 x의 값이 바뀝니다. 그런데 qualify처럼 만들면 expr의 값이 바뀌지 않고도 연결된 리스트를 반환할 수 있습니다.) 이 함수를 호출할 때 같은 인자를 전달하면 항상 같은 값을 반환할 것입니다. 호출하는 입장에서 보면 qualify함수는 순수한 함수형 코드입니다. 분명히 bad-reverse처럼 인자로 넘어온 객체를 수정하지않으니까요.
 
 Instead of treating all side-effects as equally bad, it would be helpful if we had 
 some way of distinguishing between such cases. Informally, we could say that it’s 
 harmless for a function to modify something that no one else owns. For example, 
 the nconc in qualify is harmless because the list given as the first argument is 
 freshly consed. No one else could own it. 
-모든 사이드이팩트를 다 똑같이 나쁘다라고 하지말고, 좀 나눠봤으면 합니다. 제 나름대로는 누구의 것도 아닌 것을 수정하는 함수는 별로 나쁠게 없는걸로 생각합니다. 그렇게 따지면 qualify에 있는 nconc는 해가 없는 것이지요. 첫번째 인자로 받은 리스트를 가지고 새로운 뭔가를 또 만들어서 수정했으니까요. 수정된 것은 누구의 것도 아니었습니다.
+모든 사이드이팩트를 다 똑같이 나쁘다라고 하지말고, 경우에 따라 나눌 수 있는 방법이 있다면 좋을것 같습니다. 나름대로 표현해보면 누구의 것도 아닌 것을 수정하는 함수는 별로 나쁠게 없다고 봐도 좋을것 같습니다. 그렇게 따지면 qualify에서 사용하는 nconc는 해가 없는 것이지요. nconc가 첫번째 인자로 받은 리스트는 새롭게 만들어진 리스트였으니까요. 그것은 누구의 것도 아니었습니다.
 
 In the general case, we have to talk about ownership not by functions, but by 
 invocations of functions. Though no one else owns the variable x here, 
-보통의 경우, (역자주: 객체를 어디서 만들었느냐 객체가 수정되었을때 누가 관리해야하느냐를 말합니다.) 어떤 객체가 어디에 속해있냐를 따질때, 어느 함수다라고 따지기 보다는 함수를 호출하는 상황에서 그 소유를 따져야 합니다. 아래를 보면 x라는 변수는 어디에도 속하지 않습니다.
+보통 어떤 객체가 어디에 속해있냐를 따질때, 어느 함수 안에 있냐를 보고 판단할게 아니라, 함수가 호출되는 상황에서 판단해야합니다. 아래를 보면 x라는 변수는 어디에도 속하지 않습니다.
 
 (let ((x 0)) 
 (defun total (y) 
 (incf x y))) 
 the effects of one call will be visible in succeeding ones. So the rule should be: a 
 given invocation can safely modify what it uniquely owns. 
-한번 함수가 호출되면 다음 함수가 호출될때마다 이전 함수의 결과가 영향을 줍니다. (역자주: x의 값이 계속 바뀌니까 다음 함수 호출때 이전 함수가 바꾼 x의 값에 영향을 받겠지요. 그게 바로 2장에서배운 클로저의 내용입니다. total 함수에 같은 인자를 전달한다고 해서 같은 반환 값을 받을 수 없습니다. 따라서 total은 순수 함수형 코드가 아닙니다.) 따라서 (역자주: 함수형 코드가 되기 위해서는) 항상 함수가 호출의 결과가 자기 소유의 객체만 수정되도록 해야한다는 규칙을 만들 수 있습니다.
+그렇지만 한번 함수가 호출되면 다음 함수가 호출될때마다 이전 함수의 결과가 영향을 줍니다. (역자주: x의 값이 계속 바뀌니까 다음 함수 호출때 이전 함수가 바꾼 x의 값에 영향을 받겠지요. 그게 바로 2장에서배운 클로저의 내용입니다. total 함수에 같은 인자를 전달한다고 해서 같은 반환 값을 받을 수 없습니다. 따라서 total은 순수 함수형 코드가 아닙니다.) 결국 (역자주: 함수형 코드가 되기 위해서는) 항상 함수가 호출될 때 자기가 독점하는 객체만 수정하도록 해야한다는 법칙이 있음을 알 수 있습니다. (역자주: x는 total함수가 소유하는 객체가 아닙니다. 하지만 total함수가 x의 값을 바꿉니다. 즉 여기에서 말하는 법칙을 어기고 있고, 그래서 함수형 코드가 아닙니다.)
 
 Who owns arguments and return values? The convention in Lisp seems to be 
 that an invocation owns objects it receives as return values, but not objects passed 
 to it as arguments. Functions that modify their arguments are distinguished by the 
 label “destructive,” but there is no special name for functions that modify objects 
 returned to them. 
-그럼 함수 인자와 반환값은 누구의 소유일까요? 리습에서는 함수를 호출하는 측이 반환값으로 넘겨받는 객체를 소유하는걸로 규정하고 있습니다. 하지만 인자로 넘어가는 객체는 소유하지 않습니다. 인자로 받은 객체를 수정하는 함수를 “유해함수"로 분류하는데반해, 반환값을 받아서 수정하는 함수에 대해서는 따로 부르는 이름이 없습니다. (역자주: A함수에서 B함수를 호출하면서 어떤 객체를 인자로 넘겼습니다. 그런데 B함수가 끝나고보니 객체가 수정되었습니다. 객체의 소유는 B입니다. 그런데 함수 호출의 결과는 A함수는 자기의 것이 아닌 객체가 수정된 것입니다. 따라서 A는 자기에게 속하지 않은 객체를 수정한 것이 됩니다. 좀 복잡하게 설명을 하고 있는것 같습니다.)
+그럼 함수 인자와 반환값은 누구의 소유일까요? 리습에서는 함수를 호출하는 측이 함수에서 반환되는 객체를 소유하는걸로 정했습니다. 자기 자신이 호출될 때 인자로 전달받은 객체는 자기 소유가 아닙니다.인자로 받은 객체를 수정하는 함수를 “유해함수"로 분류하는데반해, 반환값을 받아서 수정하는 함수에 대해서는 따로 부르는 이름이 없습니다. (역자주: 반환받은 객체는 자기 소유이므로 수정하든 말든 상관없으니 따로 부를 필요가 없습니다. 인자로 받은 객체는 자기 소유가 아니므로 수정하면 안되니, 수정을 하는지 안하는지에 따라 이름을 붙여서 구분합니다.)(역자주: A함수에서 B함수를 호출하면서 어떤 객체를 인자로 넘겼습니다. 그런데 B함수가 끝나고보니 객체가 수정되었습니다. 객체의 소유는 A입니다. B는 자기 소유가 아닌 객체를 수정한 것입니다.)
 
 This function adheres to the convention, for example: 
 아래 함수가 그런 규정을 보여주는 함수입니다.
+
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
++_)(*}|”?>(*&&)_+||}”0-=================== 여기부터 다시 읽어볼것======
+
 
 (defun ok (x) 
 (nconc (list ’a x) (list ’c))) 
@@ -405,27 +416,37 @@ Many Lisp programs violate this convention, at least locally. However, as we
 saw with ok, local violations need not disqualify the calling function. And func- 
 tions which do meet the preceding conditions will retain many of the advantages 
 of purely functional code. 
+위처럼 조금만 다르게 만들어도 nconc 호출이 not-ok에게 전달된 인자를 수정하게됩니다. 많은 리습 프로그램들이 규정을 위반합니다. 작은 코드안에서만 위반할 때도 있고, 그 이상일 때도 있습니다. 하지만 어떤 함수가 내부에서만 규정을 위반한다면 그 함수을 호출하는게 반드시 유해해지는건 아닙니다. (역자주: 의역을 했습니다.) 어떤 함수가 위의 조건들을 만족한다면 순수 함수형 코드가 가지는 장점들중 많은 것들을 가지게됩니다.
+
 To write programs that are really indistinguishable from functional code, we 
 have to add one more condition. Functions can’t share objects with other code 
 that doesn’t follow the rules. For example, though this function doesn’t have 
 side-effects, 
+겉으로봐서 함수형 코드와 분간이 안되는 프로그램을 만들려면 한가지 더 지켜야할 조건이 있습니다. 함수형 코드가 되기위한 규칙을 위반하는 다른 코드와 객체를 공유하면 안된다는 것입니다. 아래의 함수는 사이드이팩트가 없습니다.
+
 (defun anything (x) 
 (+ x *anything*)) 
 its return value depends on the global variable *anything*. So if any other 
 function can alter the value of this variable, anything could return anything. 
-Code written so that each invocation only modifies what it owns is almost as 
+Code written so that each invocation only modifies what it ow ns is almost as 
 good as purely functional code. A function that meets all the preceding conditions 
 at least presents a functional interface to the world: if you call it twice with the 
 same arguments, you should get the same results. And this, as the next section 
 will show, is a crucial ingredient in bottom-up programming. 
+위 함수의 반환값은 전역변수 *anything*에 따라 달라집니다. 그러니 다른 함수가 *anything*의 값을 바꾼다면 anything이라는 함수는 뭘 반환할지 모르게됩니다. 각 함수 호출때마다 자기가 소유한 것만을 수정하는 코드를 만들게되면, 거의 순수한 함수형 코드라도 해도 될정도로 가까워집니다. 위에서 말한 조건들을 다 만족하는 함수가 함수형 인터페이스를 제공하기까지하면, 같은 인자를 전달하면 항상 같은 결과값을 얻을 수 있게 됩니다. 이것이 다음장에서 설명한 상향식 프로그래밍에 중요한 조건이 됩니다.
+
 One problem with destructive operations is that, like global variables, they can 
 destroy the locality of a program. When you’re writing functional code, you can 
 narrow your focus: you only need consider the functions that call, or are called 
 by, the one you’re writing. This benefit disappears when you want to modify 
 something destructively. It could be used anywhere. 
+유해한 명령들의 문제 중 하나가 프로그램의 지역성을 해친다는 것입니다. 전역변수를 쓸때도 그렇습니다. 함수형 코드를 작성하면 신경써야하는 범위가 최소화됩니다. 작성하는 함수에서 호출되는 함수나 작성하는 함수를 호출하는 함수만 신경쓰면 됩니다. 뭔가를 유해한 방법으로 수정하고 싶다면 이런 장점을 얻을 수 없게됩니다. It could be used anywhere.(해석이 안됩니다.) 
+
 The conditions above do not guarantee the perfect locality you get with purely 
 functional code, though they do improve things somewhat. For example, suppose 
 that f calls g as below: 
+위에서 이야기한 조건들이 순수 함수형 코드에서 얻을 수 있는 완벽한 지역성을 보장해주지는 않습니다. 하지만 거기에 가까워질 수는 있습니다. 다음은 f가 g를 호출하는 예제입니다.
+
 (defun f (x) 
 (let ((val (g x))) 
 ; safe to modify val here? 
@@ -436,10 +457,11 @@ So even in programs which do follow the convention, we may have to look
 beyond f if we want to modify something there. However, we don’t have to 
 look as far: instead of worrying about the whole program, we now only have to 
 consider the subtree beginning with f. 
+nconc를 써서 val이라는 변수에 뭔가를 추가해도 f함수는 안전할까요? g가 만약 x를 그대로 반환한다면 안전하지 않게됩니다. f에 전달된 인자를 수정하게되기 때문입니다.
+결국 어떤 프로그램이 우리의 규약들을 따른다고해도, 
+
 A corollary of the convention above is that functions shouldn’t return anything 
-that isn’t safe to modify. Thus one should avoid writing functions whose return3.4 
-INTERACTIVE PROGRAMMING 
-37 
+that isn’t safe to modify. Thus one should avoid writing functions whose return
 values incorporate quoted objects. If we define exclaim so that its return value 
 incorporates a quoted list, 
 (defun exclaim (expression) 
