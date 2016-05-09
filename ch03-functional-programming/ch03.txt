@@ -521,7 +521,7 @@ available at runtime, which helps in tracing the causes of errors. But even more
 important is the ease with which you can test programs. You don’t have to compile 
 a program and test the whole thing at once. You can test functions individually 
 by calling them from the toplevel loop.
-
+리습에서는 디버깅도 더 쉬워집니다. 동적 환경에서도 많은 정보를 확인할 수 있기 때문에 에러의 원인을 찾기 쉬워집니다. 게다가 더 중요한건 프로그램을 테스트하기가 더 쉬워진다는 것입니다. 테스트를 위해서 전체를 다 컴파일하고 한꺼번에 테스트를 실행할 필요가 없습니다. 최상위 루프에서 함수를 하나씩 호출해가면서 개별적으로 테스트할 수 있습니다.
 
 Incremental testing is so valuable that Lisp style has evolved to take advantage 
 of it. Programs written in the functional style can be understood one function at a 
@@ -531,8 +531,11 @@ written in this style can also be tested one function at a time. When a function
 neither examines nor alters external state, any bugs will appear immediately. Such 
 a function can affect the outside world only through its return values. Insofar as 
 these are what you expected, you can trust the code which produced them. 
+작은 단위부터 큰 단위로 테스트할 수 있다는 것은(역자주:증분테스트, 점증적 테스트라고합니다. 자주 나오는 말이 아니라서 굳이 어려운 용어를 쓰지않고 간단하게 풀어서 번역했습니다.) 너무나 중요한 것이라서, 리습이 거기에 맞춰서 진화해왔다고 봐도 될정도입니다. 프로그램이 함수형 스타일로 작성되었다면 함수 하나만 따로 봐도 그 함수를 이해할 수 있어야 합니다. 또 그렇게 코드를 읽는 사람이 함수 하나씩도 이해할 수 있다는 것이 함수형 스타일의 가장 큰 장점입니다. 그런데 함수형 스타일은 단위를 증가시켜가며 테스트하는 경우에도 잘 들어맞습니다.  한번에 하나의 함수만을 테스트할 수 있기 때문입니다. 하나의 함수가 외부 상태를 참조하거나 바꾸지 않으므로, 어떤 버그라도 빨리 발견됩니다. 그런 함수는 반환값으로만 바깥 세상에 영향을 줍니다. 내가 원하는 반환값이 나오기만 한다면, 그런 반환값을 만드는 코드는 신뢰할 수 있습니다.
+
 Experienced Lisp programmers actually design their programs to be easy to 
 test: 
+경험많은 리습 프로그래머라면 프로그램을 테스트하기 쉽게 설계합니다.
 1. They try to segregate side-effects in a few functions, allowing the greater 
 part of the program to be written in a purely functional style. 
 2. If a function must perform side-effects, they try at least to give it a functional 
