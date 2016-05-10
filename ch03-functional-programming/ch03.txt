@@ -346,7 +346,7 @@ don’t.
 여기서 본 예제는 짧은 것이지만, 거기에 들어간 테크닉은 얼마든지 확장할 수 있습니다. 더 큰 함수에 적용될 수록 더 좋겠지요. 사이드 이팩트가 있는 함수라고 할지라도, 사이드이팩트가 없는 부분을 개선하는데 적용할 수 있을 것입니다.
 
 3.3 Functional Interfaces 
-3.3 함수간의 인터페이스
+3.3 함수형 인터페이스
 
 Some side-effects are worse than others. For example, though this function calls 
 nconc 
@@ -538,12 +538,18 @@ test:
 경험많은 리습 프로그래머라면 프로그램을 테스트하기 쉽게 설계합니다.
 1. They try to segregate side-effects in a few functions, allowing the greater 
 part of the program to be written in a purely functional style. 
+1. 그들은 몇몇 함수만 사이드 이팩트를 가지고 나머지 대부분의 프로그램은 순수한 함수형 스타일로 구현하려고 합니다.
+
 2. If a function must perform side-effects, they try at least to give it a functional 
 interface. 
+2. 어떤 함수가 꼭 사이드 이팩트를 가져야한다면, 최소한 함수형 인터페이스를 가지도록 만듭니다. (역자주:사이드 이팩트를 한 지역안으로만 한정하도록 만드는걸 3.3장에서 다뤘습니다.)
+
 3. They give each function a single, well-defined purpose. 
 When a function is written, they can test it on a selection of representative cases, 
 then move on to the next one. If each brick does what it’s supposed to do, the wall 
 will stand. 
+3. 각 함수가 하나의 명확한 목적만을 가지도록 만듭니다. 함수를 구현할 때 꼭 필요한 상황들만 테스트를 하고, 다음 함수를 만들기 시작합니다. 작은 블럭들이 하고자하는 바가 명확해지면, 만들고자하는 벽은 자연스럽게 완성됩니다.
+
 In Lisp, the wall can be better-designed as well. Imagine the kind of conver- 
 sation you would have with someone so far away that there was a transmission 
 delay of one minute. Now imagine speaking to someone in the next room. You 
@@ -552,6 +558,8 @@ of conversation. In Lisp, developing software is like speaking face-to-face. You
 can test code as you’re writing it. And instant turnaround has just as dramatic an 
 effect on development as it does on conversation. You don’t just write the same 
 program faster; you write a different kind of program. 
+
+
 How so? When testing is quicker you can do it more often. In Lisp, as in any 
 language, development is a cycle of writing and testing. But in Lisp the cycle is 
 very short: single functions, or even parts of functions. And if you test everything 
@@ -564,9 +572,7 @@ Section 1.1 stressed that bottom-up design is an evolutionary process. You
 build up a language as you write a program in it. This approach can work only 
 if you trust the lower levels of code. If you really want to use this layer as a 
 language, you have to be able to assume, as you would with any language, that 
-any bugs you encounter are bugs in your application and not in the language itself.3.4 
-INTERACTIVE PROGRAMMING 
-39 
+any bugs you encounter are bugs in your application and not in the language itself.
 So your new abstractions are supposed to bear this heavy burden of responsi- 
 bility, and yet you’re supposed to just spin them off as the need arises? Just so; in 
 Lisp you can have both. When you write programs in a functional style and test 
