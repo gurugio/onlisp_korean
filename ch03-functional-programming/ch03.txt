@@ -548,7 +548,7 @@ interface.
 When a function is written, they can test it on a selection of representative cases, 
 then move on to the next one. If each brick does what it’s supposed to do, the wall 
 will stand. 
-3. 각 함수가 하나의 명확한 목적만을 가지도록 만듭니다. 함수를 구현할 때 꼭 필요한 상황들만 테스트를 하고, 다음 함수를 만들기 시작합니다. 작은 블럭들이 하고자하는 바가 명확해지면, 만들고자하는 벽은 자연스럽게 완성됩니다.
+3. 각 함수가 하나의 명확한 목적만을 가지도록 만듭니다. 함수를 구현할 때 꼭 필요한 상황들만 테스트를 하고, 다음 함수를 만들기 시작합니다. 작은 블럭들이 하고자하는 바가 명확해지면, 만들고자하는 건물은 쉽게 완성됩니다.
 
 In Lisp, the wall can be better-designed as well. Imagine the kind of conver- 
 sation you would have with someone so far away that there was a transmission 
@@ -558,7 +558,7 @@ of conversation. In Lisp, developing software is like speaking face-to-face. You
 can test code as you’re writing it. And instant turnaround has just as dramatic an 
 effect on development as it does on conversation. You don’t just write the same 
 program faster; you write a different kind of program. 
-
+리습을 쓰면 건물의 디자인도 더 좋아집니다. 소리의 전송 시간이 일분이나되는 아주 먼거리에 있는 사람과 대화를 하게되었다고 상상해봅시다. 그리고 바로 옆방에 있는 사람과 대화하는 것을 상상해봅시다. 그냥 같은 대화가 좀더 빨리 이뤄질뿐 아니라 대화하는 내용도 달라질수 있습니다. 리습을 써서 소프트웨어를 만든다는 것은 얼굴을 보고 대화하는 것과 같습니다. 코드를 쓰는 동시에 테스트도 할 수 있습니다. 얼굴을 보고 대화하면 대화가 달라지는 것처럼 개발을 하면서도 바로바로 응답을 받을 수 있으므로 엄청난 변화가 일어날 것입니다. 단순히 같은 프로그램을 더 빨리 만들 수 있는것만이 아닙니다. 만들 수 있는 프로그램이 달라질 것입니다.
 
 How so? When testing is quicker you can do it more often. In Lisp, as in any 
 language, development is a cycle of writing and testing. But in Lisp the cycle is 
@@ -567,7 +567,9 @@ as you write it, you will know where to look when errors occur: in what you
 wrote last. Simple as it sounds, this principle is to a large extent what makes 
 bottom-up programming feasible. It brings an extra degree of confidence which 
 enables Lisp programmers to break free, at least part of the time, from the old 
-plan-and-implement style of software development. 
+plan-and-implement style of software development.
+테스트가 빠르다면 좀더 자주 테스트를 할 수 있습니다. 리습에서도 다른 언어와같이 코드 작성과 테스트를하는 개발 사이클이 있습니다. 그런데 리습에서는 그 사이클이 매주 짧아집니다. 하나의 함수를 개발 및 테스트할 수도 있고,  함수의 부분별로도 할 수 있습니다. 만약 코드를 작성하면서, 작성된 모든 코드를 테스트한다면 에러가 발생했을 때 어디를 봐야할지도 바로 알 수 있습니다. 바로 마지막에 만들었던 코드겠지요. 말로는 간단하지만, 이런 원칙이 상향식 프로그래밍을 가능하게 만든 중요한 바탕입니다. 또 그렇게 테스트가 잘 된다면 프로그램에 신뢰성이 높아질 것이고, 옛날의 기획하고 그대로 개발하던 시대에 비해 조금이라도 더 쉴시간을 가질 수 있게 됩니다.
+ 
 Section 1.1 stressed that bottom-up design is an evolutionary process. You 
 build up a language as you write a program in it. This approach can work only 
 if you trust the lower levels of code. If you really want to use this layer as a 
@@ -578,7 +580,8 @@ bility, and yet you’re supposed to just spin them off as the need arises? Just
 Lisp you can have both. When you write programs in a functional style and test 
 them incrementally, you can have the flexibility of doing things on the spur of the 
 moment, plus the kind of reliability one usually associates with careful planning. 
-
+1.1장에서 상향식 설계는 발전적인 개발 프로세스라고 강조했습니다. 프로그램을 만들다보면 그 프로그램을 돌아가게하는 하나의 언어가 만들어집니다. 하위 레벨 코드를 신뢰할 수 있어야만 이런 방식의 개발을 할 수 있습니다. 특정 레이어를 언어로 활용하고 싶다면 어떤 버그가 생겼을 때 그 버그가 언어의 버그가 아니라 그 언어로 만든 프로그램의 버그라는 것을 확신할 수 있어야 합니다. 어떤 언어든지 마찬가지입니다. 
+어떤 새로운 추상화 레이어를 만들려면 그 하위 레이어는 이렇게 막중한 책임을 감당해야합니다. 그런 하위 레이어가 있다고해도, 그걸 새로운 요구사항이 생길때마다 새롭게 바꿔나갈 수 있을까요? 리습을 쓰면 둘다를 만족시킬 수 있습니다. 함수형으로 프로그램을 만들고 점증적으로 테스트할때, 갑작스러운 변화에 대응할 유연성을 가질 수 있고, 신뢰성 또한 더할 수 있게 됩니다. 그런 신리성은 보통 주의깊게 계획해야만 얻을 수 있지만, 우리는 자연스럽게 얻어집니다.
 
 
 
